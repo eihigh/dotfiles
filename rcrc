@@ -1,7 +1,7 @@
 if [ -z $HOSTRC ]; then
-	EXCLUDES="sshrc.d sshrc bashrc vimrc"
+	EXCLUDES="README*.md sshrc.d sshrc bashrc vimrc"
 else
-	EXCLUDES=""
+	EXCLUDES="README*.md"
 fi
 COPY_ALWAYS="bashrc"
 DOTFILES_DIRS="$HOME/dotfiles-local $HOME/dotfiles"
