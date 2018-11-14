@@ -45,3 +45,5 @@ __zqx() {
 compdef __zqx _zqx
 
 [ -e $CDLOG ] || touch $CDLOG
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
