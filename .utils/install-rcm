@@ -9,5 +9,4 @@ cd rcm-1.3.3 &&
 
 ./configure &&
 make &&
-sudo make install &&
-env RCRC=~/dotfiles/rcrc rcup
+sudo make install
