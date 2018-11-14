@@ -1,4 +1,8 @@
 echo welcome-sshrc
 
-source $SSHHOME/.sshrc.d/bashrc
+if [ $SHELL -eq /bin/bash ]; then
+	source $SSHHOME/.sshrc.d/bashrc
+else
+	source $SSHHOME/.sshrc.d/zshrc
+fi
 export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc' | source \$MYVIMRC"
