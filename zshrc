@@ -40,8 +40,9 @@ function _zqx_add_log() {
 }
 
 function _zqx() {
+	local dir
 	if [ $# = 0 ]; then
-		cd $(tac $CDLOG | fzf)
+		dir=$(tac $CDLOG | fzf) && cd "$dir"
 	elif [ $# = 1 ]; then
 		cd $1
 	else
