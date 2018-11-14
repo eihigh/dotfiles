@@ -1,3 +1,3 @@
 if [ -e $HOME/.rcrc ]; then
-	source $HOME/.anysh/*
+	for f in $HOME/.anysh/*; do source $f; done
 fi
