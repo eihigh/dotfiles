@@ -12,5 +12,5 @@ ta_zqx() {
 
 g_zqx() {
 	local dir
-	dir=$(ghq root)/$(ghq list | fzf) && cd "$dir"
+	dir=$(ghq list --full-path | fzf) && cd "$dir"
 }
