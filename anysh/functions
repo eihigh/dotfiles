@@ -3,17 +3,14 @@ t_zqx() {
 	dir=$(find ${1:-.} -path '*/\.*' -prune \
 	                -o -type d -print 2> /dev/null | fzf +m) &&
 	cd "$dir"
-	ls -la
 }
 
 ta_zqx() {
 	local dir
 	dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-	ls -la
 }
 
 g_zqx() {
 	local dir
 	dir=$(ghq root)/$(ghq list | fzf) && cd "$dir"
-	ls -la
 }
