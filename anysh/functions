@@ -13,6 +13,7 @@ tazqx() {
 }
 
 gzqx() {
+	local dir
 	dir=$(ghq root)/$(ghq list | fzf) && cd "$dir"
 	ls -la
 }
