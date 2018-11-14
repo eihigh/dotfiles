@@ -13,3 +13,4 @@ fi
 
 git config --global user.name "eihigh"
 git config --global user.email "eihigh.contact@gmail.com"
+git config --global --add ghq.root $HOME/go/src
