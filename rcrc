@@ -1,5 +1,5 @@
 if [ -z $HOSTRC ]; then
-	EXCLUDES="README*.md sshrc.d sshrc bashrc vimrc"
+	EXCLUDES="README*.md sshrc.d sshrc bashrc vimrc zshrc"
 else
 	EXCLUDES="README*.md"
 fi
