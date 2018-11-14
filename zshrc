@@ -2,14 +2,18 @@ if [ -e $HOME/.rcrc ]; then
 	for f in $HOME/.anysh/*; do source $f; done
 fi
 
+autoload -U compinit
+compinit
 export LSCOLORS=DxGxcxdxCxegedabagacad
 
-CDLOG=$HOME/.cache/cd.log
+# cd history
 
 function chpwd() {
 	_zqx_add_log
 	ls -laG
 }
+
+CDLOG=$HOME/.cache/cd.log
 
 function _zqx_add_log() {
 	local i=0
