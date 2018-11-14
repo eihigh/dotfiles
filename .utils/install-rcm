@@ -1,0 +1,13 @@
+#!/bin/sh
+
+tmp=$(mktemp)
+cd /tmp/
+
+curl -LO https://thoughtbot.github.io/rcm/dist/rcm-1.3.3.tar.gz &&
+tar -xvf rcm-1.3.3.tar.gz &&
+cd rcm-1.3.3 &&
+
+./configure &&
+make &&
+sudo make install &&
+env RCRC=~/dotfiles/rcrc rcup

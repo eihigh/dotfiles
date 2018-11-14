@@ -1,0 +1,4 @@
+echo welcome-sshrc
+
+source $SSHHOME/.sshrc.d/bashrc
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc' | source \$MYVIMRC"

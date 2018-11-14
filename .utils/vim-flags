@@ -1,0 +1,1 @@
+echo "--with-features=huge --enable-multibyte --enable-gpm --enable-cscope --enable-pythoninterp --enable-python3interp"

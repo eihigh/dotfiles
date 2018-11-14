@@ -1,0 +1,18 @@
+tzqx() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+	ls -la
+}
+
+tazqx() {
+	local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+	ls -la
+}
+
+gzqx() {
+	dir=$(ghq root)/$(ghq list | fzf) && cd "$dir"
+	ls -la
+}
