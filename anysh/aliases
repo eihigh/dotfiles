@@ -1,2 +1,2 @@
-alias l_zqx='ls -alG'
+alias l_zqx='ls -al --color'
 alias vi='vim'

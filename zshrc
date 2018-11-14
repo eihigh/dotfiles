@@ -19,7 +19,7 @@ PROMPT2='[%n]> '
 # cd history
 function chpwd() {
 	_zqx_add_log
-	ls -laG
+	l_zqx
 }
 
 CDLOG=$HOME/.cache/cd.log
