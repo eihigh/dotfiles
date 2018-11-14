@@ -4,9 +4,11 @@ fi
 
 autoload -U compinit
 compinit
-export LSCOLORS=DxGxcxdxCxegedabagacad
+
+setopt AUTO_CD
 
 autoload -U colors; colors
+export LSCOLORS=DxGxcxdxCxegedabagacad
 
 # funny prompt
 setopt prompt_subst
