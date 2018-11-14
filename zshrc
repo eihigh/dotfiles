@@ -6,8 +6,17 @@ autoload -U compinit
 compinit
 export LSCOLORS=DxGxcxdxCxegedabagacad
 
-# cd history
+autoload -U colors; colors
 
+# funny prompt
+setopt prompt_subst
+PROMPT="
+%{${fg[yellow]}%}%~%{${reset_color}%} %n@%m
+%(?.%{$fg[green]%}.%{$fg[blue]%})%(?!(*'-')o!(*;-;%)?) <%{${reset_color}%} "
+
+PROMPT2='[%n]> '
+
+# cd history
 function chpwd() {
 	_zqx_add_log
 	ls -laG
