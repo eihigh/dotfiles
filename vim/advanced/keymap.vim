@@ -103,10 +103,10 @@ augroup go
 	au FileType go nmap ,h <Plug>(go-doc)
 	au FileType go nmap ,H :GoDescribe<CR>
 	au FileType go nmap ,t <Plug>(go-test)
-	au FileType go nmap ,d :GoDecls<CR>
-	au FileType go nmap ,D :GoDeclsDir<CR>
-	au FileType go nmap gd <Plug>(go-def)
-	au FileType go nmap gD <Plug>(go-def-pop)
+	au FileType go nmap ,l :GoDecls<CR>
+	au FileType go nmap ,L :GoDeclsDir<CR>
+	au FileType go nmap ,d <Plug>(go-def)
+	au FileType go nmap ,D <Plug>(go-def-pop)
 augroup END
 
 " typescript
@@ -114,6 +114,6 @@ augroup typescript
 	au!
 	au FileType typescript nmap ,f <Plug>(TsuquyomiReferences)
 	au FileType typescript nmap ,q :<C-u>TsuquyomiGeterr<CR>
-	au FileType typescript nmap gd <Plug>(TsuquyomiDefinition)
-	au FileType typescript nmap gD <Plug>(TsuquyomiGoBack)
+	au FileType typescript nmap ,d <Plug>(TsuquyomiDefinition)
+	au FileType typescript nmap ,D <Plug>(TsuquyomiGoBack)
 augroup END
