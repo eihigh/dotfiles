@@ -11,7 +11,11 @@ if [ ! -e "$HOME"/.vim/autoload/plug.vim ]; then
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-git config --global user.name "eihigh"
-git config --global user.email "eihigh.contact@gmail.com"
 git config --global --replace-all ghq.root $HOME/.ghq
 git config --global --add ghq.root $HOME/go/src
+
+# only post rcup
+if [ -e "$HOME"/.rcrc ]; then
+	git config --global user.name "eihigh"
+	git config --global user.email "eihigh.contact@gmail.com"
+fi
