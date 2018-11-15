@@ -14,3 +14,9 @@ g_zqx() {
 	local dir
 	dir=$(ghq list --full-path | fzf) && cd "$dir"
 }
+
+# zsh changing helper
+z_zqx() {
+	source $SSHHOME/.sshrc.d/zshrc
+	zsh
+}
