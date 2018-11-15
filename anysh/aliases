@@ -1,2 +1,15 @@
 alias l_zqx='ls -al --color'
 alias vi='vim'
+
+case "${OSTYPE}" in
+	darwin*)
+		alias ls="ls -G"
+		alias l_zqx="ls -alG"
+
+		alias tac="tail -r"
+		;;
+	linux*)
+		alias ls="ls --color"
+		alias l_zqx="ls -al --color"
+		;;
+esac
