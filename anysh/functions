@@ -17,6 +17,6 @@ g_zqx() {
 
 # zsh changing helper
 z_zqx() {
+	zsh -d -f
 	source $SSHHOME/.sshrc.d/zshrc
-	zsh
 }
