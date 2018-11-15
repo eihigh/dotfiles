@@ -10,7 +10,7 @@ export LSCOLORS=DxGxcxdxCxegedabagacad
 # funny prompt
 setopt prompt_subst
 PROMPT="
-%{${fg[yellow]}%}%~%{${reset_color}%} %n@%m
+%(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{${fg[yellow]}%}%~%{${reset_color}%} %n@%m
 %(?.%{$fg[green]%}.%{$fg[cyan]%})%(?!(*'-')o!(*;-;%)?) <%{${reset_color}%} "
 
 PROMPT2='[%n]> '
