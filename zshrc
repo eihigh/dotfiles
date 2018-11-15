@@ -1,3 +1,5 @@
+source $ZDOTDIR/.bashrc
+
 autoload -U compinit; compinit
 
 setopt AUTO_CD
@@ -53,7 +55,5 @@ compdef __zqx _zqx
 
 [ -e $CDLOG ] || touch $CDLOG
 [ -e $CDLOG ] && cd `tail -1 $CDLOG`
-
-source $ZDOTDIR/.bashrc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
