@@ -1,5 +1,3 @@
-[ -e $HOME/.rcrc ] && source ~/.anyshrc
-
 autoload -U compinit; compinit
 
 setopt AUTO_CD
@@ -55,5 +53,7 @@ compdef __zqx _zqx
 
 [ -e $CDLOG ] || touch $CDLOG
 [ -e $CDLOG ] && cd `tail -1 $CDLOG`
+
+source $ZDOTDIR/.anyshrc
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
