@@ -1,4 +1,4 @@
-source $ZDOTDIR/.bashrc
+source ${ZDOTDIR:-$HOME}/.bashrc
 
 autoload -U compinit; compinit
 
