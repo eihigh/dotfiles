@@ -18,4 +18,6 @@ git config --global --add ghq.root $HOME/go/src
 if [ -e "$HOME"/.rcrc ]; then
 	git config --global user.name "eihigh"
 	git config --global user.email "eihigh.contact@gmail.com"
+
+	ln -sf $HOME/dotfiles/.sshrc.d ~/
 fi
