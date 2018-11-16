@@ -6,6 +6,7 @@ export PATH=$PATH:~/go/bin
 alias vi='vim'
 alias e='vim'
 alias i='git status --short'
+alias g='lazygit'
 
 case "${OSTYPE}" in
 	darwin*)
