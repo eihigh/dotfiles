@@ -7,8 +7,18 @@ setopt AUTO_CD
 autoload -U colors; colors
 export LSCOLORS=DxGxcxdxCxegedabagacad
 
-# funny prompt
+# git info
+autoload -Uz vcs_info
 setopt prompt_subst
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+RPROMPT=$RPROMPT'%{$fg[magenta]%}${vcs_info_msg_0_}%{${reset_color}%}'
+
+# funny prompt
 PROMPT="
 %(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{${fg[yellow]}%}%~%{${reset_color}%} %n@%m
 %(?.%{$fg[green]%}.%{$fg[cyan]%})%(?!(*'-')o!(*;-;%)?) <%{${reset_color}%} "
