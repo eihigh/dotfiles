@@ -15,7 +15,7 @@ Plug 'altercation/vim-colors-solarized'
 "  画面操作
 " ------------------------------------------------------------
 " Close buffer
-Plug 'moll/vim-bbye'
+Plug 'mhinz/vim-sayonara'
 
 " Write Room Mode
 Plug 'junegunn/goyo.vim'

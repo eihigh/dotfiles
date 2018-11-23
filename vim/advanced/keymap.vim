@@ -17,7 +17,7 @@ map ;r <Plug>(operator-sandwich-replace)<Plug>(textobj-sandwich-auto-a)
 nnoremap <C-t> :TagbarOpen fj<CR>
 
 " Close buffer without collapse window layout
-nnoremap <silent> v :Bclose<CR>
+nnoremap <silent> v :Sayonara!<CR>
 
 " QuickRun (can be overwritten)
 nnoremap ,r :QuickRun<CR>
