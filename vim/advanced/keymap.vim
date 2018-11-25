@@ -1,8 +1,8 @@
 " Basic motions by easymotion
 map R <Plug>(edgemotion-k)
 map T <Plug>(edgemotion-j)
-map l <Plug>(easymotion-overwin-f2)
-map n <Plug>(easymotion-bd-fl)
+map ? <Plug>(easymotion-overwin-f2)
+map l <Plug>(easymotion-bd-fl)
 map * <Plug>(asterisk-z*)
 map # <Plug>(asterisk-z#)
 

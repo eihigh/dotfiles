@@ -32,16 +32,16 @@ set updatetime=300
 set title
 
 noremap h h
-noremap t gj
-noremap r gk
+noremap t j
+noremap r k
 noremap s l
 
 nnoremap e v
-nnoremap E V
-nnoremap <C-e> <C-v>
+nnoremap n V
+nnoremap E <C-v>
 
-noremap n f
-noremap N F
+noremap l f
+noremap L F
 
 noremap ( N
 noremap ) n
