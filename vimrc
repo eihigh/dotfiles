@@ -23,7 +23,7 @@ set ignorecase
 set smartcase
 set smartindent
 
-set scrolloff=8
+set scrolloff=10
 
 set backspace=eol,indent,start
 

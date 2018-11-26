@@ -109,6 +109,8 @@ augroup go
 	au FileType go nmap ,D :LspTypeDefinition<CR>
 	" au FileType go nmap ,D <Plug>(go-def-pop)
 	au FileType go nmap ,f :LspReferences<CR>
+	au FileType go nmap { [[zt
+	au FileType go nmap } ]]zt
 augroup END
 
 " typescript
