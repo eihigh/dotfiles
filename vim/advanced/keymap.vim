@@ -100,13 +100,15 @@ augroup go
 	au FileType go nmap ,i <Plug>(go-alternate-edit)
 	au FileType go nmap ,r <Plug>(go-run)
 	au FileType go nmap ,b <Plug>(go-build)
-	au FileType go nmap ,h <Plug>(go-doc)
+	au FileType go nmap ,h :LspHover<CR>
 	au FileType go nmap ,H :GoDescribe<CR>
 	au FileType go nmap ,t <Plug>(go-test)
 	au FileType go nmap ,l :GoDecls<CR>
 	au FileType go nmap ,L :GoDeclsDir<CR>
-	au FileType go nmap ,d <Plug>(go-def)
-	au FileType go nmap ,D <Plug>(go-def-pop)
+	au FileType go nmap ,d :LspDefinition<CR>
+	au FileType go nmap ,D :LspTypeDefinition<CR>
+	" au FileType go nmap ,D <Plug>(go-def-pop)
+	au FileType go nmap ,f :LspReferences<CR>
 augroup END
 
 " typescript

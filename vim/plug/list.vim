@@ -76,6 +76,10 @@ Plug 'hushicai/tagbar-javascript.vim'
 " ------------------------------------------------------------
 "  言語
 " ------------------------------------------------------------
+" Language Server
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
 " QuickRun
 Plug 'thinca/vim-quickrun'
 
