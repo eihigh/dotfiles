@@ -33,6 +33,8 @@ Plug 'haya14busa/vim-asterisk'
 Plug 'kana/vim-operator-user'
 Plug 'osyo-manga/vim-operator-stay-cursor'
 
+Plug 'cohama/lexima.vim'
+
 " Comment out
 Plug 'tyru/caw.vim'
 
