@@ -1,7 +1,8 @@
 if executable('go-langserver')
 	au User lsp_setup call lsp#register_server({
-				\ 'name': 'go-langserver',
-				\ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+				\ 'name': 'go-lang',
+				\ 'cmd': {server_info->['bingo', '-mode', 'stdio']},
 				\ 'whitelist': ['go'],
 				\ })
+	au FileType go setlocal omnifunc=lsp#complete
 endif

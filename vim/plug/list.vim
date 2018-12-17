@@ -75,13 +75,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'hushicai/tagbar-javascript.vim'
 
-" ------------------------------------------------------------
-"  言語
-" ------------------------------------------------------------
 " Language Server
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'natebosch/vim-lsc'
+let g:lsp_async_completion = 1
 
+" ------------------------------------------------------------
+"  言語
+" ------------------------------------------------------------
 " QuickRun
 Plug 'thinca/vim-quickrun'
 
