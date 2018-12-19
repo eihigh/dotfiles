@@ -1,4 +1,4 @@
-if executable('go-langserver')
+if executable('bingo')
 	au User lsp_setup call lsp#register_server({
 				\ 'name': 'go-lang',
 				\ 'cmd': {server_info->['bingo', '-mode', 'stdio']},
