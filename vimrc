@@ -82,6 +82,9 @@ if isdirectory(expand('~/.vim'))
 
 	" load advanced settings
 	if v:version >= 800
+		if has('win32')
+			source ~/.vim/autoload/plug.vim
+		endif
 		source ~/.vim/plug/list.vim
 		runtime! .vim/plug/config/*.vim
 		runtime! .vim/advanced/**/*.vim
