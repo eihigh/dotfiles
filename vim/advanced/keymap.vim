@@ -29,6 +29,8 @@ imap <expr><TAB>
 			\ neosnippet#expandable_or_jumpable() ?
 			\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+
 " Fzf
 function! s:find_git_root()
 	return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
@@ -109,6 +111,7 @@ augroup go
 	au FileType go nmap ,D :LspTypeDefinition<CR>
 	" au FileType go nmap ,D <Plug>(go-def-pop)
 	au FileType go nmap ,f :LspReferences<CR>
+	au FileType go nmap ,n :LspRename<CR>
 	au FileType go nmap { [[zt
 	au FileType go nmap } ]]zt
 augroup END
