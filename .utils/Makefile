@@ -1,6 +1,6 @@
 deploy:
 	-cp -r ../vim/* ~/.vim/
-	-hooks/post-up
+	-../hooks/post-up
 	echo 'deploy finished.'
 
 install:
