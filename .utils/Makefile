@@ -5,5 +5,6 @@ deploy:
 
 install:
 	./install-rcm
-	RCRC=~/dotfiles/rcrc rcup
+	export RCRC=~/dotfiles/rcrc
+	rcup
 	echo 'install finished.'
