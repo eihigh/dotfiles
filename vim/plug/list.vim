@@ -95,7 +95,7 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 " Javascript 系
 Plug 'othree/yajs.vim'
 
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'Chiel92/vim-autoformat'
 
