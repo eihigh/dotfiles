@@ -21,7 +21,7 @@ nnoremap <silent> v :Sayonara!<CR>
 
 " QuickRun (can be overwritten)
 nnoremap ,r :QuickRun<CR>
-nnoremap ,a :QuickRun -args 
+nnoremap ,a :QuickRun -args
 
 " NeoSnippet
 imap <expr><TAB>
@@ -50,13 +50,13 @@ command! -bang -nargs=* Pt
 
 nnoremap <Space><Space> :<C-u>GFiles<CR>
 nnoremap <Space>c :<C-u>Files<CR>
-nnoremap <Space>s :GPt 
-nnoremap <Space>t :Pt 
+nnoremap <Space>s :GPt
+nnoremap <Space>t :Pt
 nnoremap <Space>h :<C-u>History<CR>
 nnoremap <Space>b :<C-u>Buffers<CR>
 
 " JunkFile
-nnoremap ,j :JunkfileOpen 
+nnoremap ,j :JunkfileOpen
 
 " Git operations
 nnoremap gs :<C-u>Gstatus<CR>
