@@ -23,6 +23,9 @@ Plug 'junegunn/goyo.vim'
 " Smooth scrolling
 Plug 'yuttie/comfortable-motion.vim'
 
+" Submode
+Plug 'kana/vim-submode'
+
 " ------------------------------------------------------------
 "  オペレータ、テキスト操作
 " ------------------------------------------------------------

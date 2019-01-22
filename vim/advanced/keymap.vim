@@ -6,6 +6,13 @@ map l <Plug>(easymotion-bd-fl)
 map * <Plug>(asterisk-z*)
 map # <Plug>(asterisk-z#)
 
+" Window operations (by submode)
+call submode#enter_with('winsize', 'n', '', '<C-w>', '<Nop>')
+call submode#map('winsize', 'n', '', 'a', '<C-w>>')
+call submode#map('winsize', 'n', '', 'i', '<C-w><')
+call submode#map('winsize', 'n', '', 'h', '<C-w>+')
+call submode#map('winsize', 'n', '', 't', '<C-w>-')
+
 " Sandwich operations
 map ;a <Plug>(operator-sandwich-add)
 map ;d <Plug>(operator-sandwich-delete)<Plug>(textobj-sandwich-query-a)
