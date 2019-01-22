@@ -1,4 +1,4 @@
 augroup Autoformat
 	au!
-	au BufWrite * :Autoformat
+	au BufWrite *.json,*.ts :Autoformat
 augroup END
