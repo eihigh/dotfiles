@@ -39,3 +39,8 @@ g_zqx() {
 }
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+if type rbenv > /dev/null 2>&1
+then
+	eval "$(rbenv init -)"
+fi
