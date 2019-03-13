@@ -37,3 +37,5 @@ g_zqx() {
 	local dir
 	dir=$(ghq list --full-path | fzf) && cd "$dir"
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
