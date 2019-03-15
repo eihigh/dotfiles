@@ -1,9 +1,9 @@
-if executable('go-langserver')
+if executable('gopls')
 	augroup LspGo
 		au!
 		au User lsp_setup call lsp#register_server({
 					\ 'name': 'go-lang',
-					\ 'cmd': {server_info->['go-langserver', '-mode', 'stdio', '-gocodecompletion']},
+					\ 'cmd': {server_info->['gopls']},
 					\ 'whitelist': ['go'],
 					\ })
 		au FileType go setlocal omnifunc=lsp#complete
