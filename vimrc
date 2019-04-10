@@ -10,6 +10,7 @@ set noswapfile
 
 set autoread
 set autowrite
+set backupcopy=yes
 
 set showcmd
 set showmatch
