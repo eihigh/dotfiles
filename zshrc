@@ -16,7 +16,7 @@ precmd () { vcs_info }
 
 # funny prompt
 PROMPT="
-%(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{${fg[yellow]}%}%~ %{${fg[cyan]}%}\$vcs_info_msg_0_%{${reset_color}%} %n@%m
+%(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{${fg[yellow]}%}%~ %{${fg[cyan]}%}\$vcs_info_msg_0_%{${reset_color}%} %(1j.%j .)%n@%m
 %(?.%{$fg[green]%}.%{$fg[cyan]%})%(?!(*'-')o!(*;-;%)?) <%{${reset_color}%} "
 
 PROMPT2='[%n]> '
