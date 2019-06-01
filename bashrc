@@ -2,6 +2,8 @@ export GOPATH=~/go
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 
+export PATH=$PATH:/usr/local/google-cloud-sdk/bin
+
 # aliases
 alias vi='vim'
 alias e='vim'
