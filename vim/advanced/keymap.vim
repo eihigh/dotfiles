@@ -114,7 +114,7 @@ augroup go
 	au FileType go nmap ,t <Plug>(go-test)
 	au FileType go nmap ,l :GoDecls<CR>
 	au FileType go nmap ,L :GoDeclsDir<CR>
-	au FileType go nmap ,d <plug>(lsp-definition)
+	au FileType go nmap ,d :GoDef<CR>
 	au FileType go nmap ,D <plug>(lsp-type-definition)
 	au FileType go nmap ,f <plug>(lsp-references)
 	au FileType go nmap ,n <plug>(lsp-rename)
