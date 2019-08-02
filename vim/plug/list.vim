@@ -47,9 +47,9 @@ Plug 'Shougo/neosnippet-snippets'
 " Auto nohlsearch
 Plug 'romainl/vim-cool'
 
-let g:operator_sandwich_no_default_key_mappings = 1
-let g:sandwich_no_default_key_mappings = 1
-Plug 'machakann/vim-sandwich'
+" let g:operator_sandwich_no_default_key_mappings = 1
+" let g:sandwich_no_default_key_mappings = 1
+" Plug 'machakann/vim-sandwich'
 
 " ------------------------------------------------------------
 "  ファイラ、検索
@@ -69,7 +69,7 @@ Plug 'vim-airline/vim-airline-themes'
 "  統合ツール
 " ------------------------------------------------------------
 " Async linter
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Git
 Plug 'tpope/vim-fugitive'
