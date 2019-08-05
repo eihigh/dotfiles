@@ -103,21 +103,21 @@ augroup emmet
 	au FileType html,css,xml imap <C-f> <C-y>,
 augroup END
 
-" golang
+" go
 augroup go
 	au!
-	au FileType go nmap ,i <Plug>(go-alternate-edit)
+	au FileType go nmap ,e <Plug>(go-alternate-edit)
 	au FileType go nmap ,r <Plug>(go-run)
 	au FileType go nmap ,b <Plug>(go-build)
+	au FileType go nmap ,n <plug>(lsp-rename)
 	au FileType go nmap ,h <plug>(lsp-hover)
-	au FileType go nmap ,H :GoDescribe<CR>
-	au FileType go nmap ,t <Plug>(go-test)
+	au FileType go nmap ,t <Plug>(go-test-func)
+	au FileType go nmap ,T <Plug>(go-test)
 	au FileType go nmap ,l :GoDecls<CR>
 	au FileType go nmap ,L :GoDeclsDir<CR>
 	au FileType go nmap ,d :GoDef<CR>
 	au FileType go nmap ,D <plug>(lsp-type-definition)
 	au FileType go nmap ,f <plug>(lsp-references)
-	au FileType go nmap ,n <plug>(lsp-rename)
 	au FileType go nmap { [[zt
 	au FileType go nmap } ]]zt
 augroup END
