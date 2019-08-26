@@ -131,4 +131,8 @@ Plug 'fuenor/im_control.vim'
 " 使い捨てファイル
 Plug 'Shougo/junkfile.vim'
 
+" Gist
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+
 call plug#end()
