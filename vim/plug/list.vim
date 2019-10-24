@@ -38,6 +38,8 @@ Plug 'osyo-manga/vim-operator-stay-cursor'
 
 Plug 'cohama/lexima.vim'
 
+Plug 'junegunn/vim-easy-align'
+
 " Comment out
 Plug 'tyru/caw.vim'
 

@@ -20,6 +20,10 @@ map ;e <Plug>(operator-sandwich-delete)<Plug>(textobj-sandwich-auto-a)
 map ;c <Plug>(operator-sandwich-replace)<Plug>(textobj-sandwich-query-a)
 map ;r <Plug>(operator-sandwich-replace)<Plug>(textobj-sandwich-auto-a)
 
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 " Tagbar
 nnoremap <C-t> :TagbarOpen fj<CR>
 
