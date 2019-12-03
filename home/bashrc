@@ -1,0 +1,30 @@
+PS1='[\u \w]\$ '
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:~/go/bin
+
+# aliases
+alias vi='vim'
+alias e='vim'
+alias n='fg'
+alias gs='git status'
+alias i='git status -sb'
+alias ga='git add'
+alias gc='git commit'
+alias gm='git merge --no-ff'
+alias gk='git checkout'
+alias gp='git pull -p'
+alias gl='git log'
+alias gb='git branch'
+
+case "${OSTYPE}" in
+	darwin*)
+		alias ls="ls -G"
+		alias l_zqx="ls -alG"
+
+		alias tac="tail -r"
+		;;
+	linux*)
+		alias ls="ls --color"
+		alias l_zqx="ls -al --color"
+		;;
+esac
