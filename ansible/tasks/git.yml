@@ -1,0 +1,12 @@
+---
+- name: git config name
+  git_config:
+    name: user.name
+    scope: global
+    value: eihigh
+
+- name: git config email
+  git_config:
+    name: user.email
+    scope: global
+    value: eihigh.contact@gmail.com

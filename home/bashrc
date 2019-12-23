@@ -1,15 +1,22 @@
 PS1='[\u \w]\$ '
+
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 
+if type rbenv > /dev/null 2>&1
+then
+	eval "$(rbenv init -)"
+fi
+
 # aliases
-alias vi='vim'
 alias e='vim'
 alias n='fg'
+alias g='lazygit'
 alias gs='git status'
 alias i='git status -sb'
 alias ga='git add'
 alias gc='git commit'
+alias gd='git diff'
 alias gm='git merge --no-ff'
 alias gk='git checkout'
 alias gp='git pull -p'
@@ -28,3 +35,6 @@ case "${OSTYPE}" in
 		alias l_zqx="ls -al --color"
 		;;
 esac
+
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

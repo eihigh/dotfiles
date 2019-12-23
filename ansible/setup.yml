@@ -1,0 +1,14 @@
+---
+- name: personal Playbook
+  hosts: localhost
+  connection: local
+  tasks:
+    - include: tasks/git.yml
+      tags:
+        - git
+    - include: tasks/repos.yml
+      tags:
+        - repos
+    - include: tasks/link.yml
+      tags:
+        - link
