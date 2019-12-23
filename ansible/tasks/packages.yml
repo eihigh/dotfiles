@@ -4,6 +4,11 @@
   tags:
     - brew_formula
 
+- name: include pacman list
+  include_vars: vars/pacman.yml
+  tags:
+    - pacman
+
 - block:
   - name: manage formula
     homebrew:
@@ -12,3 +17,14 @@
     with_dict: "{{ formula }}"
     tags:
       - brew_formula
+
+  when: ansible_os_family == "Darwin"
+
+- block:
+  - name: manage pacman
+    pacman:
+      name: "{{ item.key }}"
+      state: latest
+    with_dict: "{{ pacman }}"
+
+  when: ansible_os_family == "Archlinux"
