@@ -10,8 +10,12 @@
       loop:
         - "~/.cache/vim"
         - "~/.vim"
+        - "~/.vim/plugged"
         - "~/.vim/autoload"
 
+    - include: tasks/packages.yml
+      tags:
+        - packages
     - include: tasks/git.yml
       tags:
         - git
@@ -21,6 +25,3 @@
     - include: tasks/link.yml
       tags:
         - link
-    - include: tasks/packages.yml
-      tags:
-        - packages

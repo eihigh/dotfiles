@@ -1,4 +1,4 @@
-[ -f ~/.shrc ] && source ~/.shrc
+[ -f ~/.anyshrc ] && source ~/.anyshrc
 
 autoload -U compinit; compinit
 
@@ -34,7 +34,7 @@ function _zqx_add_log() {
 	cat $CDLOG | while read line; do
 		(( i++ ))
 		if [ i = 200 ]; then
-			sed -i -e "200,200d" $CDLOG
+			sed -i -e "500,500d" $CDLOG
 		elif [ "$line" = "$PWD" ]; then
 			sed -i -e "${i},${i}d" $CDLOG
 		fi

@@ -1,5 +1,6 @@
 # shell共通設定
 
+# PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
 
@@ -7,6 +8,10 @@ if type rbenv > /dev/null 2>&1
 then
 	eval "$(rbenv init -)"
 fi
+
+# ENV
+export TERM=xterm-256color
+export EDITOR=vim
 
 # aliases
 alias e='vim'
@@ -38,4 +43,4 @@ case "${OSTYPE}" in
 		;;
 esac
 
-[ -f ~/.shrc.local ] && source ~/.shrc.local
+[ -f ~/.anyshrc.local ] && source ~/.anyshrc.local

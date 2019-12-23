@@ -1,4 +1,4 @@
-[ -f ~/.shrc ] && source ~/.shrc
+[ -f ~/.anyshrc ] && source ~/.anyshrc
 
 PS1='[\u \w]\$ '
 

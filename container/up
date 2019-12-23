@@ -1,4 +1,4 @@
-docker run -it --name devcontainer \
+docker run -it \
 	--mount type=bind,src=$(pwd)/../,dst=/home/dev/dotfiles \
 	--mount type=bind,src=$HOME/work,dst=/home/dev/work \
-	dev
+	dev191223

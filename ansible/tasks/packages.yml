@@ -25,7 +25,7 @@
     become: yes
     pacman:
       name: "{{ item.key }}"
-      state: latest
+      state: present
     with_dict: "{{ pacman }}"
 
   when: ansible_os_family == "Archlinux"
