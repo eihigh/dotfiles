@@ -1,4 +1,4 @@
-source ~/.shrc
+[ -f ~/.shrc ] && source ~/.shrc
 
 autoload -U compinit; compinit
 
@@ -24,7 +24,7 @@ PROMPT2='[%n]> '
 # cd history
 function chpwd() {
 	_zqx_add_log
-	l_zqx
+	ls -la
 }
 
 CDLOG=$HOME/.cache/cd.log

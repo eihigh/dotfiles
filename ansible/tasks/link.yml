@@ -9,8 +9,10 @@
     - { src: "~/dotfiles/home/bashrc", dest: "~/.bashrc"}
     - { src: "~/dotfiles/home/vimrc", dest: "~/.vimrc"}
     - { src: "~/dotfiles/home/zshrc", dest: "~/.zshrc"}
+    - { src: "~/dotfiles/home/sshrc", dest: "~/.sshrc"}
     - { src: "~/dotfiles/vim/advanced", dest: "~/.vim/advanced"}
     - { src: "~/dotfiles/vim/after", dest: "~/.vim/after"}
     - { src: "~/dotfiles/vim/basic", dest: "~/.vim/basic"}
     - { src: "~/dotfiles/vim/plug", dest: "~/.vim/plug"}
+    - { src: "~/dotfiles/.sshrc.d", dest: "~/.sshrc.d"}
     - { src: "~/ghq/github.com/junegunn/vim-plug/plug.vim", dest: "~/.vim/autoload/plug.vim" }
