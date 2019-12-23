@@ -10,6 +10,8 @@ fi
 
 # aliases
 alias e='vim'
+alias d='docker'
+alias dc='docker-compose'
 alias n='fg'
 alias g='lazygit'
 alias gs='git status'
