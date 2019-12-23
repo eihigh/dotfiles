@@ -3,6 +3,15 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "~/.cache/vim"
+        - "~/.vim"
+        - "~/.vim/autoload"
+
     - include: tasks/git.yml
       tags:
         - git

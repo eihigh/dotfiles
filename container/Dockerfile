@@ -6,6 +6,7 @@ ARG GROUP=devgrp
 ARG GROUPID=1000
 ARG PASSWD=dev
 
+ENV TERM xterm-256color
 ENV EDITOR=vim
 ENV LANG="ja_JP.UTF8"
 COPY mirrorlist /etc/pacman.d/mirrorlist
