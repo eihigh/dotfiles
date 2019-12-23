@@ -1,3 +1,5 @@
+source ~/.shrc
+
 autoload -U compinit; compinit
 
 setopt AUTO_CD
@@ -59,3 +61,6 @@ compdef __zqx _zqx
 
 [ -e $CDLOG ] || touch $CDLOG
 [ -e $CDLOG ] && cd `tail -1 $CDLOG`
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

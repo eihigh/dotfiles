@@ -1,2 +1,14 @@
 ---
-- name: include brew
+- name: include brew formula list
+  include_vars: vars/formula.yml
+  tags:
+    - brew_formula
+
+- block:
+  - name: manage formula
+    homebrew:
+      name: "{{ item.key }}"
+      state: present
+    with_dict: "{{ formula }}"
+    tags:
+      - brew_formula

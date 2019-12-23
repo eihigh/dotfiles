@@ -12,3 +12,6 @@
     - include: tasks/link.yml
       tags:
         - link
+    - include: tasks/packages.yml
+      tags:
+        - packages

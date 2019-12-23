@@ -1,10 +1,4 @@
 ---
-- name: pull fzf
-  git:
-    repo: https://github.com/junegunn/fzf.git
-    dest: ~/ghq/github.com/junegunn/fzf
-    update: yes
-
 - name: pull vim-plug
   git:
     repo: https://github.com/junegunn/vim-plug.git

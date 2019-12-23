@@ -6,6 +6,7 @@ let g:go_def_mapping_enabled = 0
 let g:go_version_warning = 0
 let g:go_auto_type_info = 1
 let g:go_updatetime = 100
+let g:go_gorename_command = 'gopls'
 
 " let g:go_highlight_types = 1
 " let g:go_highlight_operators = 1

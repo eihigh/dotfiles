@@ -1,0 +1,11 @@
+---
+formula:
+  autoconf:
+  automake:
+  cmake:
+  ffmpeg:
+  fzf:
+  git:
+  go:
+  jq:
+  vim:
