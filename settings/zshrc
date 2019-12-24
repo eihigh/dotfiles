@@ -23,13 +23,13 @@ PROMPT2='[%n]> '
 
 # cd history
 function chpwd() {
-	_zqx_add_log
+	_zsh_jump_add_log
 	ls -la
 }
 
 CDLOG=$HOME/.cache/cd.log
 
-function _zqx_add_log() {
+function _zsh_jump_add_log() {
 	local i=0
 	cat $CDLOG | while read line; do
 		(( i++ ))
@@ -42,25 +42,59 @@ function _zqx_add_log() {
 	echo "$PWD" >> $CDLOG
 }
 
-function _zqx() {
+function _zsh_jump() {
+	# 入力されている文字列を削除
+	zle kill-whole-line
+
 	local dir
 	if [ $# = 0 ]; then
-		dir=$(tac $CDLOG | fzf) && cd "$dir"
+		dir=$(tac $CDLOG | fzf +s) && cd "$dir"
 	elif [ $# = 1 ]; then
 		cd $1
 	else
-		echo "_zqx: too many arguments"
+		echo "_zsh_jump: too many arguments"
 	fi
+
+	# 1行入力させる
+	zle .accept-line
 }
 
-__zqx() {
+__zsh_jump() {
 	_files -/
 }
 
-compdef __zqx _zqx
+compdef __zsh_jump _zsh_jump
 
 [ -e $CDLOG ] || touch $CDLOG
 [ -e $CDLOG ] && cd `tail -1 $CDLOG`
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# key bindings
+function _zsh_up_cd() {
+	# 入力されている文字列を変数$BUFに代入
+	local BUF=${BUFFER}
+
+	# 入力されている文字列を削除
+	zle kill-whole-line
+
+	# cd ../を実行
+	\cd ..
+
+	# 1行入力させる
+	zle .accept-line
+
+	# 入力されていた文字列を再度入力する
+	if [ ! ${#BUF} -eq 0 ];then
+		zle -U ${BUF}
+	fi
+}
+
+# functionをキーバインドで利用できるよう読み込ませる
+zle -N _zsh_up_cd
+zle -N _zsh_jump
+
+# キーバインドの設定
+bindkey '^U' _zsh_up_cd
+bindkey '^T' _zsh_jump
