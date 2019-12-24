@@ -1,4 +1,13 @@
 ---
+- name: check gopls
+  command: which gopls
+  register: gopls_exists
+  ignore_errors: true
+
+- name: install gopls
+  command: go get -u golang.org/x/tools/cmd/gopls
+  when: gopls_exists is failed
+
 - name: include brew formula list
   include_vars: vars/formula.yml
   tags:
@@ -23,6 +32,7 @@
 - block:
   - name: manage pacman
     become: yes
+    ignore_errors: true
     pacman:
       name: "{{ item.key }}"
       state: present

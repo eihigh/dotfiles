@@ -14,7 +14,7 @@ RUN : "ロケール設定" &&\
 		ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime &&\
 		: "最低限のパッケージをインストール" &&\
 		chmod -R 755 /etc/pacman.d &&\
-		pacman -Syy --noconfirm base-devel ansible &&\
+		pacman -Syy --noconfirm sudo ansible &&\
 		: "一般ユーザーを追加" &&\
 		groupadd -g ${GROUPID} ${GROUP} &&\
 		useradd  -g            ${GROUP} -m -u ${USERID} ${USER} &&\

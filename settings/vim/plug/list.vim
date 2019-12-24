@@ -94,7 +94,7 @@ Plug 'dense-analysis/ale'
 Plug 'thinca/vim-quickrun'
 
 " Go
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go'
 
 " Javascript 系
 Plug 'othree/yajs.vim'
