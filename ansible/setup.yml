@@ -16,9 +16,9 @@
     - include: tasks/packages.yml
       tags:
         - packages
-    - include: tasks/git.yml
+    - include: tasks/profile.yml
       tags:
-        - git
+        - profile
     - include: tasks/repos.yml
       tags:
         - repos

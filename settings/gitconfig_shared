@@ -1,5 +1,12 @@
 [core]
+	symlinks = true
 	excludesfile = ~/.gitignore_global
-
+[user]
+	name = eihigh
+	email = eihigh.contact@gmail.com
+[ghq]
+	root = ~/ghq
+[github]
+	user = eihigh
 [color]
 	ui = auto
