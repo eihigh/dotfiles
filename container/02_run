@@ -1,4 +1,4 @@
 docker run -it \
 	--mount type=bind,src=$(pwd)/../,dst=/home/dev/dotfiles \
 	--name devbasecontainer \
-	devbase
+	devbase bash --login

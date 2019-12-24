@@ -1,0 +1,5 @@
+docker run -it \
+	--mount type=bind,src=$HOME/dotfiles,dst=/home/dev/dotfiles,readonly \
+	--mount type=bind,src=$HOME/work,dst=/home/dev/work,consistency=delegated \
+	--name devcontainer \
+	dev zsh --login

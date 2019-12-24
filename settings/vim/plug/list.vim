@@ -4,12 +4,6 @@ call plug#begin('~/.vim/plugged')
 "  カラースキーム
 " ------------------------------------------------------------
 Plug 'cocopon/iceberg.vim'
-Plug 'KKPMW/moonshine-vim'
-Plug 'nightsense/snow'
-Plug 'nightsense/stellarized'
-Plug 'kadekillary/subtle_solo'
-Plug 'yuttie/inkstained-vim'
-Plug 'altercation/vim-colors-solarized'
 
 " ------------------------------------------------------------
 "  画面操作
@@ -40,6 +34,10 @@ Plug 'cohama/lexima.vim'
 
 Plug 'junegunn/vim-easy-align'
 
+" Text object
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+
 " Comment out
 Plug 'tyru/caw.vim'
 
@@ -56,7 +54,7 @@ Plug 'machakann/vim-sandwich'
 " ------------------------------------------------------------
 "  ファイラ、検索
 " ------------------------------------------------------------
-Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'cocopon/vaffle.vim'
@@ -77,6 +75,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 Plug 'hushicai/tagbar-javascript.vim'
 
+" Async linter
+Plug 'dense-analysis/ale'
+
+" ------------------------------------------------------------
+"  言語
+" ------------------------------------------------------------
 " Language Server
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
@@ -84,17 +88,14 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 let g:lsp_async_completion = 1
 
-" Async linter
-Plug 'dense-analysis/ale'
+Plug 'mattn/vim-lsp-settings'
 
-" ------------------------------------------------------------
-"  言語
-" ------------------------------------------------------------
 " QuickRun
 Plug 'thinca/vim-quickrun'
 
 " Go
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
+Plug 'mattn/vim-goimports'
 
 " Javascript 系
 Plug 'othree/yajs.vim'

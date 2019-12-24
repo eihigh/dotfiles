@@ -28,4 +28,4 @@
         - link
 
     - name: install vim plugins
-      shell: vim +PlugInstall +qall
+      shell: "yes | vim +PlugInstall +qall"

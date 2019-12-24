@@ -30,6 +30,8 @@ alias gp='git pull -p'
 alias gl='git log'
 alias gb='git branch'
 
+alias dev="docker start -i devcontainer"
+
 case "${OSTYPE}" in
 	darwin*)
 		alias ls="ls -G"
