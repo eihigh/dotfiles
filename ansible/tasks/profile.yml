@@ -1,6 +1,0 @@
----
-- name: shared git config
-  git_config:
-    name: include.path
-    scope: global
-    value: ~/.gitconfig_shared

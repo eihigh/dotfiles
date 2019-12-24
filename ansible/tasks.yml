@@ -1,0 +1,78 @@
+---
+- name: Include vars
+  include_vars: vars/main.yml
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - "~/work"
+    - "~/.cache/vim"
+    - "~/.vim"
+    - "~/.vim/plugged"
+    - "~/.vim/autoload"
+
+- block:
+  - name: Manage formula
+    homebrew:
+      name: "{{ item.key }}"
+      state: present
+    with_dict: "{{ formula }}"
+    tags:
+      - brew_formula
+
+  when: ansible_os_family == "Darwin"
+
+- block:
+  - name: Manage pacman
+    become: yes
+    ignore_errors: true
+    pacman:
+      name: "{{ item.key }}"
+      state: present
+    with_dict: "{{ pacman }}"
+
+  when: ansible_os_family == "Archlinux"
+
+- name: Pull vim-plug
+  git:
+    repo: https://github.com/junegunn/vim-plug.git
+    dest: ~/ghq/github.com/junegunn/vim-plug
+    update: yes
+
+- name: Link dotfiles
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop:
+    - { src: "~/dotfiles/settings/anyshrc", dest: "~/.anyshrc"}
+    - { src: "~/dotfiles/settings/bashrc", dest: "~/.bashrc"}
+    - { src: "~/dotfiles/settings/sshrc", dest: "~/.sshrc"}
+    - { src: "~/dotfiles/settings/vimrc", dest: "~/.vimrc"}
+    - { src: "~/dotfiles/settings/zshrc", dest: "~/.zshrc"}
+    - { src: "~/dotfiles/settings/gitconfig_shared", dest: "~/.gitconfig_shared"}
+    - { src: "~/dotfiles/settings/gitignore_global", dest: "~/.gitignore_global"}
+    - { src: "~/dotfiles/settings/vim/advanced", dest: "~/.vim/advanced"}
+    - { src: "~/dotfiles/settings/vim/after", dest: "~/.vim/after"}
+    - { src: "~/dotfiles/settings/vim/basic", dest: "~/.vim/basic"}
+    - { src: "~/dotfiles/settings/vim/plug", dest: "~/.vim/plug"}
+    - { src: "~/dotfiles/settings/sshrc.d", dest: "~/.sshrc.d"}
+
+    - { src: "~/ghq/github.com/junegunn/vim-plug/plug.vim", dest: "~/.vim/autoload/plug.vim" }
+
+- name: Shared git config
+  git_config:
+    name: include.path
+    scope: global
+    value: ~/.gitconfig_shared
+
+- name: Install executables
+  executable:
+    name: "{{ item.key }}"
+    action: "{{ item.value }}"
+  with_dict: "{{ executable }}"
+
+- name: Install vim plugins
+  shell: "yes | vim +PlugInstall +qall"

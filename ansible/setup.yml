@@ -3,29 +3,4 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: create directories
-      file:
-        path: "{{ item }}"
-        state: directory
-      loop:
-        - "~/work"
-        - "~/.cache/vim"
-        - "~/.vim"
-        - "~/.vim/plugged"
-        - "~/.vim/autoload"
-
-    - include: tasks/packages.yml
-      tags:
-        - packages
-    - include: tasks/profile.yml
-      tags:
-        - profile
-    - include: tasks/repos.yml
-      tags:
-        - repos
-    - include: tasks/link.yml
-      tags:
-        - link
-
-    - name: install vim plugins
-      shell: "yes | vim +PlugInstall +qall"
+    - include: tasks.yml

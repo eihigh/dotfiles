@@ -1,0 +1,22 @@
+executable:
+  gopls: cd /tmp; go get -u golang.org/x/tools/cmd/gopls
+  goimports: cd /tmp; go get -u golang.org/x/tools/cmd/goimports
+
+formula:
+  autoconf:
+  automake:
+  cmake:
+  ffmpeg:
+  fzf:
+  git:
+  go:
+  jq:
+  vim:
+
+pacman:
+  fzf:
+  git:
+  go:
+  jq:
+  vim:
+  zsh:

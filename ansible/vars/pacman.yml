@@ -1,8 +1,0 @@
----
-pacman:
-  fzf:
-  git:
-  go:
-  jq:
-  vim:
-  zsh:

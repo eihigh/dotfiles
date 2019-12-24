@@ -1,6 +1,0 @@
----
-- name: pull vim-plug
-  git:
-    repo: https://github.com/junegunn/vim-plug.git
-    dest: ~/ghq/github.com/junegunn/vim-plug
-    update: yes
