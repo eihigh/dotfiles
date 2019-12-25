@@ -1,4 +1,4 @@
-[ -f ~/.anyshrc ] && source ~/.anyshrc
+[ -f ${ZDOTDIR:-$HOME}/.anyshrc ] && source ${ZDOTDIR:-$HOME}/.anyshrc
 
 autoload -U compinit; compinit
 
