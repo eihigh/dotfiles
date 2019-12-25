@@ -1,1 +1,1 @@
-ansible-playbook $1 ansible/setup.yml
+ansible-playbook ansible/setup.yml

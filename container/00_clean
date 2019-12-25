@@ -1,1 +1,1 @@
-docker rm devbasecontainer devcontainer
+docker stop devbasecontainer devcontainer

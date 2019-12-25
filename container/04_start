@@ -1,5 +1,8 @@
-docker run -it \
-	--mount type=bind,src=$HOME/dotfiles,dst=/home/dev/dotfiles,readonly \
+#!/bin/sh
+
+docker stop devbasecontainer
+docker run -d --rm -p 22022:22 \
+	--mount type=bind,src=$HOME/dotfiles,dst=/home/dev/dotfiles,consistency=delegated \
 	--mount type=bind,src=$HOME/work,dst=/home/dev/work,consistency=delegated \
 	--name devcontainer \
-	dev zsh --login
+	dev

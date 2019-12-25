@@ -15,7 +15,10 @@ RUN : &&\
 	ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime &&\
 	: "最低限のパッケージをインストール" &&\
 	chmod -R 755 /etc/pacman.d &&\
-	pacman -Syy --noconfirm sudo which ansible &&\
+	pacman -Syy --noconfirm sudo which openssh ansible &&\
+	: "sshホスト設定" &&\
+	mkdir /var/run/sshd &&\
+	ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' &&\
 	: "一般ユーザーを追加" &&\
 	groupadd -g ${GROUPID} ${GROUP} &&\
 	useradd  -g            ${GROUP} -m -u ${USERID} ${USER} &&\
@@ -23,9 +26,12 @@ RUN : &&\
 	: "sudoersにユーザー追加" &&\
 	echo 'Defaults visiblepw' >> /etc/sudoers &&\
 	echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers &&\
-	: "--RUN--"
+	: "END"
 
-USER ${USER}
 WORKDIR /home/${USER}
-RUN rm .bashrc
+RUN rm .bashrc && mkdir /home/${USER}/.ssh
+ADD https://github.com/eihigh.keys /home/${USER}/.ssh/authorized_keys
+RUN chown ${USER} /home/${USER}/.ssh/authorized_keys && chmod 700 /home/${USER}/.ssh/authorized_keys
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
 
