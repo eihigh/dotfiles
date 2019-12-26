@@ -1,4 +1,4 @@
-FROM archlinux:20191105
+FROM archlinux:20191205
 
 ARG USER=dev
 ARG USERID=1000
@@ -10,7 +10,7 @@ ENV LANG="ja_JP.UTF8"
 COPY mirrorlist /etc/pacman.d/mirrorlist
 RUN : &&\
 	: "ロケール設定" &&\
-	echo ja_JP.UTF8 UTF-8 > /etc/locale.gen &&\
+	echo ja_JP.UTF8 >> /etc/locale.gen &&\
 	locale-gen &&\
 	ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime &&\
 	: "最低限のパッケージをインストール" &&\
@@ -23,15 +23,16 @@ RUN : &&\
 	groupadd -g ${GROUPID} ${GROUP} &&\
 	useradd  -g            ${GROUP} -m -u ${USERID} ${USER} &&\
 	echo ${USER}:${PASSWD} | chpasswd &&\
+	rm /home/${USER}/.bashrc &&\
+	mkdir /home/${USER}/.ssh &&\
 	: "sudoersにユーザー追加" &&\
 	echo 'Defaults visiblepw' >> /etc/sudoers &&\
 	echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers &&\
 	: "END"
 
 WORKDIR /home/${USER}
-RUN rm .bashrc && mkdir /home/${USER}/.ssh
-ADD https://github.com/eihigh.keys /home/${USER}/.ssh/authorized_keys
-RUN chown ${USER} /home/${USER}/.ssh/authorized_keys && chmod 700 /home/${USER}/.ssh/authorized_keys
+ADD https://github.com/eihigh.keys .ssh/authorized_keys
+RUN chown ${USER} .ssh/authorized_keys && chmod 700 .ssh/authorized_keys
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
 

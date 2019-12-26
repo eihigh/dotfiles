@@ -30,8 +30,8 @@ alias gp='git pull -p'
 alias gl='git log'
 alias gb='git branch'
 
-alias devbase='ssh dev@localhost -p 22000'
-alias dev='ssh dev@localhost -p 22001'
+alias devbase='ssh -A dev@localhost -p 22000'
+alias dev='ssh -A dev@localhost -p 22001'
 
 # scripts
 case "${OSTYPE}" in

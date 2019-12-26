@@ -1,6 +1,11 @@
 executable:
+  # ghq: cd /tmp; go get -u github.com/motemen/ghq
   gopls: cd /tmp; go get -u golang.org/x/tools/cmd/gopls
+  lazygit: cd /tmp; go get -u github.com/jesseduffield/lazygit
   goimports: cd /tmp; go get -u golang.org/x/tools/cmd/goimports
+  pt: cd /tmp; go get -u github.com/monochromegane/the_platinum_searcher/...
+  eslint: sudo npm install -g eslint
+  typescript: sudo npm install -g typescript
 
 formula:
   autoconf:
@@ -20,3 +25,5 @@ pacman:
   jq:
   vim:
   zsh:
+  nodejs:
+  npm:
