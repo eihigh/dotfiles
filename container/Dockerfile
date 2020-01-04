@@ -21,7 +21,7 @@ RUN : &&\
 	ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' &&\
 	: "一般ユーザーを追加" &&\
 	groupadd -g ${GROUPID} ${GROUP} &&\
-	useradd  -g            ${GROUP} -m -u ${USERID} ${USER} &&\
+	useradd  -g            ${GROUP} -u ${USERID} ${USER} -m &&\
 	echo ${USER}:${PASSWD} | chpasswd &&\
 	rm /home/${USER}/.bashrc &&\
 	mkdir /home/${USER}/.ssh &&\
