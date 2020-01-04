@@ -15,7 +15,7 @@ RUN : &&\
 	ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime &&\
 	: "最低限のパッケージをインストール" &&\
 	chmod -R 755 /etc/pacman.d &&\
-	pacman -Syy --noconfirm sudo which openssh ansible &&\
+	pacman -Syy --noconfirm sudo which openssh ansible archlinux-keyring &&\
 	: "sshホスト設定" &&\
 	mkdir /var/run/sshd &&\
 	ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' &&\
