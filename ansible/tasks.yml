@@ -54,12 +54,11 @@
     - { src: "~/dotfiles/settings/zshrc", dest: "~/.zshrc"}
     - { src: "~/dotfiles/settings/gitconfig_shared", dest: "~/.gitconfig_shared"}
     - { src: "~/dotfiles/settings/gitignore_global", dest: "~/.gitignore_global"}
-    - { src: "~/dotfiles/settings/vim/advanced", dest: "~/.vim/advanced"}
     - { src: "~/dotfiles/settings/vim/after", dest: "~/.vim/after"}
-    - { src: "~/dotfiles/settings/vim/basic", dest: "~/.vim/basic"}
+    - { src: "~/dotfiles/settings/vim/full", dest: "~/.vim/full"}
+    - { src: "~/dotfiles/settings/vim/min", dest: "~/.vim/min"}
     - { src: "~/dotfiles/settings/vim/plug", dest: "~/.vim/plug"}
     - { src: "~/dotfiles/settings/sshrc.d", dest: "~/.sshrc.d"}
-
     - { src: "~/ghq/github.com/junegunn/vim-plug/plug.vim", dest: "~/.vim/autoload/plug.vim" }
 
 - name: Shared git config

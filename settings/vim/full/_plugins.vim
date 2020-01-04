@@ -11,9 +11,6 @@ Plug 'cocopon/iceberg.vim'
 " Close buffer
 Plug 'mhinz/vim-sayonara'
 
-" Write Room Mode
-Plug 'junegunn/goyo.vim'
-
 " Smooth scrolling
 Plug 'yuttie/comfortable-motion.vim'
 
@@ -68,15 +65,8 @@ Plug 'vim-airline/vim-airline-themes'
 " ------------------------------------------------------------
 "  統合ツール
 " ------------------------------------------------------------
-" Git
-Plug 'tpope/vim-fugitive'
-
 " ctags
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
-Plug 'hushicai/tagbar-javascript.vim'
-
-" Async linter
-Plug 'dense-analysis/ale'
 
 " ------------------------------------------------------------
 "  言語
@@ -94,12 +84,9 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'thinca/vim-quickrun'
 
 " Go
-" Plug 'fatih/vim-go'
 Plug 'mattn/vim-goimports'
 
 " Javascript 系
-Plug 'othree/yajs.vim'
-
 Plug 'leafgarland/typescript-vim'
 Plug 'Quramy/tsuquyomi'
 Plug 'Chiel92/vim-autoformat'
@@ -120,15 +107,6 @@ Plug 'stephpy/vim-yaml'
 if has('clientserver')
 	Plug 'thinca/vim-singleton'
 endif
-
-" プロジェクトローカルvimrc
-Plug 'thinca/vim-localrc'
-
-" 即時再起動
-Plug 'tyru/restart.vim'
-
-" 日本語入力固定
-Plug 'fuenor/im_control.vim'
 
 " ------------------------------------------------------------
 "  小回り

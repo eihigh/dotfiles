@@ -78,16 +78,15 @@ nnoremap <Right> <C-w>l
 nnoremap j :w<CR>
 
 if isdirectory(expand('~/.vim'))
-	runtime! .vim/basic/**/*.vim
+	runtime! .vim/min/**/*.vim
 
 	" load advanced settings
 	if v:version >= 800
 		if has('win32')
 			source ~/.vim/autoload/plug.vim
 		endif
-		source ~/.vim/plug/list.vim
-		runtime! .vim/plug/config/*.vim
-		runtime! .vim/advanced/**/*.vim
+		runtime! .vim/plug/**/*.vim
+		runtime! .vim/full/**/*.vim
 	endif
 
 	if has('win32')

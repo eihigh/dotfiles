@@ -35,7 +35,7 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <C-t> :TagbarOpen fj<CR>
 
 " Close buffer without collapse window layout
-nnoremap <silent> v :Sayonara<CR>
+nnoremap <silent> v :Sayonara!<CR>
 
 " QuickRun (can be overwritten)
 nnoremap ,r :QuickRun<CR>
@@ -76,9 +76,6 @@ nnoremap <Space>b :<C-u>Buffers<CR>
 " JunkFile
 nnoremap ,j :JunkfileOpen
 
-" Git operations
-nnoremap gs :<C-u>Gstatus<CR>
-
 " Vaffle
 nnoremap <Space>l :<C-u>Vaffle<CR>
 
@@ -117,14 +114,5 @@ augroup END
 " go
 augroup go
 	au!
-	inoremap <C-e> err != nil
-augroup END
-
-" typescript
-augroup typescript
-	au!
-	au FileType typescript nmap ,f <Plug>(TsuquyomiReferences)
-	au FileType typescript nmap ,q :<C-u>TsuquyomiGeterr<CR>
-	au FileType typescript nmap ,d <Plug>(TsuquyomiDefinition)
-	au FileType typescript nmap ,D <Plug>(TsuquyomiGoBack)
+	au FileType go inoremap <C-e> err != nil
 augroup END
