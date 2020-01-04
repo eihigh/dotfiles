@@ -1,6 +1,6 @@
 ---
 - name: Include vars
-  include_vars: vars/main.yml
+  include_vars: vars.yml
 
 - name: Create directories
   file:
