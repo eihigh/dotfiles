@@ -3,6 +3,7 @@
 docker stop devbasecontainer
 docker run -d --rm -p 22001:22 \
 	--mount type=bind,src=$HOME/dotfiles,dst=/home/dev/dotfiles,consistency=delegated \
+	--mount type=bind,src=$HOME/ghq,dst=/home/dev/ghq,consistency=delegated \
 	--mount type=bind,src=$HOME,dst=/x,consistency=delegated \
 	--name devcontainer \
 	dev
