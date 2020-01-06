@@ -85,8 +85,9 @@ if isdirectory(expand('~/.vim'))
 		if has('win32')
 			source ~/.vim/autoload/plug.vim
 		endif
-		runtime! .vim/plug/**/*.vim
+		source ~/.vim/plugins.vim
 		runtime! .vim/full/**/*.vim
+		runtime! .vim/plug/**/*.vim
 	endif
 
 	if has('win32')

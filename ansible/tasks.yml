@@ -57,7 +57,7 @@
     - { src: "~/dotfiles/settings/vim/after", dest: "~/.vim/after"}
     - { src: "~/dotfiles/settings/vim/full", dest: "~/.vim/full"}
     - { src: "~/dotfiles/settings/vim/min", dest: "~/.vim/min"}
-    - { src: "~/dotfiles/settings/vim/plug", dest: "~/.vim/plug"}
+    - { src: "~/dotfiles/settings/vim/plugins.vim", dest: "~/.vim/plugins.vim"}
     - { src: "~/dotfiles/settings/sshrc.d", dest: "~/.sshrc.d"}
     - { src: "~/ghq/github.com/junegunn/vim-plug/plug.vim", dest: "~/.vim/autoload/plug.vim" }
 
