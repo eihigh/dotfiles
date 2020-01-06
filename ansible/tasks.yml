@@ -38,7 +38,7 @@
 - name: Pull vim-plug
   git:
     repo: https://github.com/junegunn/vim-plug.git
-    dest: ~/ghq/github.com/junegunn/vim-plug
+    dest: ~/.local/share/vim-plug
     update: yes
 
 - name: Link dotfiles
@@ -59,7 +59,7 @@
     - { src: "~/dotfiles/settings/vim/min", dest: "~/.vim/min"}
     - { src: "~/dotfiles/settings/vim/plugins.vim", dest: "~/.vim/plugins.vim"}
     - { src: "~/dotfiles/settings/sshrc.d", dest: "~/.sshrc.d"}
-    - { src: "~/ghq/github.com/junegunn/vim-plug/plug.vim", dest: "~/.vim/autoload/plug.vim" }
+    - { src: "~/.local/share/vim-plug/plug.vim", dest: "~/.vim/autoload/plug.vim" }
 
 - name: Shared git config
   git_config:
