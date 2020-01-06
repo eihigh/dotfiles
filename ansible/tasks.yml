@@ -7,7 +7,6 @@
     path: "{{ item }}"
     state: directory
   loop:
-    - "~/work"
     - "~/.cache/vim"
     - "~/.vim"
     - "~/.vim/plugged"
