@@ -53,7 +53,6 @@
     - { src: "~/dotfiles/settings/zshrc", dest: "~/.zshrc"}
     - { src: "~/dotfiles/settings/gitconfig_shared", dest: "~/.gitconfig_shared"}
     - { src: "~/dotfiles/settings/gitignore_global", dest: "~/.gitignore_global"}
-    - { src: "~/dotfiles/settings/vim/after", dest: "~/.vim/after"}
     - { src: "~/dotfiles/settings/vim/full", dest: "~/.vim/full"}
     - { src: "~/dotfiles/settings/vim/min", dest: "~/.vim/min"}
     - { src: "~/dotfiles/settings/vim/plugins.vim", dest: "~/.vim/plugins.vim"}
