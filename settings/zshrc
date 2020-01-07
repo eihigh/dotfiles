@@ -71,7 +71,7 @@ compdef __zsh_jump _zsh_jump
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# key bindings
+# up
 function _zsh_up_cd() {
 	# 入力されている文字列を変数$BUFに代入
 	local BUF=${BUFFER}
@@ -91,10 +91,23 @@ function _zsh_up_cd() {
 	fi
 }
 
+# ghq
+function _zsh_ghq_fzf() {
+	local repo=$(ghq list | fzf)
+	if [ -n "$repo" ]; then
+		repo=$(ghq list --full-path --exact $repo)
+		BUFFER="cd ${repo}"
+		zle accept-line
+	fi
+	zle clear-screen
+}
+
 # functionをキーバインドで利用できるよう読み込ませる
 zle -N _zsh_up_cd
 zle -N _zsh_jump
+zle -N _zsh_ghq_fzf
 
 # キーバインドの設定
 bindkey '^U' _zsh_up_cd
 bindkey '^T' _zsh_jump
+bindkey '^X' _zsh_ghq_fzf
