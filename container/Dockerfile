@@ -1,4 +1,4 @@
-FROM archlinux:20191205
+FROM archlinux:20200106
 
 ARG USER=dev
 ARG USERID=1000
