@@ -1,7 +1,8 @@
 #!/bin/sh
 
 docker stop devbasecontainer
-docker run -d --rm -p 22001:22 -p 1234:1234 \
+docker run -d --rm \
+	-p 22001:22 -p 1234:1234 -p 8080:8080 -p 8081:8081 -p 8082:8082 -p 6060:6060 \
 	--mount type=bind,src=$HOME\/dotfiles,dst=\/home\/dev\/dotfiles \
 	--mount type=bind,src=$HOME\/ghq,dst=\/home\/dev\/ghq \
 	--mount type=bind,src=$HOME,dst=\/x \
