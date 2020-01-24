@@ -114,5 +114,5 @@ augroup END
 " go
 augroup go
 	au!
-	au FileType go inoremap <C-e> err != nil
+	au FileType go inoremap <C-e> err != nil {<CR>
 augroup END
