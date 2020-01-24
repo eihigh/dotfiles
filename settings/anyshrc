@@ -29,6 +29,8 @@ alias gk='git checkout'
 alias gp='git pull -p'
 alias gl='git log'
 alias gb='git branch'
+alias catj='iconv -f cp932 -t utf8'
+alias q,="q -H -d,"
 
 alias devbase='ssh -A dev@localhost -p 22000'
 alias dev='ssh -A dev@localhost -p 22001'
