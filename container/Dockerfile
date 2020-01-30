@@ -6,11 +6,9 @@ ARG GROUP=devgrp
 ARG GROUPID=1000
 ARG PASSWD=dev
 
-ENV LANG="ja_JP.UTF8"
 COPY mirrorlist /etc/pacman.d/mirrorlist
 RUN : &&\
 	: "ロケール設定" &&\
-	echo ja_JP.UTF8 >> /etc/locale.gen &&\
 	locale-gen &&\
 	ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime &&\
 	: "最低限のパッケージをインストール" &&\
@@ -29,6 +27,7 @@ RUN : &&\
 	echo 'Defaults visiblepw' >> /etc/sudoers &&\
 	echo "${USER} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers &&\
 	: "END"
+ENV LANG="ja_JP.UTF8"
 
 WORKDIR /home/${USER}
 ADD https://github.com/eihigh.keys .ssh/authorized_keys
