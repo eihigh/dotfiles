@@ -1,6 +1,6 @@
 " Language Server
 nmap ,n <plug>(lsp-rename)
-nmap ,h <plug>(lsp-hover)
+nmap ,h <plug>(lsp-signature-help)
 nmap ,d <plug>(lsp-definition)
 nmap ,D <plug>(lsp-type-definition)
 nmap ,f <plug>(lsp-references)
