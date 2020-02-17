@@ -1,6 +1,8 @@
 " Language Server
 nmap ,n <plug>(lsp-rename)
 nmap ,h <plug>(lsp-hover)
+nmap ,q <plug>(lsp-document-diagnostics)
+nmap ,s <plug>(lsp-document-symbol)
 nmap ,d <plug>(lsp-definition)
 nmap ,D <plug>(lsp-type-definition)
 nmap ,f <plug>(lsp-references)
@@ -35,7 +37,7 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <C-t> :TagbarOpen fj<CR>
 
 " Close buffer without collapse window layout
-nnoremap <silent> v :Sayonara!<CR>
+" nnoremap <silent> v :Sayonara!<CR>
 
 " QuickRun (can be overwritten)
 nnoremap ,r :QuickRun<CR>
