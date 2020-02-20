@@ -118,4 +118,5 @@ augroup go
 	au!
 	au FileType go inoremap <C-e> err != nil {<CR>
 	au FileType go nnoremap ,r :<C-u>term go run .<CR>
+	au FileType go nnoremap ,t :<C-u>term go test -v .<CR>
 augroup END
