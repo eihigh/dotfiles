@@ -21,6 +21,24 @@ PROMPT="
 
 PROMPT2='[%n]> '
 
+# bookmark
+a() {
+	mkdir -p ~/.bookmark
+	local dir=${1:-'.default'}
+	echo "${PWD}" > ~/.bookmark/$dir
+	echo "$dir: ${PWD}"
+}
+
+b() {
+	mkdir -p ~/.bookmark
+	local dir=${1:-'.default'}
+	cat ~/.bookmark/$dir
+}
+
+c(){
+	cd $(b)
+}
+
 # cd history
 function chpwd() {
 	_zsh_jump_add_log
