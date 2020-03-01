@@ -35,8 +35,8 @@ b() {
 	cat ~/.bookmark/$dir
 }
 
-c(){
-	cd $(b)
+c() {
+	cd "$(b $@)"
 }
 
 # cd history
