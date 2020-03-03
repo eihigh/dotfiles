@@ -14,4 +14,5 @@ set scl=yes
 set nowrap
 set noea
 
-colorscheme iceberg
+set background=light
+colorscheme github
