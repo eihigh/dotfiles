@@ -4,6 +4,7 @@ call plug#begin('~/.vim/plugged')
 "  カラースキーム
 " ------------------------------------------------------------
 Plug 'cocopon/iceberg.vim'
+Plug 'rakr/vim-one'
 Plug 'cormacrelf/vim-colors-github'
 
 " ------------------------------------------------------------

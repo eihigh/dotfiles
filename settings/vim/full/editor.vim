@@ -14,5 +14,6 @@ set scl=yes
 set nowrap
 set noea
 
-set background=light
+set termguicolors
 colorscheme github
+set background=light
