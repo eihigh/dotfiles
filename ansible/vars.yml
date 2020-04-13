@@ -1,9 +1,11 @@
 executable:
-  ghq: cd /tmp; go get -u github.com/motemen/ghq
   gopls: cd /tmp; go get -u golang.org/x/tools/gopls
-  lazygit: cd /tmp; go get -u github.com/jesseduffield/lazygit
   goimports: cd /tmp; go get -u golang.org/x/tools/cmd/goimports
-  pt: cd /tmp; go get -u github.com/monochromegane/the_platinum_searcher/...
+  gof:     curl -sf https://gobinaries.com/github.com/mattn/gof | PREFIX=~/go/bin sh
+  files:   curl -sf https://gobinaries.com/github.com/mattn/files | PREFIX=~/go/bin sh
+  ghq:     curl -sf https://gobinaries.com/github.com/motemen/ghq | PREFIX=~/go/bin sh
+  lazygit: curl -sf https://gobinaries.com/github.com/jesseduffield/lazygit | PREFIX=~/go/bin sh
+  pt:      curl -sf https://gobinaries.com/github.com/monochromegane/the_platinum_searcher/cmd/pt | PREFIX=~/go/bin sh
   eslint: sudo npm install -g eslint
   typescript: sudo npm install -g typescript
 
