@@ -86,7 +86,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'thinca/vim-quickrun'
 
 " Go
-Plug 'mattn/vim-goimports'
+" Plug 'mattn/vim-goimports'
 
 " Javascript 系
 Plug 'leafgarland/typescript-vim'

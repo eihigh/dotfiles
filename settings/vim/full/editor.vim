@@ -15,5 +15,5 @@ set nowrap
 set noea
 
 set termguicolors
-colorscheme github
+colorscheme iceberg
 set background=light

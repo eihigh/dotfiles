@@ -30,7 +30,7 @@ set scrolloff=10
 
 set backspace=eol,indent,start
 
-set updatetime=500
+set updatetime=100
 
 set title
 
