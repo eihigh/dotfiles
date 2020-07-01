@@ -16,11 +16,11 @@ map * <Plug>(asterisk-z*)
 map # <Plug>(asterisk-z#)
 
 " Window operations (by submode)
-call submode#enter_with('winsize', 'n', '', '<C-w>', '<Nop>')
-call submode#map('winsize', 'n', '', 'a', '<C-w>>')
-call submode#map('winsize', 'n', '', 'i', '<C-w><')
-call submode#map('winsize', 'n', '', 'h', '<C-w>+')
-call submode#map('winsize', 'n', '', 't', '<C-w>-')
+" call submode#enter_with('winsize', 'n', '', '<C-w>', '<Nop>')
+" call submode#map('winsize', 'n', '', 'a', '<C-w>>')
+" call submode#map('winsize', 'n', '', 'i', '<C-w><')
+" call submode#map('winsize', 'n', '', 'h', '<C-w>+')
+" call submode#map('winsize', 'n', '', 't', '<C-w>-')
 
 " Sandwich operations
 map ;a <Plug>(operator-sandwich-add)
@@ -33,6 +33,10 @@ nmap ga <Plug>(EasyAlign)
 
 " Tagbar
 nnoremap <C-t> :TagbarOpen fj<CR>
+
+" Lsp
+nnoremap <C-n> :LspNextDiagnostic<CR>
+nnoremap <C-p> :LspPreviousDiagnostic<CR>
 
 " Close buffer without collapse window layout
 " nnoremap <silent> v :Sayonara!<CR>

@@ -73,6 +73,7 @@ nnoremap <Left>  <C-w>h
 nnoremap <Down>  <C-w>j
 nnoremap <Up>    <C-w>k
 nnoremap <Right> <C-w>l
+nnoremap <C-x>   <C-w>x
 
 " save
 nnoremap j :w<CR>

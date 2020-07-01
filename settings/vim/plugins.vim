@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
 Plug 'cormacrelf/vim-colors-github'
+Plug 'koron/vim-monochromenote'
 
 " ------------------------------------------------------------
 "  画面操作
@@ -74,19 +75,17 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarOpen' }
 "  言語
 " ------------------------------------------------------------
 " Language Server
-Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 let g:lsp_async_completion = 1
-
-Plug 'mattn/vim-lsp-settings'
 
 " QuickRun
 Plug 'thinca/vim-quickrun'
 
 " Go
-" Plug 'mattn/vim-goimports'
+Plug 'mattn/vim-goimports'
 
 " Javascript 系
 Plug 'leafgarland/typescript-vim'

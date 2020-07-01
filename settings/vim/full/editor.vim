@@ -16,4 +16,4 @@ set noea
 
 set termguicolors
 colorscheme iceberg
-set background=light
+set background=dark
