@@ -1,3 +1,7 @@
+if executable('gof')
+	command! -nargs=* Gof term ++close gof -t
+endif
+
 " Language Server
 nmap ,n <plug>(lsp-rename)
 nmap ,h <plug>(lsp-hover)
@@ -118,7 +122,7 @@ augroup END
 " go
 augroup go
 	au!
-	au FileType go inoremap <C-e> err != nil {<CR>
+	au FileType go inoremap <C-e> err != nil {<CR>return 
 	au FileType go nnoremap ,r :<C-u>term go run .<CR>
 	au FileType go nnoremap ,t :<C-u>term go test -v .<CR>
 augroup END
