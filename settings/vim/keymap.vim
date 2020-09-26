@@ -37,8 +37,6 @@ nnoremap <Space>c :CtrlPCurFile<CR>
 set completeopt=menuone
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-inoremap <expr><CR> pumvisible() ? "<C-y>" : "<cr>"
-inoremap <expr><Space> pumvisible() ? "<C-y>" : "<Space>"
 
 " Sandwich operations
 map ;a <Plug>(operator-sandwich-add)
