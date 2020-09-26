@@ -24,6 +24,8 @@ alias i='git status -sb'
 alias ga='git add'
 alias gc='git commit'
 alias gd='git diff'
+alias gdd="git diff --color-words --word-diff-regex='\\w+|[^[:space:]]'"
+alias gf='git fetch -p'
 alias gm='git merge --no-ff'
 alias gk='git checkout'
 alias gp='git pull -p'

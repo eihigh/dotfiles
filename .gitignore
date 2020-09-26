@@ -1,2 +1,4 @@
-vim/plugged
-vim/autoload/plug.vim
+settings/vim/plugged
+settings/vim/autoload
+
+.DS_Store

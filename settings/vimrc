@@ -1,8 +1,10 @@
+" settings/vimrc
+" いかなる環境、バージョンのvimでも使用したい基本的な設定
+" プラグイン, ~/.vimはもしあれば読み込む
 set runtimepath+=$HOME
 
 syntax on
 
-" basic settings
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,cp932,euc-jp
@@ -35,13 +37,12 @@ set updatetime=100
 set title
 
 noremap h h
-noremap t j
-noremap r k
+noremap t gj
+noremap r gk
 noremap s l
 
-nnoremap e v
-nnoremap n V
-nnoremap E <C-v>
+noremap b ge
+noremap B b
 
 noremap l f
 noremap L F
@@ -49,19 +50,24 @@ noremap L F
 noremap ( N
 noremap ) n
 
+noremap m g;
+noremap M g,
+
+" quick mark
+noremap H mH
+noremap kh `H
+
+nnoremap e v
+nnoremap n V
+nnoremap E <C-v>
+
 map Y y$
-noremap m <C-o>
-noremap M <C-i>
 
 nnoremap + <C-a>
 nnoremap - <C-x>
 
 noremap <BS> "_xh
 noremap x "_s
-
-" quick mark
-noremap H mH
-noremap kh `H
 
 nnoremap <C-p> :cprevious<CR>
 nnoremap <C-n> :cnext<CR>
@@ -77,17 +83,100 @@ nnoremap <C-x>   <C-w>x
 
 " save
 nnoremap j :w<CR>
+" close
 nnoremap v :q<CR>
 
+" load advanced settings
 if isdirectory(expand('~/.vim'))
-	runtime! .vim/min/**/*.vim
 
-	" load advanced settings
-	if v:version >= 800
-		if has('win32')
-			source ~/.vim/autoload/plug.vim
-		endif
-		source ~/.vim/plugins.vim
-		runtime! .vim/full/**/*.vim
+	if empty(glob('~/.vim/autoload/plug.vim'))
+		silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 	endif
+
+	if has('win32')
+		source ~/.vim/autoload/plug.vim
+	endif
+
+	call plug#begin('~/.vim/plugged')
+
+	" ------------------------------------------------------------
+	"  カラースキーム
+	" ------------------------------------------------------------
+	Plug 'cocopon/iceberg.vim'
+	Plug 'koron/vim-monochromenote'
+
+	" ------------------------------------------------------------
+	"  オペレータ、テキスト操作
+	" ------------------------------------------------------------
+	Plug 'easymotion/vim-easymotion'
+	Plug 'haya14busa/vim-edgemotion'
+	Plug 'haya14busa/vim-asterisk'
+
+	Plug 'kana/vim-operator-user'
+	Plug 'osyo-manga/vim-operator-stay-cursor'
+
+	Plug 'junegunn/vim-easy-align'
+
+	Plug 'kana/vim-textobj-user'
+	Plug 'sgur/vim-textobj-parameter'
+
+	" Comment out
+	Plug 'tyru/caw.vim'
+
+	" Auto nohlsearch
+	Plug 'romainl/vim-cool'
+
+	let g:operator_sandwich_no_default_key_mappings = 1
+	let g:sandwich_no_default_key_mappings = 1
+	Plug 'machakann/vim-sandwich'
+
+	" ------------------------------------------------------------
+	"  ファイラ
+	" ------------------------------------------------------------
+	Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'cocopon/vaffle.vim'
+
+	" ------------------------------------------------------------
+	"  パッシブ拡張
+	" ------------------------------------------------------------
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+
+	" ------------------------------------------------------------
+	"  言語
+	" ------------------------------------------------------------
+	" Language Server
+	Plug 'prabirshrestha/vim-lsp'
+	Plug 'mattn/vim-lsp-settings'
+	Plug 'prabirshrestha/asyncomplete.vim'
+	Plug 'prabirshrestha/asyncomplete-lsp.vim'
+	let g:lsp_async_completion = 1
+
+	" QuickRun
+	Plug 'thinca/vim-quickrun'
+
+	" Testing
+	Plug 'vim-test/vim-test'
+
+	" ------------------------------------------------------------
+	"  小回り
+	" ------------------------------------------------------------
+	"  日本語ヘルプ
+	Plug 'vim-jp/vimdoc-ja'
+
+	" Smooth scrolling
+	Plug 'yuttie/comfortable-motion.vim'
+
+	" 使い捨てファイル
+	Plug 'Shougo/junkfile.vim'
+
+	" Gist
+	Plug 'mattn/webapi-vim'
+	Plug 'mattn/gist-vim'
+
+	call plug#end()
+
+	runtime! .vim/*.vim
+
 endif

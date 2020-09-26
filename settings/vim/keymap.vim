@@ -1,15 +1,24 @@
-if executable('gof')
-	command! -nargs=* Gof term ++close gof -t
-endif
-
 " Language Server
 nmap ,n <plug>(lsp-rename)
 nmap ,h <plug>(lsp-hover)
-nmap ,q <plug>(lsp-document-diagnostics)
 nmap ,s <plug>(lsp-document-symbol)
 nmap ,d <plug>(lsp-definition)
 nmap ,D <plug>(lsp-type-definition)
 nmap ,f <plug>(lsp-references)
+nnoremap ,q :LspStopServer<CR>
+nmap <C-n> <plug>(lsp-next-diagnostic)
+nmap <C-p> <plug>(lsp-previous-diagnostic)
+
+" Testing
+nnoremap ,t :TestNearest<CR>
+nnoremap ,T :TestFile<CR>
+
+" QuickRun
+nnoremap ,r :QuickRun<CR>
+nnoremap ,a :QuickRun -args
+
+" JunkFile
+nnoremap ,j :JunkfileOpen
 
 " Basic motions by easymotion
 map R <Plug>(edgemotion-k)
@@ -19,12 +28,17 @@ map l <Plug>(easymotion-bd-fl)
 map * <Plug>(asterisk-z*)
 map # <Plug>(asterisk-z#)
 
-" Window operations (by submode)
-" call submode#enter_with('winsize', 'n', '', '<C-w>', '<Nop>')
-" call submode#map('winsize', 'n', '', 'a', '<C-w>>')
-" call submode#map('winsize', 'n', '', 'i', '<C-w><')
-" call submode#map('winsize', 'n', '', 'h', '<C-w>+')
-" call submode#map('winsize', 'n', '', 't', '<C-w>-')
+" CtrlP
+nnoremap <Space><Space> :CtrlP<CR>
+nnoremap <Space>t :CtrlPMRU<CR>
+nnoremap <Space>c :CtrlPCurFile<CR>
+
+" 補完もろもろ
+set completeopt=menuone
+inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><CR> pumvisible() ? "<C-y>" : "<cr>"
+inoremap <expr><Space> pumvisible() ? "<C-y>" : "<Space>"
 
 " Sandwich operations
 map ;a <Plug>(operator-sandwich-add)
@@ -34,55 +48,6 @@ map ;c <Plug>(operator-sandwich-replace)<Plug>(textobj-sandwich-auto-a)
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
-" Tagbar
-nnoremap <C-t> :TagbarOpen fj<CR>
-
-" Lsp
-nnoremap <C-n> :LspNextDiagnostic<CR>
-nnoremap <C-p> :LspPreviousDiagnostic<CR>
-
-" Close buffer without collapse window layout
-" nnoremap <silent> v :Sayonara!<CR>
-
-" QuickRun (can be overwritten)
-nnoremap ,r :QuickRun<CR>
-nnoremap ,a :QuickRun -args
-
-" NeoSnippet
-imap <expr><TAB>
-			\ pumvisible() ? "\<C-n>" :
-			\ neosnippet#expandable_or_jumpable() ?
-			\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-
-" Fzf
-function! s:find_git_root()
-	return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-
-command! -bang -nargs=* GPt
-			\ call fzf#vim#grep(
-			\		'pt --column --hidden '.shellescape(<q-args>), 1,
-			\		fzf#vim#with_preview({ 'dir': s:find_git_root() }),
-			\		<bang>0)
-
-command! -bang -nargs=* Pt
-			\ call fzf#vim#grep(
-			\		'pt --column --hidden '.shellescape(<q-args>), 1,
-			\		fzf#vim#with_preview({ 'dir': './' }),
-			\		<bang>0)
-
-nnoremap <Space><Space> :<C-u>GFiles<CR>
-nnoremap <Space>c :<C-u>Files<CR>
-nnoremap <Space>s :GPt
-nnoremap <Space>t :Pt
-nnoremap <Space>h :<C-u>History<CR>
-nnoremap <Space>b :<C-u>Buffers<CR>
-
-" JunkFile
-nnoremap ,j :JunkfileOpen
 
 " Vaffle
 nnoremap <Space>l :<C-u>Vaffle<CR>
@@ -123,6 +88,5 @@ augroup END
 augroup go
 	au!
 	au FileType go inoremap <C-e> err != nil {<CR>return 
-	au FileType go nnoremap ,r :<C-u>term go run .<CR>
-	au FileType go nnoremap ,t :<C-u>term go test -v .<CR>
+	autocmd BufWritePre *.go  call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
 augroup END
