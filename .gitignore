@@ -1,4 +1,6 @@
-settings/vim/plugged
-settings/vim/autoload
+settings/vim/plugged/*
+settings/vim/autoload/*
+
+!/**/*.gitkeep
 
 .DS_Store
