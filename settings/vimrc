@@ -87,12 +87,8 @@ nnoremap j :w<CR>
 nnoremap v :q<CR>
 
 " load advanced settings
-if isdirectory(expand('~/.vim'))
-
-	if empty(glob('~/.vim/autoload/plug.vim'))
-		silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-		autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-	endif
+" ~/.vimとplug.vimが配置されている場合のみ読み込む
+if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 
 	if has('win32')
 		source ~/.vim/autoload/plug.vim
