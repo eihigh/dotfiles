@@ -1,3 +1,4 @@
+#!/bin/sh
 # shell共通設定
 
 # PATH
@@ -18,6 +19,7 @@ alias e='vim'
 alias d='docker'
 alias dc='docker-compose'
 alias n='fg'
+alias m='make'
 alias g='lazygit'
 alias gs='git status'
 alias i='git status -sb'
@@ -33,9 +35,11 @@ alias gl='git log'
 alias gb='git branch'
 alias catj='iconv -f cp932 -t utf8'
 alias q,="q -H -d,"
+alias sc='systemctl'
+alias ssc='sudo systemctl'
 
-alias devbase='ssh -A dev@localhost -p 22000'
-alias dev='ssh -A dev@localhost -p 22001'
+# alias devbase='ssh -A dev@localhost -p 22000'
+# alias dev='ssh -A dev@localhost -p 22001'
 
 # scripts
 case "${OSTYPE}" in
@@ -50,5 +54,14 @@ case "${OSTYPE}" in
 		alias l_zqx="ls -al --color"
 		;;
 esac
+
+jr () {
+	local repo=$(ghq list | gof -f)
+	if [ -n "$repo" ]; then
+		repo=$(ghq list --full-path --exact $repo)
+		cd ${repo}
+	fi
+}
+
 
 [ -f ~/.anyshrc.local ] && source ~/.anyshrc.local

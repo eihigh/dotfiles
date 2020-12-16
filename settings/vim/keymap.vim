@@ -14,7 +14,7 @@ nnoremap ,t :TestNearest<CR>
 nnoremap ,T :TestFile<CR>
 
 " QuickRun
-nnoremap ,r :QuickRun<CR>
+nnoremap ,r :QuickRun -outputter/buffer/split ":botright 8sp"<CR>
 nnoremap ,a :QuickRun -args
 
 " JunkFile
@@ -36,9 +36,12 @@ nnoremap <Space>c :CtrlPCurFile<CR>
 " 補完もろもろ
 set completeopt=menuone
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-y>" : "\<S-TAB>"
-inoremap <expr><Up> pumvisible() ? "\<C-p>" : "\<Tab>"
-inoremap <expr><Down> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-y>" : "\<S-TAB>"
+" inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
+" imap <expr>(           pumvisible() ? "\<C-y>(" : "("
+" imap <expr>)           pumvisible() ? "\<C-y>)" : ")"
+" imap <expr>.           pumvisible() ? "\<C-y>." : "."
 
 " Sandwich operations
 map ;a <Plug>(operator-sandwich-add)
