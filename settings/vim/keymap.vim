@@ -5,6 +5,7 @@ nmap ,s <plug>(lsp-document-symbol)
 nmap ,d <plug>(lsp-definition)
 nmap ,D <plug>(lsp-type-definition)
 nmap ,f <plug>(lsp-references)
+nmap ,c <plug>(lsp-code-lens)
 nnoremap ,q :LspStopServer<CR>
 nmap <C-n> <plug>(lsp-next-diagnostic)
 nmap <C-p> <plug>(lsp-previous-diagnostic)
@@ -91,5 +92,6 @@ augroup END
 augroup go
 	au!
 	au FileType go inoremap <C-e> err != nil {<CR>return 
+	au FileType go noremap ,m :<C-u>!go mod tidy<CR>
 	autocmd BufWritePre *.go  call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
 augroup END
