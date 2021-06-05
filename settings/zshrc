@@ -1,5 +1,7 @@
 [ -f ${ZDOTDIR:-$HOME}/.anyshrc ] && source ${ZDOTDIR:-$HOME}/.anyshrc
 
+bindkey -e
+
 autoload -U compinit; compinit
 
 setopt AUTO_CD
@@ -129,4 +131,3 @@ zle -N _zsh_ghq_gof
 bindkey '^U' _zsh_up_cd
 bindkey '^T' _zsh_jump
 bindkey '^X' _zsh_ghq_gof
-bindkey -e
