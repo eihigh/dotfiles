@@ -186,7 +186,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 
 	let g:vaffle_show_hidden_files = 1
 	let g:vaffle_use_default_mappings = 0
-	let g:vaffle_auto_cd = 1
+	" let g:vaffle_auto_cd = 1
 
 	let g:airline_powerline_fonts = 1
 	set laststatus=2
@@ -282,8 +282,8 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	augroup go
 	au!
 	au FileType go inoremap <C-e> err != nil {<CR>return 
-		au FileType go noremap ,m :<C-u>!go mod tidy<CR>
-			autocmd BufWritePre *.go  call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
-			augroup END
+	au FileType go noremap ,m :<C-u>!go mod tidy<CR>
+	autocmd BufWritePre *.go  call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
+	augroup END
 
 endif
