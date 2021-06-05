@@ -9,30 +9,31 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,cp932,euc-jp
 
-set nobackup
+set backup
+set backupdir=~/.cache/vim/
+set backupext=.bak
+set undofile
+set undodir=~/.cache/vim/
+set viminfo+=n~/.cache/vim/viminfo.txt
 set noswapfile
-
+set scl=yes
+set nowrap
 set autoread
 set autowrite
 set backupcopy=yes
-
 set showcmd
 set showmatch
 set matchtime=1
-
 set tabstop=2
 set shiftwidth=2
-
 set hlsearch
+set incsearch
 set ignorecase
 set smartcase
 set smartindent
-
 set scrolloff=10
-
 set backspace=eol,indent,start
-
-set updatetime=100
+set autochdir
 
 set title
 
@@ -175,6 +176,114 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 
 	call plug#end()
 
-	runtime! .vim/*.vim
+	set background=dark
+	colorscheme iceberg
+
+	let g:EasyMotion_keys = 'aenihtskmyopcrlud'
+	let g:EasyMotion_smartcase = 1
+	let g:EasyMotion_do_shade = 0
+	let g:EasyMotion_startofline = 0
+
+	let g:vaffle_show_hidden_files = 1
+	let g:vaffle_use_default_mappings = 0
+	let g:vaffle_auto_cd = 1
+
+	let g:airline_powerline_fonts = 1
+	set laststatus=2
+
+	let g:lsp_diagnostics_float_cursor = 1
+
+	let g:quickrun_config = {}
+	let g:quickrun_config.go = {'command': 'go', 'exec': ['%c run .']}
+
+	let g:sandwich_no_default_key_mappings = 1
+	let g:operator_sandwich_no_default_key_mappings = 1
+
+	let test#strategy = "vimterminal"
+
+	" Language Server
+	nmap ,n <plug>(lsp-rename)
+	nmap ,h <plug>(lsp-hover)
+	nmap ,s <plug>(lsp-document-symbol)
+	nmap ,d <plug>(lsp-definition)
+	nmap ,D <plug>(lsp-type-definition)
+	nmap ,f <plug>(lsp-references)
+	nmap ,c <plug>(lsp-code-lens)
+	nnoremap ,q :LspStopServer<CR>
+	nmap <C-n> <plug>(lsp-next-diagnostic)
+	nmap <C-p> <plug>(lsp-previous-diagnostic)o
+
+	" Testing
+	nnoremap ,t :TestNearest<CR>
+	nnoremap ,T :TestFile<CR>
+
+	" QuickRun
+	nnoremap ,r :QuickRun -outputter/buffer/split ":botright 8sp"<CR>
+	nnoremap ,a :QuickRun -args
+
+	" JunkFile
+	nnoremap ,j :JunkfileOpen
+
+	" Basic motions by easymotion
+	map R <Plug>(edgemotion-k)
+	map T <Plug>(edgemotion-j)
+	map ? <Plug>(easymotion-overwin-f2)
+	map l <Plug>(easymotion-bd-fl)
+	map * <Plug>(asterisk-z*)
+	map # <Plug>(asterisk-z#)
+
+	" CtrlP
+	nnoremap <Space><Space> :CtrlP<CR>
+	nnoremap <Space>t :CtrlPMRU<CR>
+	nnoremap <Space>c :CtrlPCurFile<CR>
+
+	" 補完もろもろ
+	set completeopt=menuone
+	inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+
+	" Sandwich operations
+	map ;a <Plug>(operator-sandwich-add)
+	map ;d <Plug>(operator-sandwich-delete)<Plug>(textobj-sandwich-auto-a)
+	map ;c <Plug>(operator-sandwich-replace)<Plug>(textobj-sandwich-auto-a)
+
+	" EasyAlign
+	xmap ga <Plug>(EasyAlign)
+	nmap ga <Plug>(EasyAlign)
+
+	" Vaffle
+	nnoremap <Space>l :<C-u>Vaffle<CR>
+
+	" Vaffle
+	augroup vimrc_vaffle
+		autocmd!
+		au FileType vaffle nnoremap <buffer> . /
+		au FileType vaffle nmap <buffer> ~ <Plug>(vaffle-open-home)
+		au FileType vaffle nmap <buffer> h <Plug>(vaffle-open-parent)
+		au FileType vaffle nmap <buffer> s <Plug>(vaffle-open-current)
+		au FileType vaffle nmap <buffer> a <Plug>(vaffle-toggle-all)
+		au FileType vaffle nmap <buffer> <Space> <Plug>(vaffle-toggle-current)
+		au FileType vaffle vmap <buffer> <Space> <Plug>(vaffle-toggle-current)
+
+		au FileType vaffle nmap <buffer> <CR> <Plug>(vaffle-open-selected)
+		au FileType vaffle nmap <buffer> e <Plug>(vaffle-move-selected)
+		au FileType vaffle nmap <buffer> d <Plug>(vaffle-delete-selected)
+		au FileType vaffle nmap <buffer> n <Plug>(vaffle-rename-selected)
+		au FileType vaffle nmap <buffer> q <Plug>(vaffle-quit)
+		au FileType vaffle nmap <buffer> o <Plug>(vaffle-mkdir)
+		au FileType vaffle nmap <buffer> i <Plug>(vaffle-new-file)
+		au FileType vaffle nmap <buffer> R <Plug>(vaffle-refresh)
+		au FileType vaffle nmap <buffer> x <Plug>(vaffle-fill-cmdline)
+	augroup END
+
+	" ============================================================
+	"  FileTypeごとの設定
+	" ============================================================
+	" go
+	augroup go
+	au!
+	au FileType go inoremap <C-e> err != nil {<CR>return 
+		au FileType go noremap ,m :<C-u>!go mod tidy<CR>
+			autocmd BufWritePre *.go  call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
+			augroup END
 
 endif
