@@ -7,14 +7,14 @@ mkdir -p ~/.vim/autoload
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-ln -s ~/dotfiles/settings/anyshrc ~/.anyshrc
-ln -s ~/dotfiles/settings/bashrc ~/.bashrc
-ln -s ~/dotfiles/settings/sshrc ~/.sshrc
-ln -s ~/dotfiles/settings/sshrc.d ~/.sshrc.d
-ln -s ~/dotfiles/settings/vimrc ~/.vimrc
-ln -s ~/dotfiles/settings/zshrc ~/.zshrc
-ln -s ~/dotfiles/settings/gitconfig_shared ~/.gitconfig_shared
-ln -s ~/dotfiles/settings/gitignore_global ~/.gitignore_global
+ln -sf ~/dotfiles/settings/anyshrc ~/.anyshrc
+ln -sf ~/dotfiles/settings/bashrc ~/.bashrc
+ln -sf ~/dotfiles/settings/sshrc ~/.sshrc
+ln -sf ~/dotfiles/settings/sshrc.d ~/.sshrc.d
+ln -sf ~/dotfiles/settings/vimrc ~/.vimrc
+ln -sf ~/dotfiles/settings/zshrc ~/.zshrc
+ln -sf ~/dotfiles/settings/gitconfig_shared ~/.gitconfig_shared
+ln -sf ~/dotfiles/settings/gitignore_global ~/.gitignore_global
 
 yes | vim +PlugInstall +qall
 
