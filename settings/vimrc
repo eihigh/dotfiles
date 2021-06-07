@@ -71,8 +71,8 @@ nnoremap - <C-x>
 noremap <BS> "_xh
 noremap x "_s
 
-nnoremap <C-p> :cprevious<CR>
-nnoremap <C-n> :cnext<CR>
+nnoremap <C-h> :cprevious<CR>
+nnoremap <C-s> :cnext<CR>
 nnoremap <C-q> :cclose<CR>
 nnoremap <C-l> zt
 
@@ -246,6 +246,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	nnoremap <Space><Space> :CtrlP<CR>
 	nnoremap <Space>t :CtrlPMRU<CR>
 	nnoremap <Space>c :CtrlPCurFile<CR>
+	nnoremap <Space>q :CtrlPQuickfix<CR>
 
 	" 補完もろもろ
 	set completeopt=menuone
