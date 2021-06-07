@@ -1,6 +1,0 @@
-#!/bin/sh
-
-docker run -d --rm -p 22000:22 \
-	--mount type=bind,src=$(pwd)/../,dst=/home/dev/dotfiles \
-	--name devbasecontainer \
-	devbase

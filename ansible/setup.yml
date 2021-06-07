@@ -1,6 +1,0 @@
----
-- name: personal Playbook
-  hosts: localhost
-  connection: local
-  tasks:
-    - include: tasks.yml
