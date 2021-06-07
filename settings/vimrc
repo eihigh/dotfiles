@@ -1,6 +1,5 @@
-" settings/vimrc
-" いかなる環境、バージョンのvimでも使用したい基本的な設定
-" プラグイン, ~/.vimはもしあれば読み込む
+" 自分の開発スタイルに最適化されたvimの設定
+" 一時的にサーバーに入る場合はsshrcでvimrc_minを持っていく
 set runtimepath+=$HOME
 
 syntax on
@@ -34,7 +33,6 @@ set smartindent
 set scrolloff=10
 set backspace=eol,indent,start
 set autochdir
-
 set title
 
 noremap h h
@@ -176,7 +174,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 
 	call plug#end()
 
-	set background=dark
+	set background=light
 	colorscheme iceberg
 
 	let g:EasyMotion_keys = 'aenihtskmyopcrlud'

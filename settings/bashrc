@@ -1,6 +1,0 @@
-[ -f ~/.anyshrc ] && source ~/.anyshrc
-
-PS1='[\u \w]\$ '
-
-[ -f ~/.bashrc.local ] && source ~/.bashrc.local
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

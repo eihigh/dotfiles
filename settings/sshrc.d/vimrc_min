@@ -1,0 +1,69 @@
+syntax on
+
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,cp932,euc-jp
+set showcmd
+set showmatch
+set matchtime=1
+set tabstop=2
+set shiftwidth=2
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set smartindent
+set scrolloff=10
+set backspace=eol,indent,start
+set autochdir
+set title
+
+noremap h h
+noremap t gj
+noremap r gk
+noremap s l
+
+noremap b ge
+noremap B b
+
+noremap l f
+noremap L F
+
+noremap ( N
+noremap ) n
+
+noremap m g;
+noremap M g,
+
+" quick mark
+noremap H mH
+noremap kh `H
+
+nnoremap e v
+nnoremap n V
+nnoremap E <C-v>
+
+map Y y$
+
+nnoremap + <C-a>
+nnoremap - <C-x>
+
+noremap <BS> "_xh
+noremap x "_s
+
+nnoremap <C-p> :cprevious<CR>
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-q> :cclose<CR>
+nnoremap <C-l> zt
+
+" navigate windows
+nnoremap <Left>  <C-w>h
+nnoremap <Down>  <C-w>j
+nnoremap <Up>    <C-w>k
+nnoremap <Right> <C-w>l
+nnoremap <C-x>   <C-w>x
+
+" save
+nnoremap j :w<CR>
+" close
+nnoremap v :q<CR>

@@ -1,5 +1,3 @@
-source $SSHHOME/.sshrc.d/.anyshrc
-export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/.vimrc' | source \$MYVIMRC"
-export ZDOTDIR=$SSHHOME/.sshrc.d
+export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc_min' | source \$MYVIMRC"
 
 echo welcome-sshrc
