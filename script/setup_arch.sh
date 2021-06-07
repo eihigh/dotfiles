@@ -2,8 +2,8 @@
 
 pacman-key --init
 pacman-key --populate archlinux
-pacman -Syy archlinux-keyring
-pacman -Syu
+pacman -Syy --noconfirm archlinux-keyring
+pacman -Syu --noconfirm
 
 ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
