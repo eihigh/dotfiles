@@ -1,1 +1,0 @@
-/Users/eiichiro.takahashi/dotfiles/settings/sshrc.d
