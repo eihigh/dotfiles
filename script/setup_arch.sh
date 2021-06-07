@@ -16,3 +16,6 @@ echo me:me | chpasswd
 echo "me ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 pacman -Syy --noconfirm sudo which openssh git go jq vim zsh nodejs npm
+
+# Arch.exe config --default-user me
+# Arch.exe config --append-path off
