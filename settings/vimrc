@@ -122,7 +122,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	Plug 'kana/vim-operator-user'
 	Plug 'osyo-manga/vim-operator-stay-cursor'
 
-	Plug 'cohama/lexima.vim'
+	Plug 'mattn/vim-lexiv'
 
 	Plug 'junegunn/vim-easy-align'
 
