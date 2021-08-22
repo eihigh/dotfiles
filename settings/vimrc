@@ -160,6 +160,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	Plug 'prabirshrestha/asyncomplete.vim'
 	Plug 'prabirshrestha/asyncomplete-lsp.vim'
 	let g:lsp_async_completion = 1
+	let g:lsp_document_code_action_signs_enabled = 0
 
 	" QuickRun
 	Plug 'thinca/vim-quickrun'
