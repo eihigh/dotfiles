@@ -140,10 +140,12 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	Plug 'machakann/vim-sandwich'
 
 	" ------------------------------------------------------------
-	"  ファイラ
+	"  ファイラ / セレクタ
 	" ------------------------------------------------------------
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'cocopon/vaffle.vim'
+	Plug 'tacahiroy/ctrlp-funky'
+	Plug 'liuchengxu/vista.vim'
 
 	" ------------------------------------------------------------
 	"  パッシブ拡張
@@ -218,7 +220,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	nmap ,s <plug>(lsp-document-symbol)
 	nmap ,d <plug>(lsp-definition)
 	nmap ,D <plug>(lsp-type-definition)
-	nmap ,f <plug>(lsp-references)
+	nmap ,f :CtrlPFunky<CR>
 	nmap ,c <plug>(lsp-code-lens)
 	nnoremap ,q :LspStopServer<CR>
 	nmap <C-n> <plug>(lsp-next-diagnostic)
@@ -248,6 +250,8 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	nnoremap <Space>t :CtrlPMRU<CR>
 	nnoremap <Space>c :CtrlPCurFile<CR>
 	nnoremap <Space>q :CtrlPQuickfix<CR>
+
+	nnoremap <Space>s :Vista vim_lsp<CR>
 
 	" 補完もろもろ
 	set completeopt=menuone
