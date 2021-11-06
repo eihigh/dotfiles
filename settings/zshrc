@@ -22,7 +22,8 @@ export EDITOR=vim
 # Aliases
 # ========================================
 alias e='vim'
-alias d='docker'
+alias d='podman'
+alias docker='podman'
 alias dc='docker-compose'
 alias n='fg'
 alias m='make'
@@ -85,22 +86,25 @@ PROMPT2='[%n]> '
 # Functions
 # ========================================
 
-# bookmark
+BOOKMARKS_FILE="$HOME/.bookmarks"
+
+# Add pwd to bookmark
 a() {
-	mkdir -p ~/.bookmark
-	local dir=${1:-'.default'}
-	echo "${PWD}" > ~/.bookmark/$dir
-	echo "$dir: ${PWD}"
+	pwd | sed "s#^$HOME#~#" >> $BOOKMARKS_FILE
+	cat $BOOKMARKS_FILE | sort | uniq > $BOOKMARKS_FILE
+	echo "bookmarked:" $(cat $BOOKMARKS_FILE | tail -1)
 }
 
+# Show bookmarks
 b() {
-	mkdir -p ~/.bookmark
-	local dir=${1:-'.default'}
-	cat ~/.bookmark/$dir
+	echo "Bookmarks in $BOOKMARKS_FILE:" 1>&2
+	cat $BOOKMARKS_FILE
 }
 
+# Select bookmark to cd
 c() {
-	cd "$(b $@)"
+	local dir
+	dir=$(cat $BOOKMARKS_FILE | gof) && cd $(echo $dir | sed "s#^~#$HOME#")
 }
 
 # cd history
