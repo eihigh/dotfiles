@@ -139,6 +139,10 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	let g:sandwich_no_default_key_mappings = 1
 	Plug 'machakann/vim-sandwich'
 
+	" template
+	Plug 'mattn/vim-sonictemplate'
+	let g:sonictemplate_vim_template_dir = expand('~/dotfiles/settings/sonictemplate')
+
 	" ------------------------------------------------------------
 	"  ファイラ / セレクタ
 	" ------------------------------------------------------------
