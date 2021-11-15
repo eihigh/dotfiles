@@ -141,7 +141,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 
 	" template
 	Plug 'mattn/vim-sonictemplate'
-	let g:sonictemplate_vim_template_dir = expand('~/dotfiles/settings/sonictemplate')
+	let g:sonictemplate_vim_template_dir = [ '~/dotfiles/settings/sonictemplate' ]
 
 	" ------------------------------------------------------------
 	"  ファイラ / セレクタ
