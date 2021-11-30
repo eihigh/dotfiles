@@ -44,6 +44,7 @@ alias catj='iconv -f cp932 -t utf8'
 alias q,="q -H -d,"
 alias sc='systemctl'
 alias ssc='sudo systemctl'
+alias gogo='go run .'
 
 case "${OSTYPE}" in
 	darwin*)
@@ -90,14 +91,16 @@ BOOKMARKS_FILE="$HOME/.bookmarks"
 
 # Add pwd to bookmark
 a() {
-	pwd | sed "s#^$HOME#~#" >> $BOOKMARKS_FILE
-	cat $BOOKMARKS_FILE | sort | uniq > $BOOKMARKS_FILE
-	echo "bookmarked:" $(cat $BOOKMARKS_FILE | tail -1)
+	local temp
+	temp=$(mktemp)
+	cat $BOOKMARKS_FILE <(pwd | sed "s#^$HOME#~#") | sort | uniq > $temp
+	mv $temp $BOOKMARKS_FILE
+	echo "Added: " $(cat $BOOKMARKS_FILE | tail -1)
 }
 
 # Show bookmarks
 b() {
-	echo "Bookmarks in $BOOKMARKS_FILE:" 1>&2
+	echo "Bookmarks:" 1>&2
 	cat $BOOKMARKS_FILE
 }
 
