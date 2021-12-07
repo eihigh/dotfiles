@@ -86,7 +86,7 @@ nnoremap <Right> <C-w>l
 nnoremap <C-x>   <C-w>x
 
 " save
-nnoremap f :w<CR>
+nnoremap j :w<CR>
 " close
 nnoremap v :q<CR>
 
