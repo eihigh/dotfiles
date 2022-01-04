@@ -21,6 +21,7 @@ export EDITOR=vim
 # ========================================
 # Aliases
 # ========================================
+alias ll='ls -la'
 alias e='vim'
 alias d='podman'
 alias docker='podman'
