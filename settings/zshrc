@@ -23,8 +23,8 @@ export EDITOR=vim
 # ========================================
 alias ll='ls -la'
 alias e='vim'
-alias d='podman'
-alias docker='podman'
+alias d='docker'
+alias docker='docker'
 alias dc='docker-compose'
 alias n='fg'
 alias m='make'
