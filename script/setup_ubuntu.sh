@@ -23,3 +23,5 @@ mv ~/.profile{,_default}
 # Copy keys
 cp /mnt/c/Users/eihigh/.ssh/* ~/.ssh/
 chmod 0400 ~/.ssh/*
+
+~/dotfiles/script/setup.sh
