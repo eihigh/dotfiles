@@ -25,5 +25,3 @@ go install github.com/x-motemen/ghq@latest
 # go install github.com/jesseduffield/lazygit@latest
 go get github.com/jesseduffield/lazygit
 go install github.com/monochromegane/the_platinum_searcher/cmd/pt@latest
-
-sudo npm install -g typescript
