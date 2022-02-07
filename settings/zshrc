@@ -25,6 +25,7 @@ export EDITOR=vim
 alias ll='ls -la'
 alias e='vim'
 alias d='docker'
+alias sd='sudo docker'
 alias dc='docker-compose'
 alias n='fg'
 alias m='make'
