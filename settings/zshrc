@@ -4,7 +4,8 @@
 # ========================================
 # PATH
 # ========================================
-export PATH=$PATH:/usr/local/go/bin
+[ -d /home/linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 export PATH=$PATH:~/go/bin
 
 if type rbenv > /dev/null 2>&1
