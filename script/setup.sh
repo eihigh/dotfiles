@@ -22,6 +22,5 @@ go install golang.org/x/tools/gopls@latest
 go install golang.org/x/tools/cmd/goimports@latest
 go install github.com/mattn/gof@latest
 go install github.com/x-motemen/ghq@latest
-# go install github.com/jesseduffield/lazygit@latest
-go get github.com/jesseduffield/lazygit
+go install github.com/jesseduffield/lazygit@latest
 go install github.com/monochromegane/the_platinum_searcher/cmd/pt@latest

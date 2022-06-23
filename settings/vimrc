@@ -15,7 +15,7 @@ set undofile
 set undodir=~/.cache/vim/
 set viminfo+=n~/.cache/vim/viminfo.txt
 set noswapfile
-set scl=yes
+set scl=no
 set nowrap
 set autoread
 set autowrite
@@ -54,12 +54,9 @@ noremap L F
 noremap ( N
 noremap ) n
 
-noremap m g;
-noremap M g,
-
 " quick mark
-noremap H mH
-noremap kh `H
+noremap m mM
+noremap k `M
 
 nnoremap e v
 nnoremap n V
@@ -121,6 +118,8 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	Plug 'haya14busa/vim-edgemotion'
 	Plug 'haya14busa/vim-asterisk'
 
+	Plug 'hrsh7th/vim-searchx'
+
 	Plug 'kana/vim-operator-user'
 	Plug 'osyo-manga/vim-operator-stay-cursor'
 
@@ -158,6 +157,8 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	" ------------------------------------------------------------
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
+	set ttimeoutlen=0
+	let g:airline_theme = 'powerlineish'
 
 	" ------------------------------------------------------------
 	"  言語
@@ -194,7 +195,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 
 	call plug#end()
 
-	set background=light
+	set background=dark
 	colorscheme iceberg
 	set termguicolors
 
@@ -202,6 +203,19 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	let g:EasyMotion_smartcase = 1
 	let g:EasyMotion_do_shade = 0
 	let g:EasyMotion_startofline = 0
+
+	let g:searchx = {}
+
+	" Auto jump if the recent input matches to any marker.
+	let g:searchx.auto_accept = v:true
+
+	" The scrolloff value for moving to next/prev.
+	let g:searchx.scrolloff = &scrolloff
+
+	" To enable auto nohlsearch after cursor is moved
+	let g:searchx.nohlsearch = {}
+	let g:searchx.nohlsearch.jump = v:true
+	let g:searchx.markers = split('AENIHTSKMYOPCRLUD', '.\zs')
 
 	let g:vaffle_show_hidden_files = 1
 	let g:vaffle_use_default_mappings = 0
@@ -250,6 +264,13 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	map l <Plug>(easymotion-bd-fl)
 	map * <Plug>(asterisk-z*)
 	map # <Plug>(asterisk-z#)
+
+	" Searchx
+	nnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
+	nnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
+	xnoremap ? <Cmd>call searchx#start({ 'dir': 0 })<CR>
+	xnoremap / <Cmd>call searchx#start({ 'dir': 1 })<CR>
+	cnoremap ; <Cmd>call searchx#select()<CR>
 
 	" CtrlP
 	nnoremap <Space><Space> :CtrlP<CR>

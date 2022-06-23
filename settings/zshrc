@@ -18,6 +18,7 @@ fi
 # ========================================
 export TERM=xterm-256color
 export EDITOR=vim
+export LANG=ja_JP.utf8
 
 # ========================================
 # Aliases
@@ -25,13 +26,12 @@ export EDITOR=vim
 alias ll='ls -la'
 alias e='vim'
 alias d='docker'
-alias sd='sudo docker'
-alias dc='docker-compose'
 alias mu='multipass'
 alias n='fg'
 alias m='make'
 alias g='lazygit'
 alias gs='git status'
+alias gw='git switch'
 alias i='git status -sb'
 alias ga='git add'
 alias gc='git commit'
@@ -39,25 +39,21 @@ alias gd='git diff'
 alias gdd="git diff --color-words --word-diff-regex='\\w+|[^[:space:]]'"
 alias gf='git fetch -p'
 alias gm='git merge --no-ff'
-alias gk='git checkout'
 alias gp='git pull -p'
 alias gl='git log'
 alias gb='git branch'
-alias catj='iconv -f cp932 -t utf8'
 alias q,="q -H -d,"
 alias sc='systemctl'
 alias ssc='sudo systemctl'
-alias gogo='go run .'
 
 case "${OSTYPE}" in
 	darwin*)
-		alias ls="ls -G"
-		alias l_zqx="ls -alG"
 		alias tac="tail -r"
+		alias ls="ls -G"
 		;;
 	linux*)
 		alias ls="ls --color"
-		alias l_zqx="ls -al --color"
+		alias ll="ls -la --color"
 		;;
 esac
 
@@ -94,8 +90,9 @@ BOOKMARKS_FILE="$HOME/.bookmarks"
 
 # Add pwd to bookmark
 a() {
-	local temp
+	local temp new
 	temp=$(mktemp)
+	new=$(pwd | sed "s#^$HOME#~#")
 	cat $BOOKMARKS_FILE <(pwd | sed "s#^$HOME#~#") | sort | uniq > $temp
 	mv $temp $BOOKMARKS_FILE
 	echo "Added: " $(cat $BOOKMARKS_FILE | tail -1)
@@ -140,7 +137,7 @@ function _zsh_jump() {
 
 	local dir
 	if [ $# = 0 ]; then
-		dir=$(tac $CDLOG | gof -f) && cd "$dir"
+		dir=$(tac $CDLOG <(cat ~/.cache/vim/viminfo.txt | grep -e "^-" | cut -d' ' -f7 | sort | uniq | xargs -n1 dirname) | gof -f) && cd "$dir"
 	elif [ $# = 1 ]; then
 		cd $1
 	else

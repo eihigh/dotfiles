@@ -8,6 +8,12 @@
 # Duplicate profile and change the command line to `wsl.exe -d Lize -u me`
 # See https://brew.sh/ to install brew
 
+# Install system gcc
+sudo apt install gcc -y
+
+# Install ja_JP.utf8
+sudo apt install language-pack-ja -y
+
 # Install brew and temporarily set env vars
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew install go jq vim zsh node
