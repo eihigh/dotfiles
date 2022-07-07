@@ -5,6 +5,7 @@
 # PATH
 # ========================================
 [ -d /home/linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 
 export PATH=$PATH:~/go/bin
 
@@ -95,7 +96,7 @@ a() {
 	new=$(pwd | sed "s#^$HOME#~#")
 	cat $BOOKMARKS_FILE <(pwd | sed "s#^$HOME#~#") | sort | uniq > $temp
 	mv $temp $BOOKMARKS_FILE
-	echo "Added: " $(cat $BOOKMARKS_FILE | tail -1)
+	echo "Added: " $new
 }
 
 # Show bookmarks
