@@ -89,6 +89,7 @@ nnoremap v :q<CR>
 
 iabbrev packgae package
 iabbrev retrun return
+iabbrev ret return
 iabbrev mina main
 iabbrev mani main
 iabbrev numbre number
