@@ -44,8 +44,6 @@ noremap h h
 noremap t gj
 noremap r gk
 noremap s l
-noremap H ^
-noremap S $
 
 noremap ( N
 noremap ) n
@@ -82,6 +80,8 @@ nnoremap <C-x>   <C-w>x
 nnoremap j :w<CR>
 " close
 nnoremap v :q<CR>
+
+iabbrev ret return
 
 " load advanced settings
 " ~/.vimとplug.vimが配置されている場合のみ読み込む
