@@ -44,12 +44,8 @@ noremap h h
 noremap t gj
 noremap r gk
 noremap s l
-
-noremap b ge
-noremap B b
-
-noremap l f
-noremap L F
+noremap H ^
+noremap S $
 
 noremap ( N
 noremap ) n
@@ -86,15 +82,6 @@ nnoremap <C-x>   <C-w>x
 nnoremap j :w<CR>
 " close
 nnoremap v :q<CR>
-
-iabbrev packgae package
-iabbrev retrun return
-iabbrev ret return
-iabbrev mina main
-iabbrev mani main
-iabbrev numbre number
-iabbrev potin point
-iabbrev Potin Point
 
 " load advanced settings
 " ~/.vimとplug.vimが配置されている場合のみ読み込む
@@ -325,7 +312,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	" go
 	augroup go
 	au!
-	au FileType go inoremap <C-e> err != nil {<CR>return 
+	au FileType go inoremap <C-e> err != nil {<CR>
 	au FileType go noremap ,m :<C-u>!go mod tidy<CR>
 	autocmd BufWritePre *.go  call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
 	augroup END
