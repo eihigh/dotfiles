@@ -6,6 +6,7 @@
 # ========================================
 [ -d /home/linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -d /opt/homebrew/opt/llvm/bin ] && export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 export PATH=$PATH:~/go/bin
 
@@ -24,7 +25,7 @@ export LANG=ja_JP.utf8
 # ========================================
 # Aliases
 # ========================================
-alias ll='ls -la'
+alias ll='ls -lah'
 alias e='vim'
 alias d='docker'
 alias mu='multipass'
@@ -114,7 +115,7 @@ c() {
 # cd history
 function chpwd() {
 	_zsh_jump_add_log
-	ls -la
+	ls -lah
 }
 
 CDLOG=$HOME/.cache/cd.log

@@ -136,6 +136,8 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	"  ファイラ / セレクタ
 	" ------------------------------------------------------------
 	Plug 'ctrlpvim/ctrlp.vim'
+	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
 	Plug 'cocopon/vaffle.vim'
 	Plug 'tacahiroy/ctrlp-funky'
 	Plug 'liuchengxu/vista.vim'
@@ -227,6 +229,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	nmap ,h <plug>(lsp-hover)
 	nmap ,s <plug>(lsp-document-symbol)
 	nmap ,d <plug>(lsp-definition)
+	nmap ,i <plug>(lsp-implementation)
 	nmap ,D <plug>(lsp-type-definition)
 	nmap ,f :CtrlPFunky<CR>
 	nmap ,c <plug>(lsp-code-lens)
