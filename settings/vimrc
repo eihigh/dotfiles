@@ -205,7 +205,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	" To enable auto nohlsearch after cursor is moved
 	let g:searchx.nohlsearch = {}
 	let g:searchx.nohlsearch.jump = v:true
-	let g:searchx.markers = split('AENIHTSKMYOPCRLUD', '.\zs')
+	let g:searchx.markers = split('HTSCRLMDBGAENIYUKOP', '.\zs')
 
 	let g:vaffle_show_hidden_files = 1
 	let g:vaffle_use_default_mappings = 0
