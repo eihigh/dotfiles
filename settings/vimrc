@@ -102,6 +102,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	"  カラースキーム
 	" ------------------------------------------------------------
 	Plug 'cocopon/iceberg.vim'
+	Plug 'arcticicestudio/nord-vim'
 	Plug 'koron/vim-monochromenote'
 
 	" ------------------------------------------------------------
