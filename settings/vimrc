@@ -104,6 +104,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	Plug 'cocopon/iceberg.vim'
 	Plug 'arcticicestudio/nord-vim'
 	Plug 'koron/vim-monochromenote'
+	Plug 'chriskempson/base16-vim'
 
 	" ------------------------------------------------------------
 	"  オペレータ、テキスト操作
@@ -192,7 +193,7 @@ if isdirectory(expand('~/.vim')) && !empty(glob('~/.vim/autoload/plug.vim'))
 	call plug#end()
 
 	set background=dark
-	colorscheme iceberg
+	colorscheme base16-ashes
 	set termguicolors
 
 	let g:EasyMotion_keys = 'aenihtskmyopcrlud'
