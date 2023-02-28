@@ -1,3 +1,0 @@
-export VIMINIT="let \$MYVIMRC='$SSHHOME/.sshrc.d/vimrc_min' | source \$MYVIMRC"
-
-echo welcome-sshrc
