@@ -1,0 +1,173 @@
+" ----------------------------------------
+" 独自のキーレイアウトに合わせるためのマッピング
+" ----------------------------------------
+
+" 移動
+nnoremap h h
+nnoremap t gj
+nnoremap r gk
+nnoremap s l
+vnoremap h h
+vnoremap t gj
+vnoremap r gk
+vnoremap s l
+
+" ビジュアル
+nnoremap e v
+nnoremap n V
+nnoremap E <C-v>
+vnoremap e v
+vnoremap n V
+vnoremap E <C-v>
+
+" 検索
+nnoremap ( N
+nnoremap ) n
+vnoremap ( N
+vnoremap ) n
+
+" IME切り替えで生じるゴミの無視
+noremap! <S-F5> <nop>
+noremap! <S-F6> <nop>
+
+" ----------------------------------------
+" 好みの挙動のカスタマイズ
+" ----------------------------------------
+
+" 最低限欲しい設定
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,euc-jp,cp932
+set backspace=eol,indent,start
+
+" その他の設定
+set undofile
+set undodir=~/.cache/vim/
+set number
+set signcolumn=number
+set nowrap
+set autoread
+set autochdir
+set tabstop=2
+set shiftwidth=2
+" set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set smartindent
+
+" yank 範囲
+nnoremap Y y$
+vnoremap Y y$
+
+" 一文字削除でレジスタを消費しない
+nnoremap <BS> "_xh
+nnoremap x    "_s
+
+" クイックマーク
+nnoremap m mM
+nnoremap k `M
+
+" 保存/終了ショートカット
+nnoremap j :w<CR>
+nnoremap v :q<CR>
+
+" カーソルを最上段へ
+nnoremap <C-l> zt
+vnoremap <C-l> zt
+
+" ウィンドウ分割
+nnoremap \| :<C-u>vsplit<CR>
+nnoremap -  :<C-u>split<CR>
+
+" 矢印キーでウィンドウ移動
+" <C-w> 連打でウィンドウ入れ替え
+nnoremap <Left>     <C-w>h
+nnoremap <Down>     <C-w>j
+nnoremap <Up>       <C-w>k
+nnoremap <Right>    <C-w>l
+nnoremap <C-w><C-w> <C-w>x
+
+" <Esc> でターミナルノーマルモードへ遷移
+" 代わりに <C-w> 連打で <Esc> 入力
+tnoremap <C-w><C-w> <Esc>
+tnoremap <Esc>      <C-w>N
+
+" 絶対に手放せない abbreviation
+iabbrev ret return
+
+" NORMAL/INSERT でカーソル形状を変更
+if &term =~ 'xterm' || &term == 'win32'
+	let &t_SI = "\e[5 q"
+	let &t_EI = "\e[2 q"
+else
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" カーソル行強調表示
+set cursorline
+augroup vimrc
+	autocmd!
+	autocmd WinLeave * set nocursorline
+	autocmd WinEnter * set cursorline
+augroup END
+
+" ----------------------------------------
+" プラグイン
+" ----------------------------------------
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+	finish
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" カラースキーム
+Plug 'chriskempson/base16-vim'
+
+" オペレータ / テキスト操作
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+
+Plug 'tyru/caw.vim'
+
+Plug 'machakann/vim-sandwich'
+
+" ファイラ / セレクタ
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+
+Plug 'mattn/vim-molder'
+
+" パッシブ拡張
+Plug 'wellle/context.vim'
+
+" 言語
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+
+" 小回り
+Plug 'vim-jp/vimdoc-ja'
+
+call plug#end()
+
+" ----------------------------------------
+" プラグインの設定
+" ----------------------------------------
+
+" カラースキーム
+set background=dark
+set termguicolors
+colorscheme base16-ashes
+
+" Language Server
+let g:lsp_async_completion = 1
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_document_highlight_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 0
