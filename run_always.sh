@@ -3,6 +3,7 @@
 set -euxo pipefail
 
 if [[ "$SHELL" != *"/zsh" ]]; then
-	which zsh | sudo tee -a /etc/shells
+	echo 'changing the shell'
+	grep '/zsh' < /etc/shells || which zsh | sudo tee -a /etc/shells
 	sudo chsh -s $(which zsh) $USER
 fi
