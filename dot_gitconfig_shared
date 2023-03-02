@@ -1,0 +1,7 @@
+[core]
+	symlinks = true
+[user]
+	name = eihigh
+	email = eihigh.contact@gmail.com
+[ghq]
+	root = ~/ghq

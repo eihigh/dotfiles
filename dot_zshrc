@@ -5,8 +5,52 @@
 # ========================================
 [ -d /home/linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[ -d ~/go/bin ] && export PATH=$PATH:~/go/bin
 
 # ========================================
 # ENV
 # ========================================
+export TERM=xterm-256color
+export EDITOR=vim
 export LANG='ja_JP.utf8'
+
+# ========================================
+# Aliases
+# ========================================
+alias e='vim'
+alias cf='wrangler'
+alias d='docker'
+alias g='lazygit'
+alias ga='git add'
+alias gb='git branch'
+alias gc='git commit'
+alias gd='git diff'
+alias gdd="git diff --color-words --word-diff-regex='\\w+|[^[:space:]]'"
+alias gf='git fetch -p'
+alias gm='git merge --no-ff'
+alias gl='git log'
+alias gp='git pull -p'
+alias gs='git switch'
+alias i='git status -sb'
+alias ll='ls -lah'
+alias m='make'
+alias n='fg'
+alias qc="q -d,"
+
+# ========================================
+# Prompt
+# ========================================
+autoload -U colors; colors
+export LSCOLORS=DxGxcxdxCxegedabagacad
+
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:*' formats "*%b"
+zstyle ':vcs_info:*' actionformats '*%b|%a'
+precmd () { vcs_info }
+
+PROMPT="
+%(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{$fg[yellow]%}%(1j.[%j] .)%{${fg[yellow]}%}%~ %{${fg[cyan]}%}\$vcs_info_msg_0_%{${reset_color}%} %n@%m
+%(?.%{$fg[green]%}.%{$fg[cyan]%})%(?!(*'-')o!(*;-;%)?) $%{${reset_color}%} "
+
+PROMPT2='[%n]> '
