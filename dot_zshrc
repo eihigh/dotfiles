@@ -32,10 +32,19 @@ alias gl='git log'
 alias gp='git pull -p'
 alias gs='git switch'
 alias i='git status -sb'
-alias ll='ls -lah'
 alias m='make'
 alias n='fg'
 alias qc="q -d,"
+
+case "${OSTYPE}" in
+	darwin*)
+		alias tac="tail -r"
+		alias ll='ls -lah'
+		;;
+	linux*)
+		alias ll="ls -la --color"
+		;;
+esac
 
 # ========================================
 # Prompt
