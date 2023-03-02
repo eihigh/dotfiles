@@ -9,6 +9,3 @@ set -euxo pipefail
 
 [ -d /home/linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Exit as success
-exit 0
