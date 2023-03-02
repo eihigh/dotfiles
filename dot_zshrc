@@ -54,3 +54,24 @@ PROMPT="
 %(?.%{$fg[green]%}.%{$fg[cyan]%})%(?!(*'-')o!(*;-;%)?) $%{${reset_color}%} "
 
 PROMPT2='[%n]> '
+
+# ========================================
+# Functions
+# ========================================
+
+update() {
+	chezmoi update
+	brew upgrade
+	yes | vim +PlugInstall +qall
+	yes | vim +PlugUpdate +qall
+}
+
+# ========================================
+# Operations / Bindings
+# ========================================
+
+setopt AUTO_CD
+
+autoload -U compinit; compinit
+
+bindkey -e
