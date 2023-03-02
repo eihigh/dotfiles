@@ -58,7 +58,6 @@ PROMPT2='[%n]> '
 # ========================================
 # Functions
 # ========================================
-
 update() {
 	chezmoi update
 	brew upgrade
@@ -66,12 +65,39 @@ update() {
 	yes | vim +PlugUpdate +qall
 }
 
+cd_up() {
+	BUFFER="cd .."
+	zle accept-line
+}
+
+cd_recents() {
+	local dir=$(cdr -l | awk '{print $2}' | fzf --query "$LBUFFER")
+	if [ -n "$dir" ]; then
+		BUFFER="cd ${dir}"
+		zle accept-line
+	fi
+}
+
 # ========================================
 # Operations / Bindings
 # ========================================
-
 setopt AUTO_CD
 
-autoload -U compinit; compinit
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000
+SAVEHIST=1000000
+
+autoload -Uz compinit; compinit
+
+# Recent dirs
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-file "$HOME/.cache/chpwd_recent_dirs"
 
 bindkey -e
+
+zle -N       cd_up
+bindkey '^U' cd_up
+zle -N       cd_recents
+bindkey '^T' cd_recents
