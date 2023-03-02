@@ -127,6 +127,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 
 " オペレータ / テキスト操作
+Plug 'haya14busa/vim-easymotion'
+
 Plug 'kana/vim-textobj-user'
 Plug 'sgur/vim-textobj-parameter'
 
@@ -171,3 +173,10 @@ let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
+
+" Easymotion (inline motion only)
+let g:EasyMotion_keys = 'aenihtskmyopcrlud'
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_shade = 0
+let g:EasyMotion_startofline = 0
+map l <Plug>(easymotion-sl)
