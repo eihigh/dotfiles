@@ -1,5 +1,5 @@
 # dotfiles
 
 ```
-$ chezmoi init --apply eihigh
+$ bash -x -c "$(curl -fsLS get.chezmoi.io)" -- init --apply eihigh
 ```
