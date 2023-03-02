@@ -70,8 +70,7 @@ PROMPT2='[%n]> '
 update() {
 	chezmoi update
 	brew upgrade
-	yes | vim +PlugInstall +qall
-	yes | vim +PlugUpdate +qall
+	yes | vim +PlugInstall +PlugClean +PlugUpdate +qall
 }
 
 cd_up() {
