@@ -173,6 +173,17 @@ let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
+nmap ,n <plug>(lsp-rename)
+nmap ,h <plug>(lsp-hover)
+nmap ,s <plug>(lsp-document-symbol)
+nmap ,d <plug>(lsp-definition)
+nmap ,i <plug>(lsp-implementation)
+nmap ,D <plug>(lsp-type-definition)
+nmap ,f :CtrlPFunky<CR>
+nmap ,c <plug>(lsp-code-lens)
+nnoremap ,q :<C-u>LspStopServer<CR>
+nmap <C-n> <plug>(lsp-next-diagnostic)
+nmap <C-p> <plug>(lsp-previous-diagnostic)o
 
 " Easymotion (inline motion only)
 let g:EasyMotion_keys = 'aenihtskmyopcrlud'
