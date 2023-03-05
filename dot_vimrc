@@ -132,7 +132,7 @@ augroup vimrc
 augroup END
 
 " statusline
-set statusline=\ %m\ %p%%\ of\ %LL%=%<%f\ \|\ %{&fenc}\ 
+set statusline=\ %m\ %p%%\ of\ %LL%=%<%{&fenc}\ \|\ %f\ 
 
 " ----------------------------------------
 " プラグイン
