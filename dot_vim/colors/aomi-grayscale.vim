@@ -90,8 +90,8 @@ exe "hi! IncSearch"     .s:fmt_revr .s:fg_white     .s:bg_black
 exe "hi! Search"        .s:fmt_revr .s:fg_white     .s:bg_black
 exe "hi! MoreMsg"       .s:normal
 exe "hi! ModeMsg"       .s:normal
-exe "hi! LineNr"        .s:fmt_none .s:fg_gray      .s:bg_deep
-exe "hi! CursorLineNr"  .s:fmt_undr .s:fg_white     .s:bg_deep
+exe "hi! LineNr"        .s:fmt_none .s:fg_dull      .s:bg_none
+exe "hi! CursorLineNr"  .s:fmt_none .s:fg_white     .s:bg_none
 exe "hi! Question"      .s:attention
 exe "hi! VertSplit"     .s:fmt_none .s:fg_deep      .s:bg_none
 exe "hi! Title"         .s:normal
@@ -118,3 +118,8 @@ exe "hi! CursorLine"    .s:fmt_none .s:fg_none      .s:bg_deep
 exe "hi! CursorColumn"  .s:fmt_none .s:fg_none      .s:bg_deep
 exe "hi! Cursor"        .s:fmt_none .s:fg_none      .s:bg_dull
 exe "hi! MatchParen"    .s:fmt_none .s:fg_none      .s:bg_dull
+
+hi! link LspErrorHighlight       Error
+hi! link LspWarningHighlight     Error
+hi! link LspInformationHighlight Visual
+hi! link LspHintHighlight        Visual
