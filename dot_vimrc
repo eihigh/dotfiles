@@ -1,3 +1,9 @@
+" キーマップ戦略:
+" 大前提として、デフォルト挙動を大きく変えすぎないようにする。
+" LSP中心に g を注意深く上書きする。
+" その他分類不能なプラグインの機能は <Space> で起動する。
+" Ctrl キーは特殊なキーが多いのでなるべく避ける。
+
 " ----------------------------------------
 " 独自のキーレイアウトに合わせるためのマッピング
 " ----------------------------------------
@@ -7,24 +13,24 @@ nnoremap h h
 nnoremap t gj
 nnoremap r gk
 nnoremap s l
-vnoremap h h
-vnoremap t gj
-vnoremap r gk
-vnoremap s l
+xnoremap h h
+xnoremap t gj
+xnoremap r gk
+xnoremap s l
 
 " ビジュアル
 nnoremap e v
 nnoremap n V
 nnoremap E <C-v>
-vnoremap e v
-vnoremap n V
-vnoremap E <C-v>
+xnoremap e v
+xnoremap n V
+xnoremap E <C-v>
 
 " 検索
 nnoremap ( N
 nnoremap ) n
-vnoremap ( N
-vnoremap ) n
+xnoremap ( N
+xnoremap ) n
 
 " IME切り替えで生じるゴミの無視
 noremap! <S-F5> <nop>
@@ -55,10 +61,10 @@ set incsearch
 set ignorecase
 set smartcase
 set smartindent
+set ttimeoutlen=0
 
 " yank 範囲
 nnoremap Y y$
-vnoremap Y y$
 
 " 一文字削除でレジスタを消費しない
 nnoremap <BS> "_xh
@@ -71,10 +77,6 @@ nnoremap k `M
 " 保存/終了ショートカット
 nnoremap j :w<CR>
 nnoremap v :q<CR>
-
-" カーソルを最上段へ
-nnoremap <C-l> zt
-vnoremap <C-l> zt
 
 " ウィンドウ分割
 nnoremap \| :<C-u>vsplit<CR>
@@ -93,8 +95,12 @@ nnoremap <C-w><C-w> <C-w>x
 tnoremap <C-w><C-w> <Esc>
 tnoremap <Esc>      <C-w>N
 
+" スクロールオフセット
+set scrolloff=2
+noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
+
 " 絶対に手放せない abbreviation
-iabbrev ret return
+abbrev ret return
 
 " NORMAL/INSERT でカーソル形状を変更
 if &term =~ 'xterm' || &term == 'win32'
@@ -113,6 +119,9 @@ augroup vimrc
 	autocmd WinEnter * set cursorline
 augroup END
 
+" statusline
+set statusline=\ %m%=%<%f\ 
+
 " ----------------------------------------
 " プラグイン
 " ----------------------------------------
@@ -128,6 +137,7 @@ Plug 'chriskempson/base16-vim'
 
 " オペレータ / テキスト操作
 Plug 'haya14busa/vim-easymotion'
+Plug 'haya14busa/vim-edgemotion'
 
 Plug 'kana/vim-textobj-user'
 Plug 'sgur/vim-textobj-parameter'
@@ -165,7 +175,10 @@ call plug#end()
 " カラースキーム
 set background=dark
 set termguicolors
-colorscheme base16-ashes
+colorscheme base16-grayscale-dark
+
+" CtrlP
+nmap <Space><Space> :<C-u>CtrlPMRU<CR>
 
 " Language Server
 let g:lsp_async_completion = 1
@@ -173,17 +186,15 @@ let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_document_highlight_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
-nmap ,n <plug>(lsp-rename)
-nmap ,h <plug>(lsp-hover)
-nmap ,s <plug>(lsp-document-symbol)
-nmap ,d <plug>(lsp-definition)
-nmap ,i <plug>(lsp-implementation)
-nmap ,D <plug>(lsp-type-definition)
-nmap ,f :CtrlPFunky<CR>
-nmap ,c <plug>(lsp-code-lens)
-nnoremap ,q :<C-u>LspStopServer<CR>
-nmap <C-n> <plug>(lsp-next-diagnostic)
-nmap <C-p> <plug>(lsp-previous-diagnostic)o
+nmap gr <plug>(lsp-rename)
+nmap gh <plug>(lsp-hover)
+" nmap gs <plug>(lsp-document-symbol)
+nmap gd <plug>(lsp-definition)
+nmap gD <plug>(lsp-type-definition)
+nmap gi <plug>(lsp-implementation)
+nmap gf :CtrlPFunky<CR>
+nmap gl <plug>(lsp-code-lens)
+nnoremap gq :<C-u>LspStopServer<CR>
 
 " Easymotion (inline motion only)
 let g:EasyMotion_keys = 'aeniyopukhtscrldmbfvqxz'
@@ -191,3 +202,18 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_startofline = 0
 map l <Plug>(easymotion-sl)
+
+" Edgemotion
+map T <Plug>(edgemotion-j)
+map R <Plug>(edgemotion-k)
+
+" Sandwich
+let g:sandwich_no_default_key_mappings = 1
+map gs <Nop>
+nmap gsa <Plug>(sandwich-add)
+xmap gsa <Plug>(sandwich-add)
+omap gsa <Plug>(sandwich-add)
+nmap gsd <Plug>(sandwich-delete-auto)
+xmap gsd <Plug>(sandwich-delete)
+nmap gsc <Plug>(sandwich-replace-auto)
+xmap gsc <Plug>(sandwich-replace)
