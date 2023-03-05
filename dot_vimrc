@@ -105,7 +105,7 @@ inoremap <silent> <expr> <CR>   pumvisible() ? asyncomplete#close_popup() . "\<C
 tnoremap <C-w><C-w> <Esc>
 tnoremap <Esc>      <C-w>N
 
-" スクロールオフセット
+" z. でカーソル中央固定
 set scrolloff=2
 noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
 
@@ -171,8 +171,9 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
+" 補完ウィンドウを閉じたときの挙動がバグるので後で解決する
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/vim-vsnip-integ'
 
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
@@ -226,5 +227,5 @@ xmap gsa <Plug>(sandwich-add)
 omap gsa <Plug>(sandwich-add)
 nmap gsd <Plug>(sandwich-delete-auto)
 xmap gsd <Plug>(sandwich-delete)
-nmap gsc <Plug>(sandwich-replace-auto)
-xmap gsc <Plug>(sandwich-replace)
+nmap gsr <Plug>(sandwich-replace-auto)
+xmap gsr <Plug>(sandwich-replace)
