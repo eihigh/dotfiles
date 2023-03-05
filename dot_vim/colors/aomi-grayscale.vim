@@ -123,3 +123,4 @@ hi! link LspErrorHighlight       Error
 hi! link LspWarningHighlight     Error
 hi! link LspInformationHighlight Visual
 hi! link LspHintHighlight        Visual
+hi! link LspErrorVirtualText     Comment

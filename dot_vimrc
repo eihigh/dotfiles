@@ -61,6 +61,8 @@ set incsearch
 set ignorecase
 set smartcase
 set smartindent
+
+" Esc の遅延解消
 set ttimeoutlen=0
 
 " yank 範囲
@@ -130,7 +132,7 @@ augroup vimrc
 augroup END
 
 " statusline
-set statusline=\ %m%=%<%f\ 
+set statusline=\ %m\ %p%%\ of\ %LL%=%<%f\ \|\ %{&fenc}\ 
 
 " ----------------------------------------
 " プラグイン
@@ -197,9 +199,12 @@ let g:lsp_async_completion = 1
 let g:lsp_diagnostics_highlights_enabled = 1
 let g:lsp_diagnostics_highlights_delay = 100
 let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 1
+let g:lsp_diagnostics_virtual_text_align = "right"
 nmap gr <plug>(lsp-rename)
 nmap gh <plug>(lsp-hover)
+nmap gen <plug>(lsp-next-diagnostic)
+nmap gep <plug>(lsp-previous-diagnostic)
 " nmap gs <plug>(lsp-document-symbol)
 nmap gd <plug>(lsp-definition)
 nmap gD <plug>(lsp-type-definition)
