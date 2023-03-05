@@ -175,7 +175,7 @@ call plug#end()
 " カラースキーム
 set background=dark
 set termguicolors
-colorscheme base16-grayscale-dark
+colorscheme aomi-grayscale
 
 " CtrlP
 nmap <Space><Space> :<C-u>CtrlPMRU<CR>

@@ -9,6 +9,7 @@ set background=dark
 
 " Colors abbrev
 let s:vmode     = "gui"
+let s:none      = "NONE"
 let s:black     = "#0d1117"
 let s:deep      = "#171a1f"
 let s:dull      = "#40444a"
@@ -50,7 +51,6 @@ let s:fmt_bldi = " " .s:vmode."=NONE".s:b.      " term=NONE".s:b
 let s:fmt_undr = " " .s:vmode."=NONE".s:u.      " term=NONE".s:u
 let s:fmt_undb = " " .s:vmode."=NONE".s:u.s:b.  " term=NONE".s:u.s:b
 let s:fmt_undi = " " .s:vmode."=NONE".s:u.      " term=NONE".s:u
-let s:fmt_uopt = " " .s:vmode."=NONE".s:ou.     " term=NONE".s:ou
 let s:fmt_curl = " " .s:vmode."=NONE".s:c.      " term=NONE".s:c
 let s:fmt_ital = " " .s:vmode."=NONE".s:i.      " term=NONE".s:i
 let s:fmt_stnd = " " .s:vmode."=NONE".s:s.      " term=NONE".s:s
@@ -91,6 +91,7 @@ exe "hi! Search"        .s:fmt_revr .s:fg_white     .s:bg_black
 exe "hi! MoreMsg"       .s:normal
 exe "hi! ModeMsg"       .s:normal
 exe "hi! LineNr"        .s:fmt_none .s:fg_gray      .s:bg_deep
+exe "hi! CursorLineNr"  .s:fmt_undr .s:fg_white     .s:bg_deep
 exe "hi! Question"      .s:attention
 exe "hi! VertSplit"     .s:fmt_none .s:fg_deep      .s:bg_none
 exe "hi! Title"         .s:normal
