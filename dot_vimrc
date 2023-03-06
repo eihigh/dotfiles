@@ -161,6 +161,7 @@ Plug 'cocopon/iceberg.vim'
 " オペレータ / テキスト操作
 Plug 'haya14busa/vim-easymotion'
 Plug 'haya14busa/vim-edgemotion'
+Plug 'haya14busa/vim-asterisk'
 
 Plug 'kana/vim-textobj-user'
 Plug 'sgur/vim-textobj-parameter'
@@ -261,6 +262,12 @@ map l <Plug>(easymotion-sl)
 " Edgemotion
 map T <Plug>(edgemotion-j)
 map R <Plug>(edgemotion-k)
+
+" Asterisk
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
