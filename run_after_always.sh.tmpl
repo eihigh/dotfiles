@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -euxo pipefail
+
+[ -d /home/linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+standard_env() {
+	# Check and change the login shell
+	if [[ "$SHELL" != *"/zsh" ]]; then
+		grep '/zsh' < /etc/shells || which zsh | sudo tee -a /etc/shells
+		sudo chsh -s $(which zsh) $USER
+	fi
+}
+
+dev_env() {
+	echo '[hostname {{ .chezmoi.hostname }}: 機能低減版]'
+}
+
+{{ if not (contains "dev" .chezmoi.hostname) }} standard_env {{ else }} dev_env {{ end }}
+
+# Include my gitconfig
+git config --global include.path ~/.gitconfig_shared
