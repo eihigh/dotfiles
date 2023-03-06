@@ -64,65 +64,61 @@ let s:comment   = s:fmt_none .s:fg_gray      .s:bg_none
 let s:attention = s:fmt_undr .s:fg_white      .s:bg_none
 
 " Basic highlights
-exe "hi! Normal"      .s:normal
-exe "hi! Comment"     .s:comment
-exe "hi! Constant"    .s:normal
-exe "hi! String"      .s:keyword
-exe "hi! Character"   .s:keyword
-exe "hi! Identifier"  .s:normal
-exe "hi! Statement"   .s:keyword
-exe "hi! PreProc"     .s:keyword
-exe "hi! Type"        .s:normal
-exe "hi! Special"     .s:normal
-exe "hi! Underlined"  .s:fmt_undr .s:fg_white     .s:bg_none
-exe "hi! Ignore"      .s:fmt_none .s:fg_none      .s:bg_none
-exe "hi! Error"       .s:attention
-exe "hi! Todo"        .s:fmt_bold .s:fg_white     .s:bg_deep
+exe "hi Normal"      .s:normal
+exe "hi Comment"     .s:comment
+exe "hi Constant"    .s:normal
+exe "hi String"      .s:keyword
+exe "hi Character"   .s:keyword
+exe "hi Identifier"  .s:normal
+exe "hi Statement"   .s:keyword
+exe "hi PreProc"     .s:keyword
+exe "hi Type"        .s:normal
+exe "hi Special"     .s:normal
+exe "hi Underlined"  .s:fmt_undr .s:fg_white     .s:bg_none
+exe "hi Ignore"      .s:fmt_none .s:fg_none      .s:bg_none
+exe "hi Error"       .s:attention
+exe "hi Todo"        .s:fmt_bold .s:fg_white     .s:bg_deep
 
-exe "hi! SpecialKey"    .s:fmt_revb .s:fg_white     .s:bg_black
-exe "hi! NonText"       .s:fmt_none .s:fg_gray      .s:bg_none
-exe "hi! StatusLine"    .s:fmt_bold .s:fg_white     .s:bg_dull
-exe "hi! StatusLineNC"  .s:fmt_none .s:fg_gray      .s:bg_deep
-exe "hi! Visual"        .s:fmt_none .s:fg_none      .s:bg_dull
-exe "hi! Directory"     .s:keyword
-exe "hi! ErrorMsg"      .s:attention
-exe "hi! IncSearch"     .s:fmt_revr .s:fg_white     .s:bg_black
-exe "hi! Search"        .s:fmt_revr .s:fg_white     .s:bg_black
-exe "hi! MoreMsg"       .s:normal
-exe "hi! ModeMsg"       .s:normal
-exe "hi! LineNr"        .s:fmt_none .s:fg_dull      .s:bg_none
-exe "hi! CursorLineNr"  .s:fmt_none .s:fg_white     .s:bg_none
-exe "hi! Question"      .s:attention
-exe "hi! VertSplit"     .s:fmt_none .s:fg_deep      .s:bg_none
-exe "hi! Title"         .s:normal
-exe "hi! VisualNOS"     .s:fmt_none .s:fg_none      .s:bg_dull
-exe "hi! WarningMsg"    .s:attention
-exe "hi! WildMenu"      .s:fmt_none .s:fg_white     .s:bg_dull
-exe "hi! Folded"        .s:fmt_none .s:fg_gray      .s:bg_deep
-exe "hi! FoldColumn"    .s:fmt_none .s:fg_white     .s:bg_deep
+exe "hi SpecialKey"    .s:fmt_revb .s:fg_white     .s:bg_black
+exe "hi NonText"       .s:fmt_none .s:fg_gray      .s:bg_none
+exe "hi StatusLine"    .s:fmt_bold .s:fg_white     .s:bg_dull
+exe "hi StatusLineNC"  .s:fmt_none .s:fg_gray      .s:bg_deep
+exe "hi Visual"        .s:fmt_none .s:fg_none      .s:bg_dull
+exe "hi Directory"     .s:keyword
+exe "hi ErrorMsg"      .s:attention
+exe "hi IncSearch"     .s:fmt_revr .s:fg_white     .s:bg_black
+exe "hi Search"        .s:fmt_revr .s:fg_white     .s:bg_black
+exe "hi MoreMsg"       .s:normal
+exe "hi ModeMsg"       .s:normal
+exe "hi LineNr"        .s:fmt_none .s:fg_dull      .s:bg_none
+exe "hi CursorLineNr"  .s:fmt_none .s:fg_white     .s:bg_none
+exe "hi Question"      .s:attention
+exe "hi VertSplit"     .s:fmt_none .s:fg_deep      .s:bg_none
+exe "hi Title"         .s:normal
+exe "hi VisualNOS"     .s:fmt_none .s:fg_none      .s:bg_dull
+exe "hi WarningMsg"    .s:attention
+exe "hi WildMenu"      .s:fmt_none .s:fg_white     .s:bg_dull
+exe "hi Folded"        .s:fmt_none .s:fg_gray      .s:bg_deep
+exe "hi FoldColumn"    .s:fmt_none .s:fg_white     .s:bg_deep
 " TODO: Diff
-exe "hi! SignColumn"    .s:normal
-exe "hi! Conceal"       .s:fmt_none
-exe "hi! SpellBad"      .s:fmt_undr
-exe "hi! SpellCap"      .s:fmt_undr
-exe "hi! SpellRare"     .s:fmt_undr
-exe "hi! SpellLocal"    .s:fmt_undr
-exe "hi! PMenu"         .s:fmt_none .s:fg_white     .s:bg_deep
-exe "hi! PMenuSel"      .s:fmt_none .s:fg_white     .s:bg_dull
-exe "hi! PMenuSbar"     .s:fmt_none .s:fg_gray      .s:bg_deep
-exe "hi! PMenuThumb"    .s:fmt_none .s:fg_gray      .s:bg_gray
-exe "hi! TabLine"       .s:fmt_undr .s:fg_gray      .s:bg_deep
-exe "hi! TabLineFill"   .s:fmt_undr .s:fg_gray      .s:bg_deep
-exe "hi! TabLineSel"    .s:fmt_undr .s:fg_semiwhite .s:bg_deep
-exe "hi! CursorLine"    .s:fmt_none .s:fg_none      .s:bg_deep
-exe "hi! CursorColumn"  .s:fmt_none .s:fg_none      .s:bg_deep
-exe "hi! Cursor"        .s:fmt_none .s:fg_none      .s:bg_dull
-exe "hi! MatchParen"    .s:fmt_none .s:fg_none      .s:bg_dull
+exe "hi SignColumn"    .s:normal
+exe "hi Conceal"       .s:fmt_none
+exe "hi SpellBad"      .s:fmt_undr
+exe "hi SpellCap"      .s:fmt_undr
+exe "hi SpellRare"     .s:fmt_undr
+exe "hi SpellLocal"    .s:fmt_undr
+exe "hi PMenu"         .s:fmt_none .s:fg_white     .s:bg_deep
+exe "hi PMenuSel"      .s:fmt_none .s:fg_white     .s:bg_dull
+exe "hi PMenuSbar"     .s:fmt_none .s:fg_gray      .s:bg_deep
+exe "hi PMenuThumb"    .s:fmt_none .s:fg_gray      .s:bg_gray
+exe "hi TabLine"       .s:fmt_undr .s:fg_gray      .s:bg_deep
+exe "hi TabLineFill"   .s:fmt_undr .s:fg_gray      .s:bg_deep
+exe "hi TabLineSel"    .s:fmt_undr .s:fg_semiwhite .s:bg_deep
+exe "hi CursorLine"    .s:fmt_none .s:fg_none      .s:bg_deep
+exe "hi CursorColumn"  .s:fmt_none .s:fg_none      .s:bg_deep
+exe "hi Cursor"        .s:fmt_none .s:fg_none      .s:bg_dull
+exe "hi MatchParen"    .s:fmt_none .s:fg_none      .s:bg_dull
 
-hi! link CtrlPMatch Visual
+hi link CtrlPMatch Visual
 
-hi! link LspErrorHighlight       Error
-hi! link LspWarningHighlight     Error
-hi! link LspInformationHighlight Visual
-hi! link LspHintHighlight        Visual
-hi! link LspErrorVirtualText     Comment
+hi link LspErrorVirtualText     Comment
