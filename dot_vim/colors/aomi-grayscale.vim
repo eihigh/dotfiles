@@ -119,6 +119,8 @@ exe "hi! CursorColumn"  .s:fmt_none .s:fg_none      .s:bg_deep
 exe "hi! Cursor"        .s:fmt_none .s:fg_none      .s:bg_dull
 exe "hi! MatchParen"    .s:fmt_none .s:fg_none      .s:bg_dull
 
+hi! link CtrlPMatch Visual
+
 hi! link LspErrorHighlight       Error
 hi! link LspWarningHighlight     Error
 hi! link LspInformationHighlight Visual
