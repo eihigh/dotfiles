@@ -221,20 +221,35 @@ let g:lsp_diagnostics_virtual_text_delay = 100
 let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
 let g:lsp_diagnostics_virtual_text_align = "right"
 
-nmap gd <plug>(lsp-definition)
-nmap gt <plug>(lsp-type-definition)
-nmap gr <plug>(lsp-rename)
-nmap K <plug>(lsp-hover)
-nmap ]g <plug>(lsp-next-diagnostic)
-nmap [g <plug>(lsp-previous-diagnostic)
-nmap gs :<C-u>CtrlPLspDocumentSymbol<CR>
-nmap gS :<C-u>CtrlPLspWorkspaceSymbol<CR>
+function! s:on_lsp_buffer_enabled() abort
+	setlocal omnifunc=lsp#complete
+	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+	nmap <buffer> ga <plug>(lsp-code-lens)
+	nmap <buffer> gA <plug>(lsp-code-action)
+	nmap <buffer> gd <plug>(lsp-definition)
+	nmap gs :<C-u>CtrlPLspDocumentSymbol<CR>
+	nmap gS :<C-u>CtrlPLspWorkspaceSymbol<CR>
+	nmap <buffer> gr <plug>(lsp-rename)
+	nmap <buffer> gi <plug>(lsp-implementation)
+	nmap <buffer> gt <plug>(lsp-type-definition)
+	nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+	nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+	nmap <buffer> K <plug>(lsp-hover)
+	" nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+	" nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+	nnoremap gq :<C-u>LspStopServer<CR>
+	nmap <buffer> <expr> gQ lsp#disable()
 
-nmap gi <plug>(lsp-implementation)
-nmap gf :CtrlPFunky<CR>:cw<CR>
-nmap gl <plug>(lsp-code-lens)
-nnoremap gq :<C-u>LspStopServer<CR>
-nmap <expr> gQ lsp#disable()
+	" gofmt & goimports
+	autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
+endfunction
+
+augroup lsp_install
+	au!
+	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+	autocmd User EasyMotionPromptBegin call lsp#disable_diagnostics_for_buffer()<CR>
+	autocmd User EasyMotionPromptEnd call lsp#enable_diagnostics_for_buffer()<CR>
+augroup END
 
 " Easymotion (inline motion only)
 let g:EasyMotion_keys = 'aeniyopukhtscrldmbfvqxz'
@@ -242,12 +257,6 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_startofline = 0
 map l <Plug>(easymotion-sl)
-
-augroup LspEasyMotion
-	autocmd!
-	autocmd User EasyMotionPromptBegin call lsp#disable_diagnostics_for_buffer()<CR>
-	autocmd User EasyMotionPromptEnd call lsp#enable_diagnostics_for_buffer()<CR>
-augroup END
 
 " Edgemotion
 map T <Plug>(edgemotion-j)
@@ -263,3 +272,6 @@ let g:sandwich_no_default_key_mappings = 1
 " xmap gsd <Plug>(sandwich-delete)
 " nmap gsr <Plug>(sandwich-replace-auto)
 " xmap gsr <Plug>(sandwich-replace)
+
+" Help
+set helplang=ja
