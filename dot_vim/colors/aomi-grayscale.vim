@@ -13,7 +13,7 @@ let s:none      = "NONE"
 let s:black     = "#0d1117"
 let s:deep      = "#171a1f"
 let s:dull      = "#40444a"
-let s:gray      = "#5a646d"
+let s:gray      = "#69727a"
 let s:semiwhite = "#8b949e"
 let s:white     = "#c9d1d9"
 

@@ -19,10 +19,10 @@ xnoremap r gk
 xnoremap s l
 
 " ウィンドウ移動
-noremap <C-w>h <C-w>h
-noremap <C-w>t <C-w>j
-noremap <C-w>r <C-w>k
-noremap <C-w>s <C-w>l
+nnoremap <Left>  <C-w>h
+nnoremap <Down>  <C-w>j
+nnoremap <Up>    <C-w>k
+nnoremap <Right> <C-w>l
 
 " ビジュアル
 nnoremap e v
@@ -68,7 +68,6 @@ set ignorecase
 set smartcase
 set smartindent
 set helplang=ja
-set switchbuf=uselast
 
 " Esc の遅延解消
 set ttimeoutlen=0
@@ -97,6 +96,32 @@ nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
 
 " ウィンドウ分割
 nnoremap \| :<C-u>vsplit<CR>
+
+" ウィンドウ入れ替え
+" https://gist.github.com/orther/916584
+function! s:swapwindows() abort
+	if !exists("g:swapsrcwin")
+		let g:swapsrcwin = winnr()
+		echo "Marked #" . g:swapsrcwin . " for swap"
+	else
+		let l:dstwin = winnr()
+		let l:dstbuf = bufnr('%')
+		if g:swapsrcwin == l:dstwin
+			echo "Unmarked #" . g:swapsrcwin
+		else
+			exe g:swapsrcwin . "wincmd w"
+			let l:srcbuf = bufnr('%')
+			exe 'hide buf' l:dstbuf
+			exe l:dstwin . "wincmd w"
+			exe 'hide buf' l:srcbuf
+			echo "Windows swapped"
+		endif
+
+		unlet g:swapsrcwin
+	endif
+endfunction
+
+noremap - :<C-u>call <SID>swapwindows()<CR>
 
 " ターミナルを開く
 " <Esc> でターミナルノーマルモードへ遷移
@@ -191,7 +216,7 @@ Plug 'mattn/ctrlp-lsp'
 
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
-Plug 't9md/vim-choosewin'
+" Plug 't9md/vim-choosewin'
 
 call plug#end()
 
@@ -202,11 +227,8 @@ set background=dark
 set termguicolors
 colorscheme aomi-grayscale
 
-let g:choosewin_overlay_enable = 1
-nmap - <Plug>(choosewin)
-
 " CtrlP
-nmap ,, :<C-u>CtrlPMRU<CR>
+nmap <Space><Space> :<C-u>CtrlPMRU<CR>
 nmap ,q :<C-u>CtrlPQuickfix<CR>
 
 " Language Server
