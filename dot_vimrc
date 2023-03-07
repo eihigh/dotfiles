@@ -1,13 +1,12 @@
-" キーマップ戦略:
+" # キーマップ戦略
 " 大前提として、デフォルト挙動を大きく変えすぎないようにする。
-" LSP中心に [, ], g を注意深く上書きする。
+" 暗黙の <Leader> として , を利用する。
 " 選択モード関連は潰す。
-" その他分類不能なプラグインの機能は <Space> で起動する。
 " Ctrl キーは特殊なキーが多いのでなるべく避ける。
 
-" ----------------------------------------
-" 独自のキーレイアウトに合わせるためのマッピング
-" ----------------------------------------
+" # Vim のバージョンに関わらず欲しい設定
+
+" ## 独自のキーボードレイアウトに合わせるためのマップ
 
 " 移動
 nnoremap h h
@@ -18,6 +17,12 @@ xnoremap h h
 xnoremap t gj
 xnoremap r gk
 xnoremap s l
+
+" ウィンドウ移動
+noremap <C-w>h <C-w>h
+noremap <C-w>t <C-w>j
+noremap <C-w>r <C-w>k
+noremap <C-w>s <C-w>l
 
 " ビジュアル
 nnoremap e v
@@ -37,9 +42,7 @@ xnoremap ) n
 noremap! <S-F5> <nop>
 noremap! <S-F6> <nop>
 
-" ----------------------------------------
-" 好みの挙動のカスタマイズ
-" ----------------------------------------
+" ## その他の挙動のカスタマイズ
 
 " 最低限欲しい設定
 set encoding=utf-8
@@ -48,8 +51,10 @@ set fileencodings=utf-8,euc-jp,cp932
 set backspace=eol,indent,start
 
 " その他の設定
-set undofile
-set undodir=~/.cache/vim/
+if isdirectory(expand('~/.cache/vim'))
+	set undofile
+	set undodir=~/.cache/vim/
+endif
 set number
 set signcolumn=number
 set nowrap
@@ -62,6 +67,8 @@ set incsearch
 set ignorecase
 set smartcase
 set smartindent
+set helplang=ja
+set switchbuf=uselast
 
 " Esc の遅延解消
 set ttimeoutlen=0
@@ -90,27 +97,11 @@ nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
 
 " ウィンドウ分割
 nnoremap \| :<C-u>vsplit<CR>
-nnoremap -  :<C-u>split<CR>
 
-" 矢印キーでウィンドウ移動
-" <C-w> 連打でウィンドウ入れ替え
-nnoremap <Left>     <C-w>h
-nnoremap <Down>     <C-w>j
-nnoremap <Up>       <C-w>k
-nnoremap <Right>    <C-w>l
-nnoremap <C-w><C-w> <C-w>x
-
-" 補完ウィンドウ操作
-" up/down では候補を選択しても即座に挿入されずCRで確定する必要があるので、
-" C-n/p に置き換えて候補選択と同時に挿入されるようにする。
-inoremap <silent> <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <silent> <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent> <expr> <CR> pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
-
+" ターミナルを開く
 " <Esc> でターミナルノーマルモードへ遷移
 " 代わりに <C-w> 連打で <Esc> 入力
+nnoremap <C-t> :<C-u>botright terminal ++rows=20<CR>
 tnoremap <C-w><C-w> <Esc>
 tnoremap <Esc>      <C-w>N
 
@@ -138,19 +129,28 @@ augroup vimrc
 	autocmd WinEnter * set cursorline
 augroup END
 
-" statusline
+" ステータスラインをシュッとさせる
+" utf-8 以外の注意すべきエンコードなら強調する
 function! Stl_fenc() abort
 	return &fenc == "utf-8" ? "" : "[".&fenc."] "
 endfunction
 set statusline=\ %m\ %=%{Stl_fenc()}%LL\ %<%f\ 
 
-" ----------------------------------------
-" プラグイン
-" ----------------------------------------
+" # プラグイン
 
+" ## プラグインを利用する環境かチェック
+
+" plug.vim がなければ弾く
 if empty(glob('~/.vim/autoload/plug.vim'))
 	finish
 endif
+
+" バージョンが低ければ弾く
+if v:version < 900
+	finish
+endif
+
+" ## プラグインのインストール
 
 call plug#begin('~/.vim/plugged')
 
@@ -158,14 +158,17 @@ call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'cocopon/iceberg.vim'
 
-" オペレータ / テキスト操作
+" モーション / オペレータ
 Plug 'haya14busa/vim-easymotion'
 Plug 'haya14busa/vim-edgemotion'
 Plug 'haya14busa/vim-asterisk'
 
+Plug 'andymass/vim-matchup'
+
 Plug 'kana/vim-textobj-user'
 Plug 'sgur/vim-textobj-parameter'
 
+" テキスト編集
 Plug 'tyru/caw.vim'
 
 Plug 'machakann/vim-sandwich'
@@ -174,7 +177,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 
-Plug 'mattn/vim-molder'
+Plug 'cocopon/vaffle.vim'
 
 " パッシブ拡張
 Plug 'wellle/context.vim'
@@ -184,28 +187,27 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-" 補完ウィンドウを閉じたときの挙動がバグるので後で解決する
-" Plug 'hrsh7th/vim-vsnip'
-" Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'mattn/ctrlp-lsp'
 
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
+Plug 't9md/vim-choosewin'
 
 call plug#end()
 
-" ----------------------------------------
-" プラグインの設定
-" ----------------------------------------
+" ## プラグインの設定
 
 " カラースキーム
 set background=dark
 set termguicolors
 colorscheme aomi-grayscale
 
+let g:choosewin_overlay_enable = 1
+nmap - <Plug>(choosewin)
+
 " CtrlP
-nmap <Space><Space> :<C-u>CtrlPMRU<CR>
-nmap <Space>q :<C-u>CtrlPQuickfix<CR>
+nmap ,, :<C-u>CtrlPMRU<CR>
+nmap ,q :<C-u>CtrlPQuickfix<CR>
 
 " Language Server
 " なるべく vim-lsp の README に倣う
@@ -219,7 +221,6 @@ let g:lsp_diagnostics_signs_enabled = 0
 
 let g:lsp_diagnostics_virtual_text_enabled = 1
 let g:lsp_diagnostics_virtual_text_delay = 100
-let g:lsp_diagnostics_virtual_text_insert_mode_enabled = 1
 let g:lsp_diagnostics_virtual_text_align = "right"
 
 function! s:on_lsp_buffer_enabled() abort
@@ -252,6 +253,15 @@ augroup lsp_install
 	autocmd User EasyMotionPromptEnd call lsp#enable_diagnostics_for_buffer()<CR>
 augroup END
 
+" 補完ウィンドウ操作
+" up/down では候補を選択しても即座に挿入されずCRで確定する必要があるので、
+" C-n/p に置き換えて候補選択と同時に挿入されるようにする。
+imap <silent> <expr> <Up>    pumvisible() ? "\<C-p>" : "\<Up>"
+imap <silent> <expr> <Down>  pumvisible() ? "\<C-n>" : "\<Down>"
+imap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+imap <silent> <expr> <CR> pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
+
 " Easymotion (inline motion only)
 let g:EasyMotion_keys = 'aeniyopukhtscrldmbfvqxz'
 let g:EasyMotion_smartcase = 1
@@ -279,6 +289,3 @@ let g:sandwich_no_default_key_mappings = 1
 " xmap gsd <Plug>(sandwich-delete)
 " nmap gsr <Plug>(sandwich-replace-auto)
 " xmap gsr <Plug>(sandwich-replace)
-
-" Help
-set helplang=ja
