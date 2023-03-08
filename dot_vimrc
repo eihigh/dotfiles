@@ -159,7 +159,7 @@ augroup END
 function! Stl_fenc() abort
 	return &fenc == "utf-8" ? "" : "[".&fenc."] "
 endfunction
-set statusline=\ %m\ %=%{Stl_fenc()}%LL\ %<%f\ 
+set statusline=\ %m\ %=%{Stl_fenc()}\ %<%f\ 
 
 " # プラグイン
 
@@ -206,6 +206,8 @@ Plug 'cocopon/vaffle.vim'
 
 " パッシブ拡張
 Plug 'wellle/context.vim'
+
+Plug 'obcat/vim-sclow'
 
 " 言語
 Plug 'prabirshrestha/vim-lsp'
@@ -311,6 +313,9 @@ let g:sandwich_no_default_key_mappings = 1
 " xmap gsd <Plug>(sandwich-delete)
 " nmap gsr <Plug>(sandwich-replace-auto)
 " xmap gsr <Plug>(sandwich-replace)
+
+" Scrollbar
+hi link SclowSbar StatusLine
 
 function Eatchar(char)
 	let c = nr2char(getchar(0))
