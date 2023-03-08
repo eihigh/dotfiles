@@ -311,3 +311,8 @@ let g:sandwich_no_default_key_mappings = 1
 " xmap gsd <Plug>(sandwich-delete)
 " nmap gsr <Plug>(sandwich-replace-auto)
 " xmap gsr <Plug>(sandwich-replace)
+
+function Eatchar(char)
+	let c = nr2char(getchar(0))
+	return (c =~ a:char) ? '' : c
+endfunction
