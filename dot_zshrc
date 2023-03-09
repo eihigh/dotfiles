@@ -68,6 +68,10 @@ PROMPT2='[%n]> '
 # ========================================
 # Functions
 # ========================================
+chpwd() {
+	ll
+}
+
 update() {
 	chezmoi update
 	brew upgrade
