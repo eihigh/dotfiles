@@ -198,6 +198,8 @@ Plug 'tyru/caw.vim'
 
 Plug 'machakann/vim-sandwich'
 
+Plug 'cohama/lexima.vim'
+
 " ファイラ / セレクタ
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
