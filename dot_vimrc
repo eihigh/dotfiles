@@ -329,7 +329,9 @@ function Eatchar(char)
 endfunction
 
 " Vaffle
+let g:vaffle_auto_cd = 1
 let g:vaffle_show_hidden_files = 1
+nnoremap <C-f> :<C-u>e .<CR>
 function! s:init_vaffle() abort
 	nnoremap <buffer> l <Nop>
 	nnoremap <buffer> s <Plug>(vaffle-open-current)
