@@ -327,3 +327,29 @@ function Eatchar(char)
 	let c = nr2char(getchar(0))
 	return (c =~ a:char) ? '' : c
 endfunction
+
+" Vaffle
+let g:vaffle_show_hidden_files = 1
+function! s:init_vaffle() abort
+	nnoremap <buffer> l <Nop>
+	nnoremap <buffer> s <Plug>(vaffle-open-current)
+	nnoremap <buffer> t j
+	nnoremap <buffer> r k
+	nnoremap <buffer> gr <Plug>(vaffle-rename-selected)
+endfunction
+
+augroup vimrc_vaffle
+	autocmd!
+	autocmd FileType vaffle call s:init_vaffle()
+augroup END
+
+" Filetype Go
+function! s:init_go() abort
+	abbrev <buffer> e~ err != nil {<CR>
+	abbrev <buffer> a~ append(<C-R>=Eatchar('\s')<CR>
+endfunction
+
+augroup vimrc
+	autocmd!
+	autocmd FileType go call s:init_go()
+augroup END
