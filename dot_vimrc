@@ -99,27 +99,27 @@ nnoremap \| :<C-u>vsplit<CR>
 
 " ウィンドウ入れ替え
 " https://gist.github.com/orther/916584
-function! s:swapwindows() abort
-	if !exists("g:swapsrcwin")
-		let g:swapsrcwin = winnr()
-		echo "Marked #" . g:swapsrcwin . " for swap"
-	else
-		let l:dstwin = winnr()
-		let l:dstbuf = bufnr('%')
-		if g:swapsrcwin == l:dstwin
-			echo "Unmarked #" . g:swapsrcwin
-		else
-			exe g:swapsrcwin . "wincmd w"
-			let l:srcbuf = bufnr('%')
-			exe 'hide buf' l:dstbuf
-			exe l:dstwin . "wincmd w"
-			exe 'hide buf' l:srcbuf
-			echo "Windows swapped"
-		endif
-
-		unlet g:swapsrcwin
-	endif
-endfunction
+" function! s:swapwindows() abort
+" 	if !exists("g:swapsrcwin")
+" 		let g:swapsrcwin = winnr()
+" 		echo "Marked #" . g:swapsrcwin . " for swap"
+" 	else
+" 		let l:dstwin = winnr()
+" 		let l:dstbuf = bufnr('%')
+" 		if g:swapsrcwin == l:dstwin
+" 			echo "Unmarked #" . g:swapsrcwin
+" 		else
+" 			exe g:swapsrcwin . "wincmd w"
+" 			let l:srcbuf = bufnr('%')
+" 			exe 'hide buf' l:dstbuf
+" 			exe l:dstwin . "wincmd w"
+" 			exe 'hide buf' l:srcbuf
+" 			echo "Windows swapped"
+" 		endif
+" 
+" 		unlet g:swapsrcwin
+" 	endif
+" endfunction
 
 noremap - :<C-u>call <SID>swapwindows()<CR>
 
@@ -192,6 +192,7 @@ Plug 'andymass/vim-matchup'
 
 Plug 'kana/vim-textobj-user'
 Plug 'sgur/vim-textobj-parameter'
+Plug 'kana/vim-textobj-indent'
 
 " テキスト編集
 Plug 'tyru/caw.vim'
@@ -232,8 +233,11 @@ set termguicolors
 colorscheme aomi-grayscale
 
 " CtrlP
-nmap <Space><Space> :<C-u>CtrlPMRU<CR>
-nmap ,q :<C-u>CtrlPQuickfix<CR>
+nmap , :<C-u>CtrlPMRU<CR>
+" nmap ,q :<C-u>CtrlPQuickfix<CR>
+
+" com! -bar CtrlPGhq call ctrlp#init(ctrlp#ghq#id())
+" nmap <silent> <Space> :<C-u>call ctrlp#init(ctrlp#commands#id())<CR>
 
 " Language Server
 " なるべく vim-lsp の README に倣う
@@ -266,7 +270,7 @@ function! s:on_lsp_buffer_enabled() abort
 	" nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
 	" nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 	nnoremap gq :<C-u>LspStopServer<CR>
-	nmap <buffer> <expr> gQ lsp#disable()
+	nmap <buffer> gQ :<C-u>call lsp#disable()<CR>
 
 	" gofmt & goimports
 	autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
