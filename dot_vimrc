@@ -345,7 +345,7 @@ augroup END
 
 " Filetype Go
 function! s:init_go() abort
-	abbrev <buffer> e~ err != nil {
+	abbrev <buffer> e~ err != nil
 	abbrev <buffer> a~ append(<C-R>=Eatchar('\s')<CR>
 endfunction
 
