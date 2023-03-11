@@ -13,8 +13,8 @@ let s:none      = "NONE"
 let s:black     = "#0d1117"
 let s:deep      = "#171a1f"
 let s:dull      = "#40444a"
-let s:gray      = "#69727a"
-let s:semiwhite = "#8b949e"
+let s:gray      = "#626b72"
+let s:semiwhite = "#9aa2ab"
 let s:white     = "#c9d1d9"
 
 let s:bg_none      = " " .s:vmode ."bg=" .s:none
