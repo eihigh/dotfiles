@@ -311,14 +311,13 @@ map g# <Plug>(asterisk-gz#)
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
-" map gs <Nop>
-" nmap gsa <Plug>(sandwich-add)
-" xmap gsa <Plug>(sandwich-add)
-" omap gsa <Plug>(sandwich-add)
-" nmap gsd <Plug>(sandwich-delete-auto)
-" xmap gsd <Plug>(sandwich-delete)
-" nmap gsr <Plug>(sandwich-replace-auto)
-" xmap gsr <Plug>(sandwich-replace)
+nmap ;a <Plug>(sandwich-add)
+xmap ;a <Plug>(sandwich-add)
+omap ;a <Plug>(sandwich-add)
+nmap ;d <Plug>(sandwich-delete-auto)
+xmap ;d <Plug>(sandwich-delete)
+nmap ;r <Plug>(sandwich-replace-auto)
+xmap ;r <Plug>(sandwich-replace)
 
 " Scrollbar
 hi link SclowSbar StatusLine
