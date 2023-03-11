@@ -157,9 +157,9 @@ augroup END
 " ステータスラインをシュッとさせる
 " utf-8 以外の注意すべきエンコードなら強調する
 function! Stl_fenc() abort
-	return &fenc == "utf-8" ? "" : "[".&fenc."] "
+	return &fenc == "utf-8" ? "" : "[".&fenc."]"
 endfunction
-set statusline=\ %m\ %=%{Stl_fenc()}\ %<%f\ 
+set statusline=\ %m%=%<%{Stl_fenc()}\ %f\ 
 
 " # プラグイン
 
@@ -282,6 +282,9 @@ augroup lsp_install
 	autocmd User EasyMotionPromptBegin call lsp#disable_diagnostics_for_buffer()<CR>
 	autocmd User EasyMotionPromptEnd call lsp#enable_diagnostics_for_buffer()<CR>
 augroup END
+
+" CtrlP
+nnoremap <Space> :<C-u>call ctrlp#init(ctrlp#commands#id())<CR>
 
 " 補完ウィンドウ操作
 " up/down では候補を選択しても即座に挿入されずCRで確定する必要があるので、
