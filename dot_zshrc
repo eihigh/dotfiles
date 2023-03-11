@@ -91,6 +91,11 @@ cd_recents() {
 	fi
 }
 
+select_history() {
+	BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER")
+	CURSOR=$#BUFFER
+}
+
 # ========================================
 # Operations / Bindings
 # ========================================
@@ -113,4 +118,6 @@ bindkey -e
 zle -N       cd_up
 bindkey '^U' cd_up
 zle -N       cd_recents
-bindkey '^T' cd_recents
+bindkey '^X' cd_recents
+zle -N       select_history
+bindkey '^R' select_history
