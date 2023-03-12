@@ -26,6 +26,8 @@ function! s:basic_settings() abort
 	xnoremap r gk
 	xnoremap s l
 
+	noremap l F
+
 	" ビジュアル
 	nnoremap e v
 	nnoremap n V
@@ -59,7 +61,7 @@ function! s:basic_settings() abort
 
 	" クイックマーク
 	nnoremap m mM
-	nnoremap k `Mzz
+	nnoremap ` `Mzz
 
 	" ターミナルを開く
 	" <Esc> でターミナルノーマルモードへ遷移
@@ -317,7 +319,8 @@ function! s:on_lsp_buffer_enabled() abort
 	" 独自のキーマップ
 	" TODO: <Plug>(lsp-code-action) は nmap のみだがおそらく
 	" vmap もデフォルトで存在すべき
-	nmap <buffer> gr <plug>(lsp-rename)
+	" lens と action 混ぜて候補に表示したい気もする
+	nmap <buffer> gn <plug>(lsp-rename)
 	nmap <buffer> ga <plug>(lsp-code-lens)
 	nmap <buffer> gA <plug>(lsp-code-action)
 	xnoremap <buffer> gA :LspCodeAction<CR>
@@ -336,7 +339,7 @@ function! s:filetype_vaffle() abort
 	nnoremap <buffer> r k
 
 	" リネームを LspRename に合わせる
-	nnoremap <buffer> gr <Plug>(vaffle-rename-selected)
+	nnoremap <buffer> gn <Plug>(vaffle-rename-selected)
 endfunction
 
 function! s:filetype_go() abort
