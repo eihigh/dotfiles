@@ -26,8 +26,6 @@ function! s:basic_settings() abort
 	xnoremap r gk
 	xnoremap s l
 
-	noremap l F
-
 	" ビジュアル
 	nnoremap e v
 	nnoremap n V
@@ -59,10 +57,6 @@ function! s:basic_settings() abort
 	nnoremap j :<C-u>w<CR>
 	nnoremap v :<C-u>q<CR>
 
-	" クイックマーク
-	nnoremap m mM
-	nnoremap ` `Mzz
-
 	" ターミナルを開く
 	" <Esc> でターミナルノーマルモードへ遷移
 	" 代わりに <C-w> 連打で <Esc> 入力
@@ -87,6 +81,10 @@ function! s:basic_settings() abort
 	" IME切り替えで生じるゴミの無視
 	noremap! <S-F5> <nop>
 	noremap! <S-F6> <nop>
+
+	" クイックマーク
+	nnoremap m mM
+	nnoremap ` `Mzz
 
 	" yank 範囲
 	nnoremap Y y$
