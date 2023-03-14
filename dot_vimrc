@@ -209,7 +209,7 @@ function! s:plugin_settings() abort
 	Plug 'tacahiroy/ctrlp-funky'
 
 	" パッシブ拡張
-	" Plug 'wellle/context.vim'
+	Plug 'wellle/context.vim'
 	Plug 'obcat/vim-sclow'
 
 	" 言語
@@ -218,6 +218,8 @@ function! s:plugin_settings() abort
 	Plug 'prabirshrestha/asyncomplete.vim'
 	Plug 'prabirshrestha/asyncomplete-lsp.vim'
 	Plug 'mattn/ctrlp-lsp'
+
+	Plug 'fatih/vim-go'
 
 	" 小回り
 	Plug 'vim-jp/vimdoc-ja'
@@ -293,6 +295,9 @@ function! s:plugin_settings() abort
 	let g:lsp_diagnostics_virtual_text_delay = 100
 	let g:lsp_diagnostics_virtual_text_align = "right"
 
+	" Vim-go
+	let g:go_def_mapping_enabled = 0
+
 	" Vaffle
 	let g:vaffle_auto_cd = 1
 	let g:vaffle_show_hidden_files = 1
@@ -345,6 +350,8 @@ endfunction
 function! s:filetype_go() abort
 	" Snippet にするか迷う
 	abbrev <buffer> e~ err != nil
+
+	noremap <buffer> gt :<C-u>GoTest<CR>
 endfunction
 
 call s:main()
