@@ -209,7 +209,7 @@ function! s:plugin_settings() abort
 	Plug 'tacahiroy/ctrlp-funky'
 
 	" パッシブ拡張
-	Plug 'wellle/context.vim'
+	" Plug 'wellle/context.vim'
 	Plug 'obcat/vim-sclow'
 
 	" 言語
@@ -246,16 +246,15 @@ function! s:plugin_settings() abort
 	" CtrlP
 	nnoremap ,       :<C-u>CtrlPMRU<CR>
 	nnoremap <Space> :<C-u>call ctrlp#init(ctrlp#commands#id())<CR>
-	" com! -bar CtrlPGhq call ctrlp#init(ctrlp#ghq#id())
+	com! -bar CtrlPGhq call ctrlp#init(ctrlp#ghq#id())
 
 	" Asyncomplete
 	imap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 	imap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-	" 改行で確定するだけでなく実際に改行を挿入する
-	imap <silent> <expr> <CR> pumvisible() ? asyncomplete#close_popup() . "\<CR>" : "\<CR>"
+	imap <silent> <expr> <CR>    pumvisible() ? asyncomplete#close_popup() : "\<CR>"
 
 	" Easymotion (inline motion only)
-	let g:EasyMotion_keys = 'aeniyopukhtscrldmbfvqxz'
+	let g:EasyMotion_keys = 'aeniyopuk,;?-_/'
 	let g:EasyMotion_smartcase = 1
 	map l <Plug>(easymotion-sl)
 
