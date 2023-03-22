@@ -112,7 +112,7 @@ function! s:basic_settings() abort
 
 	" テキスト編集
 	set backspace=eol,indent,start
-	set tabstop=4
+	set tabstop=3
 	set shiftwidth=2
 	set smartindent
 
