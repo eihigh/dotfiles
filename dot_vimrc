@@ -112,7 +112,7 @@ function! s:basic_settings() abort
 
 	" テキスト編集
 	set backspace=eol,indent,start
-	set tabstop=2
+	set tabstop=4
 	set shiftwidth=2
 	set smartindent
 
@@ -209,7 +209,7 @@ function! s:plugin_settings() abort
 	Plug 'tacahiroy/ctrlp-funky'
 
 	" パッシブ拡張
-	Plug 'wellle/context.vim'
+	" Plug 'wellle/context.vim'
 	Plug 'obcat/vim-sclow'
 
 	" 言語
@@ -252,6 +252,8 @@ function! s:plugin_settings() abort
 
 	" Lexiv
 	let g:lexiv_no_default_key_mappings = 1
+	inoremap <expr> { lexiv#paren_open('{')
+	inoremap <expr> } lexiv#paren_close('}')
 
 	" Asyncomplete
 	inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
