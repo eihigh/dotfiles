@@ -60,7 +60,7 @@ zstyle ':vcs_info:*' actionformats '*%b|%a'
 precmd () { vcs_info }
 
 PROMPT="
-%(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{$fg[yellow]%}%(1j.[%j] .)%{${fg[yellow]}%}%~ %{${fg[cyan]}%}\$vcs_info_msg_0_%{${reset_color}%} %n@%m
+%(?.%{$fg[green]%}.%{$fg[cyan]%}){\__/} %{$fg[yellow]%}%(1j.[%j] .)%{${fg[yellow]}%}%~ %{${fg[cyan]}%}\$vcs_info_msg_0_%{${reset_color}%} %n@${WSL_DISTRO_NAME:-$(hostname)}
 %(?.%{$fg[green]%}.%{$fg[cyan]%})%(?!(*'-')o!(*;-;%)?) $%{${reset_color}%} "
 
 PROMPT2='[%n]> '

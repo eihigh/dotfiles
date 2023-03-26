@@ -219,7 +219,7 @@ function! s:plugin_settings() abort
 	Plug 'prabirshrestha/asyncomplete-lsp.vim'
 	Plug 'mattn/ctrlp-lsp'
 
-	Plug 'fatih/vim-go'
+	" Plug 'fatih/vim-go'
 
 	" 小回り
 	Plug 'vim-jp/vimdoc-ja'
