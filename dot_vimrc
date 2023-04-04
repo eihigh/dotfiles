@@ -183,6 +183,7 @@ function! s:plugin_settings() abort
 	call plug#begin('~/.vim/plugged')
 
 	" カラースキーム
+	Plug 'eihigh/vim-aomi-grayscale'
 	Plug 'chriskempson/base16-vim'
 	Plug 'cocopon/iceberg.vim'
 
