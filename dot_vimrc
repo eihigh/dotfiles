@@ -241,10 +241,9 @@ function! s:plugin_settings() abort
 	" ----------
 
 	" カラースキーム / ハイライト
-	set background=dark
+	set background=light
 	set termguicolors
 	colorscheme aomi-grayscale
-	hi Normal guibg=NONE
 
 	" CtrlP
 	nnoremap ,       :<C-u>CtrlPMRU<CR>
