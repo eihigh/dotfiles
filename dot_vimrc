@@ -220,7 +220,7 @@ function! s:plugin_settings() abort
 	Plug 'prabirshrestha/asyncomplete-lsp.vim'
 	Plug 'mattn/ctrlp-lsp'
 
-	" Plug 'fatih/vim-go'
+	Plug 'fatih/vim-go'
 
 	" 小回り
 	Plug 'vim-jp/vimdoc-ja'
@@ -293,6 +293,7 @@ function! s:plugin_settings() abort
 	let g:lsp_diagnostics_highlights_insert_mode_enabled = 1
 	let g:lsp_diagnostics_highlights_delay = 100
 	let g:lsp_diagnostics_signs_enabled = 0
+	let g:lsp_document_code_action_signs_enabled = 0
 	let g:lsp_diagnostics_virtual_text_enabled = 1
 	let g:lsp_diagnostics_virtual_text_delay = 100
 	let g:lsp_diagnostics_virtual_text_align = "right"
@@ -331,11 +332,10 @@ function! s:on_lsp_buffer_enabled() abort
 	nmap <buffer> ga <plug>(lsp-code-lens)
 	nmap <buffer> gA <plug>(lsp-code-action)
 	xnoremap <buffer> gA :LspCodeAction<CR>
-	nnoremap <buffer> gq :<C-u>LspStopServer<CR>
 	nnoremap <buffer> gQ :<C-u>LspStopServer<CR>:<C-u>call lsp#disable()<CR>
 
 	" gofmt & goimports
-	autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
+	" autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
 endfunction
 
 function! s:filetype_vaffle() abort
@@ -347,6 +347,7 @@ function! s:filetype_vaffle() abort
 
 	" リネームを LspRename に合わせる
 	nnoremap <buffer> gn <Plug>(vaffle-rename-selected)
+	nnoremap <buffer> gq :<C-u>call go#lsp#Restart()
 endfunction
 
 function! s:filetype_go() abort
