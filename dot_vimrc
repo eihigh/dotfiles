@@ -157,7 +157,7 @@ function! s:basic_settings() abort
 	function! Stl_fenc() abort
 		return &fenc == "utf-8" ? "" : "[".&fenc."]"
 	endfunction
-	set statusline=\ %m%=%{Stl_fenc()}\ %<%f\ 
+	set statusline=\ %m%=%{Stl_fenc()}\ %<%F\ 
 
 endfunction
 
@@ -241,10 +241,11 @@ function! s:plugin_settings() abort
 	" ----------
 
 	" カラースキーム / ハイライト
-	set background=light
+	set background=dark
 	set termguicolors
 	colorscheme aomi-grayscale
 
+	hi Normal guibg=NONE
 	hi link EndOfBuffer Ignore
 
 	" CtrlP
