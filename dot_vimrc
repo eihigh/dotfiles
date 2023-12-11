@@ -17,28 +17,26 @@ function! s:basic_settings() abort
 	" ----------
 
 	" 移動
-	nnoremap h h
-	nnoremap t gj
-	nnoremap r gk
-	nnoremap s l
-	xnoremap h h
-	xnoremap t gj
-	xnoremap r gk
-	xnoremap s l
+	" nnoremap h h
+	" nnoremap t gj
+	" nnoremap r gk
+	" nnoremap s l
+	" xnoremap h h
+	" xnoremap t gj
+	" xnoremap r gk
+	" xnoremap s l
 
 	" ビジュアル
 	nnoremap e v
-	nnoremap n V
 	nnoremap E <C-v>
 	xnoremap e v
-	xnoremap n V
 	xnoremap E <C-v>
 
 	" ウィンドウ移動
-	nnoremap <Left>  <C-w>h
-	nnoremap <Down>  <C-w>j
-	nnoremap <Up>    <C-w>k
-	nnoremap <Right> <C-w>l
+	" nnoremap <Left>  <C-w>h
+	" nnoremap <Down>  <C-w>j
+	" nnoremap <Up>    <C-w>k
+	" nnoremap <Right> <C-w>l
 
 	" ウィンドウ分割
 	nnoremap \| :<C-u>vsplit<CR>
