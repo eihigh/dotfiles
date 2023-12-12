@@ -17,20 +17,15 @@ function! s:basic_settings() abort
 	" ----------
 
 	" 移動
-	" nnoremap h h
-	" nnoremap t gj
-	" nnoremap r gk
-	" nnoremap s l
-	" xnoremap h h
-	" xnoremap t gj
-	" xnoremap r gk
-	" xnoremap s l
+	nnoremap t gj
+	nnoremap l gk
+	nnoremap s l
+	xnoremap t gj
+	xnoremap l gk
+	xnoremap s l
 
-	" ビジュアル
-	nnoremap e v
-	nnoremap E <C-v>
-	xnoremap e v
-	xnoremap E <C-v>
+	" 行選択
+	nnoremap e V
 
 	" ウィンドウ移動
 	" nnoremap <Left>  <C-w>h
@@ -42,10 +37,6 @@ function! s:basic_settings() abort
 	nnoremap \| :<C-u>vsplit<CR>
 
 	" 検索
-	nnoremap ( N
-	nnoremap ) n
-	xnoremap ( N
-	xnoremap ) n
 	nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
 
 	" Grep
@@ -53,7 +44,6 @@ function! s:basic_settings() abort
 
 	" 保存/終了ショートカット
 	nnoremap j :<C-u>w<CR>
-	nnoremap v :<C-u>q<CR>
 
 	" ターミナルを開く
 	" <Esc> でターミナルノーマルモードへ遷移
@@ -264,7 +254,7 @@ function! s:plugin_settings() abort
 	" Easymotion (inline motion only)
 	let g:EasyMotion_keys = 'aeniyopuk,;?-_/'
 	let g:EasyMotion_smartcase = 1
-	map l <Plug>(easymotion-sl)
+	" map l <Plug>(easymotion-sl)
 
 	" Edgemotion
 	map T <Plug>(edgemotion-j)
