@@ -17,21 +17,28 @@ function! s:basic_settings() abort
 	" ----------
 
 	" 移動
-	nnoremap t gj
-	nnoremap l gk
-	nnoremap s l
-	xnoremap t gj
-	xnoremap l gk
-	xnoremap s l
+	nnoremap <down> gj
+	nnoremap <up>   gk
+	xnoremap <down> gj
+	xnoremap <up>   gk
 
-	" 行選択
-	nnoremap e V
+	" ge 稀に使うけど潰してしまったので代わりを用意
+	" スクロールは shift+arrow でできる
+	nnoremap <c-b> ge
+	xnoremap <c-b> ge
+
+	" Visual
+	nnoremap e v
+	nnoremap E V
+	nnoremap <c-e> <c-v>
+	nnoremap ge gv
+	xnoremap e v
+	xnoremap E V
+	xnoremap <c-e> <c-v>
+	xnoremap ge gv
 
 	" ウィンドウ移動
-	" nnoremap <Left>  <C-w>h
-	" nnoremap <Down>  <C-w>j
-	" nnoremap <Up>    <C-w>k
-	" nnoremap <Right> <C-w>l
+	" マウスで代用
 
 	" ウィンドウ分割
 	nnoremap \| :<C-u>vsplit<CR>
@@ -56,6 +63,9 @@ function! s:basic_settings() abort
 	set scrolloff=2
 	noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
 
+	" statusline常設
+	set laststatus=2
+
 	" 絶対に手放せない abbreviation
 	abbrev ret return
 
@@ -70,14 +80,9 @@ function! s:basic_settings() abort
 
 	" クイックマーク
 	nnoremap m mM
-	nnoremap ` `Mzz
-
-	" クイックマクロ
-	nnoremap @ @q
-
-	" 行内検索
-	nnoremap f /\V\%<c-r>=line('.')<cr>l
-	nnoremap F ?\V\%<c-r>=line('.')<cr>l
+	nnoremap M `M
+	xnoremap m mM
+	xnoremap M `M
 
 	" yank 範囲
 	nnoremap Y y$
@@ -85,12 +90,6 @@ function! s:basic_settings() abort
 	" 一文字削除でレジスタを消費しない
 	nnoremap <BS> "_xh
 	nnoremap x    "_s
-
-	" ジャンプ後カーソルを中央に
-	nnoremap g; g;zz
-	nnoremap g, g,zz
-	xnoremap g; g;zz
-	xnoremap g, g,zz
 
 	" エンコード
 	set encoding=utf-8
@@ -184,6 +183,7 @@ function! s:plugin_settings() abort
 	Plug 'haya14busa/vim-easymotion'
 	Plug 'haya14busa/vim-edgemotion'
 	Plug 'haya14busa/vim-asterisk'
+	Plug 'rhysd/clever-f.vim'
 	Plug 'kana/vim-textobj-user'
 	Plug 'sgur/vim-textobj-parameter'
 	Plug 'kana/vim-textobj-indent'
