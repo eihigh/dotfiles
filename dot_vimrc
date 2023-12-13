@@ -62,17 +62,22 @@ function! s:basic_settings() abort
 	" 標準の上書き、調整
 	" ----------
 
+	set mouse=a
+
 	" インサート中移動で undo block を中断しない
 	inoremap <Left>  <C-g>U<Left>
 	inoremap <Right> <C-g>U<Right>
 
-	" IME切り替えで生じるゴミの無視
-	noremap! <S-F5> <nop>
-	noremap! <S-F6> <nop>
-
 	" クイックマーク
 	nnoremap m mM
 	nnoremap ` `Mzz
+
+	" クイックマクロ
+	nnoremap @ @q
+
+	" 行内検索
+	nnoremap f /\V\%<c-r>=line('.')<cr>l
+	nnoremap F ?\V\%<c-r>=line('.')<cr>l
 
 	" yank 範囲
 	nnoremap Y y$
