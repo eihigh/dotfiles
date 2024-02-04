@@ -30,7 +30,7 @@ function! s:basic_settings() abort
 	nnoremap <C-g> :<C-u>vimgrep '' **<Left><Left><Left><Left>
 
 	" 保存ショートカット
-	nnoremap S :<C-u>w<CR>
+	nnoremap _ :<C-u>w<CR>
 
 	" ターミナルを開く
 	" <Esc> でターミナルノーマルモードへ遷移
