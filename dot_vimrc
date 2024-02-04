@@ -1,8 +1,3 @@
-" 基本方針
-" - デフォルト挙動を大きく変えすぎないようにする
-" - 選択モード関連は潰す
-" - Ctrl キーは特殊なキーが多いのでなるべく避ける
-
 function! s:main() abort
 	call s:basic_settings()
 	if s:use_plugin()
@@ -22,21 +17,6 @@ function! s:basic_settings() abort
 	xnoremap <down> gj
 	xnoremap <up>   gk
 
-	" ge 稀に使うけど潰してしまったので代わりを用意
-	" スクロールは shift+arrow でできる
-	nnoremap <c-b> ge
-	xnoremap <c-b> ge
-
-	" Visual
-	nnoremap e v
-	nnoremap E V
-	nnoremap <c-e> <c-v>
-	nnoremap ge gv
-	xnoremap e v
-	xnoremap E V
-	xnoremap <c-e> <c-v>
-	xnoremap ge gv
-
 	" ウィンドウ移動
 	" マウスで代用
 
@@ -49,9 +29,8 @@ function! s:basic_settings() abort
 	" Grep
 	nnoremap <C-g> :<C-u>vimgrep '' **<Left><Left><Left><Left>
 
-	" 保存/終了ショートカット
-	nnoremap s :<C-u>w<CR>
-	nnoremap k :<C-u>q<CR>
+	" 保存ショートカット
+	nnoremap _ :<C-u>w<CR>
 
 	" ターミナルを開く
 	" <Esc> でターミナルノーマルモードへ遷移
