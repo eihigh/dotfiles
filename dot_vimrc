@@ -164,6 +164,7 @@ function! s:plugin_settings() abort
 	Plug 'kana/vim-textobj-user'
 	Plug 'sgur/vim-textobj-parameter'
 	Plug 'kana/vim-textobj-indent'
+	Plug 'hrsh7th/vim-searchx'
 	" matchup - たまに statusline が壊れるので調査
 	" Plug 'andymass/vim-matchup'
 
@@ -227,6 +228,23 @@ function! s:plugin_settings() abort
 	let g:lexiv_no_default_key_mappings = 1
 	inoremap <expr> { lexiv#paren_open('{')
 	inoremap <expr> } lexiv#paren_close('}')
+
+	" Searchx
+	nnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
+	xnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
+	let g:searchx = {}
+	let g:searchx.auto_accept = v:true
+	let g:searchx.scrolloff = &scrolloff
+	let g:searchx.scrolltime = 500
+	let g:searchx.nohlsearch = {}
+	let g:searchx.nohlsearch.jump = v:true
+	let g:searchx.markers = split('HTSRMFGVXBDLCWZK', '.\zs')
+	function g:searchx.convert(input) abort
+		if a:input !~# '\k'
+			return '\V' .. a:input
+		endif
+		return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
+	endfunction
 
 	" Asyncomplete
 	inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
