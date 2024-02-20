@@ -165,7 +165,7 @@ function! s:plugin_settings() abort
 	Plug 'haya14busa/vim-easymotion'
 	Plug 'haya14busa/vim-edgemotion'
 	Plug 'haya14busa/vim-asterisk'
-	Plug 'rhysd/clever-f.vim'
+	" Plug 'rhysd/clever-f.vim'
 	Plug 'kana/vim-textobj-user'
 	Plug 'sgur/vim-textobj-parameter'
 	Plug 'kana/vim-textobj-indent'
@@ -225,7 +225,7 @@ function! s:plugin_settings() abort
 	hi link EndOfBuffer Ignore
 
 	" CtrlP
-	nnoremap <c-p>   :<C-u>CtrlPMRUFiles<CR>
+	nnoremap <c-e>   :<C-u>CtrlPMRUFiles<CR>
 	nnoremap <Space> :<C-u>call ctrlp#init(ctrlp#commands#id())<CR>
 	com! -bar CtrlPGhq call ctrlp#init(ctrlp#ghq#id())
 
