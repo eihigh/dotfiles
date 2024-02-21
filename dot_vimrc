@@ -11,31 +11,21 @@ function! s:basic_settings() abort
 	" 標準にないキーマップ
 	" ----------
 
-	" 移動
-	nnoremap t gk
-	nnoremap s gj
-	nnoremap r l
-	xnoremap t gk
-	xnoremap s gj
-	xnoremap r l
-	onoremap t gk
-	onoremap s gj
-	onoremap r l
-
-	" ウィンドウ移動
-	" マウスで代用
-
-	" ウィンドウ分割
-	nnoremap \| :<C-u>vsplit<CR>
+	" 独自キー配列対応
+	nnoremap ) v
+	xnoremap ) v
+	nnoremap ( V
+	xnoremap ( V
+	nnoremap _ y
+	xnoremap _ y
+	nnoremap __ yy
+	xnoremap __ yy
 
 	" 検索
 	nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
 
 	" Grep
 	nnoremap <C-g> :<C-u>vimgrep '' **<Left><Left><Left><Left>
-
-	nnoremap , V
-	xnoremap , V
 
 	" 保存ショートカット
 	nnoremap <cr> :<C-u>w<CR>
@@ -225,11 +215,13 @@ function! s:plugin_settings() abort
 	hi link EndOfBuffer Ignore
 
 	" CtrlP
+	" TODO: プロジェクト全体検索＋MRUにする
 	nnoremap <c-e>   :<C-u>CtrlPMRUFiles<CR>
 	nnoremap <Space> :<C-u>call ctrlp#init(ctrlp#commands#id())<CR>
 	com! -bar CtrlPGhq call ctrlp#init(ctrlp#ghq#id())
 
 	" Lexiv
+	" {} にのみ適用
 	let g:lexiv_no_default_key_mappings = 1
 	inoremap <expr> { lexiv#paren_open('{')
 	inoremap <expr> } lexiv#paren_close('}')
@@ -243,7 +235,7 @@ function! s:plugin_settings() abort
 	let g:searchx.scrolltime = 500
 	let g:searchx.nohlsearch = {}
 	let g:searchx.nohlsearch.jump = v:true
-	let g:searchx.markers = split('HTSRMFGVXBDLCWZK', '.\zs')
+	let g:searchx.markers = split(' HTSRMFGVXBDLCWZK', '.\zs')
 	function g:searchx.convert(input) abort
 		if a:input !~# '\k'
 			return '\V' .. a:input
@@ -256,15 +248,6 @@ function! s:plugin_settings() abort
 	inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 	inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_expand()
 
-	" Easymotion (inline motion only)
-	let g:EasyMotion_keys = 'aeniyopuk,;?-_/'
-	let g:EasyMotion_smartcase = 1
-	" map l <Plug>(easymotion-sl)
-
-	" Edgemotion
-	map T <Plug>(edgemotion-j)
-	map R <Plug>(edgemotion-k)
-
 	" Asterisk
 	map *  <Plug>(asterisk-z*)
 	map #  <Plug>(asterisk-z#)
@@ -273,13 +256,13 @@ function! s:plugin_settings() abort
 
 	" Sandwich
 	let g:sandwich_no_default_key_mappings = 1
-	nmap ;a <Plug>(sandwich-add)
-	xmap ;a <Plug>(sandwich-add)
-	omap ;a <Plug>(sandwich-add)
-	nmap ;d <Plug>(sandwich-delete-auto)
-	xmap ;d <Plug>(sandwich-delete)
-	nmap ;r <Plug>(sandwich-replace-auto)
-	xmap ;r <Plug>(sandwich-replace)
+	nmap sa <Plug>(sandwich-add)
+	xmap sa <Plug>(sandwich-add)
+	omap sa <Plug>(sandwich-add)
+	nmap sd <Plug>(sandwich-delete-auto)
+	xmap sd <Plug>(sandwich-delete)
+	nmap sr <Plug>(sandwich-replace-auto)
+	xmap sr <Plug>(sandwich-replace)
 
 	" LSP
 	let g:lsp_async_completion = 1
@@ -335,11 +318,8 @@ function! s:on_lsp_buffer_enabled() abort
 endfunction
 
 function! s:filetype_vaffle() abort
-	" 移動キーを hjkl => htrs に合わせる
-	nnoremap <buffer> l <Nop>
-	nnoremap <buffer> s <Plug>(vaffle-open-current)
-	nnoremap <buffer> t j
-	nnoremap <buffer> r k
+	nmap <buffer> <left>  h
+	nmap <buffer> <right> l
 
 	" リネームを LspRename に合わせる
 	nnoremap <buffer> gn <Plug>(vaffle-rename-selected)
