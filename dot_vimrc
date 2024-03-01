@@ -213,10 +213,7 @@ function! s:plugin_settings() abort
 	omap ) <Plug>(edgemotion-j)
 
 	" CtrlP
-	" TODO: プロジェクト全体検索＋MRUにする
-	nnoremap <c-e>   :<C-u>CtrlPMRUFiles<CR>
-	nnoremap <Space> :<C-u>call ctrlp#init(ctrlp#commands#id())<CR>
-	com! -bar CtrlPGhq call ctrlp#init(ctrlp#ghq#id())
+	" TODO
 
 	" Lexiv
 	" {} にのみ適用
@@ -293,6 +290,7 @@ function! s:plugin_settings() abort
 	nnoremap he :<C-u>e .<CR>
 	nnoremap ht :<C-u>terminal<CR>
 	nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
+	nnoremap hr :<C-u>CtrlPMRU<CR>
 
 endfunction
 
@@ -341,6 +339,7 @@ endfunction
 
 function! s:filetype_qf() abort
 	nnoremap <buffer> <CR> <CR>
+	nnoremap <buffer> _ :<C-u>cclose<CR>
 	nnoremap <buffer> o :<C-u>colder<CR>
 	nnoremap <buffer> O :<C-u>cnewer<CR>
 endfunction
