@@ -151,6 +151,7 @@ set nowrap
 set number
 set signcolumn=number
 set helplang=ja
+set termguicolors
 
 " statusline常設
 set laststatus=2
@@ -196,12 +197,6 @@ set statusline=\ %m%=%{Stl_fenc()}\ %<%F\
 " ========================================
 " プラグイン機能の設定
 " ========================================
-
-" カラースキーム / ハイライト
-set background=dark
-set termguicolors
-
-hi link EndOfBuffer Ignore
 
 " CtrlP
 " TODO
@@ -249,7 +244,6 @@ let g:clever_f_smart_case = 1
 let g:clever_f_mark_char_color = 'Search'
 
 " Scrollbar
-hi link SclowSbar StatusLine
 
 " ========================================
 " Autocmd!
@@ -319,5 +313,8 @@ endfunction
 call plug#end()
 
 " プラグイン読み込み後に行う必要のある設定
+set background=light
 colorscheme aomi-grayscale
-hi Normal guibg=NONE
+" hi Normal guibg=NONE
+hi link SclowSbar StatusLine
+hi link EndOfBuffer Ignore
