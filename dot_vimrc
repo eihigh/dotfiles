@@ -1,299 +1,266 @@
-function! s:main() abort
-	call s:basic_settings()
-	if s:use_plugin()
-		call s:plugin_settings()
+" ========================================
+" プラグインのインストール
+" ========================================
+
+call plug#begin('~/.vim/plugged')
+
+" カラースキーム
+Plug 'eihigh/vim-aomi-grayscale'
+Plug 'chriskempson/base16-vim'
+Plug 'cocopon/iceberg.vim'
+
+" モーション / オペレータ
+" Plug 'haya14busa/vim-edgemotion'
+Plug 'jeetsukumaran/vim-indentwise'
+Plug 'haya14busa/vim-asterisk'
+Plug 'rhysd/clever-f.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+Plug 'kana/vim-textobj-indent'
+Plug 'hrsh7th/vim-searchx'
+
+" テキスト編集
+Plug 'tyru/caw.vim'
+Plug 'machakann/vim-sandwich'
+Plug 'eihigh/vim-lexiv'
+
+" ファイラ / セレクタ
+Plug 'mattn/vim-findroot'
+Plug 'cocopon/vaffle.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky'
+
+" パッシブ拡張
+" Plug 'wellle/context.vim'
+Plug 'obcat/vim-sclow'
+
+" 言語
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/ctrlp-lsp'
+
+Plug 'fatih/vim-go'
+
+" 小回り
+Plug 'vim-jp/vimdoc-ja'
+Plug 'Shougo/junkfile.vim'
+
+" ========================================
+" 標準のキーマップの上書き・調整（いくらあってもよいとされている）
+" ========================================
+
+" 検索ハイライト消去
+nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
+
+" <Esc> でターミナルノーマルモードへ遷移
+" 代わりに <C-w> 連打で <Esc> 入力
+tnoremap <Esc>      <C-w>N
+tnoremap <C-w><C-w> <Esc>
+
+" インサート中移動で undo block を中断しない
+inoremap <Left>  <C-g>U<Left>
+inoremap <Right> <C-g>U<Right>
+
+" yank 範囲
+nnoremap Y y$
+
+" 一文字削除でレジスタを消費しない
+nnoremap <BS> "_xh
+nnoremap x    "_s
+
+" Asterisk
+map *  <Plug>(asterisk-z*)
+map #  <Plug>(asterisk-z#)
+map g* <Plug>(asterisk-gz*)
+map g# <Plug>(asterisk-gz#)
+
+" Asyncomplete
+inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_expand()
+
+" ========================================
+" 標準にはない追加のキーマップ（少ないほどよいとされている）
+" ========================================
+
+" 保存ショートカット
+nnoremap <cr> :<C-u>w<CR>
+
+" Quickfix 召喚
+nnoremap _ :<C-u>botright copen<CR>
+
+" z. でカーソル中央固定
+set scrolloff=2
+noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
+
+" Indentwise
+" [- や ]= があるが、デフォルトのまま使う
+
+" Lexiv ({} にのみ適用)
+let g:lexiv_no_default_key_mappings = 1
+inoremap <expr> { lexiv#paren_open('{')
+inoremap <expr> } lexiv#paren_close('}')
+
+" Sandwich
+let g:sandwich_no_default_key_mappings = 1
+nmap sa <Plug>(sandwich-add)
+xmap sa <Plug>(sandwich-add)
+omap sa <Plug>(sandwich-add)
+nmap sd <Plug>(sandwich-delete-auto)
+xmap sd <Plug>(sandwich-delete)
+nmap sr <Plug>(sandwich-replace-auto)
+xmap sr <Plug>(sandwich-replace)
+
+" Searchx
+nnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
+xnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
+
+" これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
+" 仕方なく割り当てるやつ
+nnoremap hh :<C-u>CtrlPMixed<CR>
+nnoremap he :<C-u>exe 'e '.expand('%:h')<CR>
+nnoremap ht :<C-u>botright terminal ++rows=20<CR>
+nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
+nnoremap hr :<C-u>CtrlPMRU<CR>
+
+" ========================================
+" 本体機能の設定
+" ========================================
+
+" エンコード
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,euc-jp,cp932
+
+" 検索
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" テキスト編集
+set backspace=eol,indent,start
+set tabstop=3
+set shiftwidth=3
+set smartindent
+
+" 見た目
+set nowrap
+set number
+set signcolumn=number
+set helplang=ja
+
+" statusline常設
+set laststatus=2
+
+" 挙動
+set autoread
+" set autochdir
+
+" Abbreviation
+abbrev ret return
+
+" マウス
+set mouse=a
+
+" クリップボード
+" TODO
+
+" Esc の遅延解消
+set ttimeoutlen=0
+
+" undo 履歴
+if isdirectory(expand('~/.cache/vim'))
+	set undofile
+	set undodir=~/.cache/vim/
+endif
+
+" NORMAL/INSERT でカーソル形状を変更
+if &term =~ 'xterm' || &term == 'win32'
+	let &t_SI = "\e[5 q"
+	let &t_EI = "\e[2 q"
+else
+	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" ステータスラインをシュッとさせる
+" utf-8 以外の注意すべきエンコードなら強調する
+function! Stl_fenc() abort
+	return &fenc == "utf-8" ? "" : "[".&fenc."]"
+endfunction
+set statusline=\ %m%=%{Stl_fenc()}\ %<%F\ 
+
+" ========================================
+" プラグイン機能の設定
+" ========================================
+
+" カラースキーム / ハイライト
+set background=dark
+set termguicolors
+
+hi link EndOfBuffer Ignore
+
+" CtrlP
+" TODO
+
+" Searchx
+let g:searchx = {}
+let g:searchx.auto_accept = v:true
+let g:searchx.scrolloff = &scrolloff
+let g:searchx.scrolltime = 500
+let g:searchx.nohlsearch = {}
+let g:searchx.nohlsearch.jump = v:true
+let g:searchx.markers = split(' HTSRMFGVXBDLCWZK', '.\zs')
+function g:searchx.convert(input) abort
+	if a:input !~# '\k'
+		return '\V' .. a:input
 	endif
+	return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
 endfunction
 
-" Vim のバージョンに係わらず欲しい設定
-function! s:basic_settings() abort
+" LSP
+let g:lsp_async_completion = 1
+let g:lsp_document_highlight_enabled = 0
+let g:lsp_diagnostics_highlights_enabled = 1
+let g:lsp_diagnostics_highlights_insert_mode_enabled = 1
+let g:lsp_diagnostics_highlights_delay = 100
+let g:lsp_diagnostics_signs_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_diagnostics_virtual_text_enabled = 1
+let g:lsp_diagnostics_virtual_text_delay = 100
+let g:lsp_diagnostics_virtual_text_align = "right"
 
-	" 標準にないキーマップ
-	" ----------
+" vim-go
+" LSPに寄せるのでキーマップ無効
+let g:go_def_mapping_enabled = 0
 
-	" 検索
-	nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
+" Vaffle
+let g:vaffle_show_hidden_files = 1
 
-	" Grep
+" findroot
+let g:findroot_not_for_subdir = 0
 
-	" 保存ショートカット
-	nnoremap <cr> :<C-u>w<CR>
+" clever-f
+let g:clever_f_across_no_line = 1
+let g:clever_f_smart_case = 1
+let g:clever_f_mark_char_color = 'Search'
 
-	" ターミナルを開く
-	" <Esc> でターミナルノーマルモードへ遷移
-	" 代わりに <C-w> 連打で <Esc> 入力
-	nnoremap <C-t> :<C-u>botright terminal ++rows=20<CR>
-	tnoremap <Esc>      <C-w>N
-	tnoremap <C-w><C-w> <Esc>
+" Scrollbar
+hi link SclowSbar StatusLine
 
-	" z. でカーソル中央固定
-	set scrolloff=2
-	noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
+" ========================================
+" Autocmd!
+" ========================================
+autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+autocmd! FileType vaffle call s:filetype_vaffle()
+autocmd! FileType go call s:filetype_go()
+autocmd! FileType qf call s:filetype_qf()
 
-	" statusline常設
-	set laststatus=2
-
-	" 絶対に手放せない abbreviation
-	abbrev ret return
-
-	" 標準の上書き、調整
-	" ----------
-
-	set mouse=a
-
-	" インサート中移動で undo block を中断しない
-	inoremap <Left>  <C-g>U<Left>
-	inoremap <Right> <C-g>U<Right>
-
-	" yank 範囲
-	nnoremap Y y$
-
-	" 一文字削除でレジスタを消費しない
-	nnoremap <BS> "_xh
-	nnoremap x    "_s
-
-	" エンコード
-	set encoding=utf-8
-	set fileencoding=utf-8
-	set fileencodings=utf-8,euc-jp,cp932
-
-	" 検索
-	set hlsearch
-	set incsearch
-	set ignorecase
-	set smartcase
-
-	" テキスト編集
-	set backspace=eol,indent,start
-	set tabstop=3
-	set shiftwidth=3
-	set smartindent
-
-	" 見た目
-	set nowrap
-	set number
-	set signcolumn=number
-	set helplang=ja
-
-	" 挙動
-	set autoread
-	set autochdir
-
-	" Esc の遅延解消
-	set ttimeoutlen=0
-
-	" undo 履歴
-	if isdirectory(expand('~/.cache/vim'))
-		set undofile
-		set undodir=~/.cache/vim/
-	endif
-
-	" NORMAL/INSERT でカーソル形状を変更
-	if &term =~ 'xterm' || &term == 'win32'
-		let &t_SI = "\e[5 q"
-		let &t_EI = "\e[2 q"
-	else
-		let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-		let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-	endif
-
-	" カーソル行強調表示
-	" set cursorline
-	" augroup vimrc_cursorline
-	" 	autocmd!
-	" 	autocmd WinLeave * set nocursorline
-	" 	autocmd WinEnter * set cursorline
-	" augroup END
-
-	" ステータスラインをシュッとさせる
-	" utf-8 以外の注意すべきエンコードなら強調する
-	function! Stl_fenc() abort
-		return &fenc == "utf-8" ? "" : "[".&fenc."]"
-	endfunction
-	set statusline=\ %m%=%{Stl_fenc()}\ %<%F\ 
-
-endfunction
-
-function! s:use_plugin() abort
-	" plug.vim がなければ弾く
-	if empty(glob('~/.vim/autoload/plug.vim'))
-		return v:false
-	endif
-
-	" バージョンが低ければ弾く
-	if v:version < 900
-		return v:false
-	endif
-
-	return v:true
-endfunction
-
-function! s:plugin_settings() abort
-
-	" プラグインのインストール
-	" ----------
-
-	call plug#begin('~/.vim/plugged')
-
-	" カラースキーム
-	Plug 'eihigh/vim-aomi-grayscale'
-	Plug 'chriskempson/base16-vim'
-	Plug 'cocopon/iceberg.vim'
-
-	" モーション / オペレータ
-	Plug 'haya14busa/vim-easymotion'
-	Plug 'haya14busa/vim-edgemotion'
-	Plug 'haya14busa/vim-asterisk'
-	" Plug 'rhysd/clever-f.vim'
-	Plug 'kana/vim-textobj-user'
-	Plug 'sgur/vim-textobj-parameter'
-	Plug 'kana/vim-textobj-indent'
-	Plug 'hrsh7th/vim-searchx'
-	" matchup - たまに statusline が壊れるので調査
-	" Plug 'andymass/vim-matchup'
-
-	" テキスト編集
-	Plug 'tyru/caw.vim'
-	Plug 'machakann/vim-sandwich'
-	Plug 'eihigh/vim-lexiv'
-	" lexima - 有効だと入力が非常に重い場合があるので調査 (lexiv では起こらない)
-	" Plug 'cohama/lexima.vim'
-
-	" ファイラ / セレクタ
-	Plug 'cocopon/vaffle.vim'
-	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'tacahiroy/ctrlp-funky'
-
-	" パッシブ拡張
-	" Plug 'wellle/context.vim'
-	Plug 'obcat/vim-sclow'
-
-	" 言語
-	Plug 'prabirshrestha/vim-lsp'
-	Plug 'mattn/vim-lsp-settings'
-	Plug 'prabirshrestha/asyncomplete.vim'
-	Plug 'prabirshrestha/asyncomplete-lsp.vim'
-	Plug 'mattn/ctrlp-lsp'
-
-	Plug 'fatih/vim-go'
-
-	" 小回り
-	Plug 'vim-jp/vimdoc-ja'
-	Plug 'Shougo/junkfile.vim'
-
-	call plug#end()
-
-	" Autocmd!
-	" ----------
-	autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-	autocmd! User EasyMotionPromptBegin call lsp#disable_diagnostics_for_buffer()<CR>
-	autocmd! User EasyMotionPromptEnd call lsp#enable_diagnostics_for_buffer()<CR>
-
-	autocmd! FileType vaffle call s:filetype_vaffle()
-	autocmd! FileType go call s:filetype_go()
-	autocmd! FileType qf call s:filetype_qf()
-
-	" プラグインの設定
-	" ----------
-
-	" カラースキーム / ハイライト
-	set background=dark
-	set termguicolors
-	colorscheme aomi-grayscale
-
-	hi Normal guibg=NONE
-	hi link EndOfBuffer Ignore
-	
-	" Edgemotion
-	nmap ( <Plug>(edgemotion-k)
-	xmap ( <Plug>(edgemotion-k)
-	omap ( <Plug>(edgemotion-k)
-	nmap ) <Plug>(edgemotion-j)
-	xmap ) <Plug>(edgemotion-j)
-	omap ) <Plug>(edgemotion-j)
-
-	" CtrlP
-	" TODO
-
-	" Lexiv
-	" {} にのみ適用
-	let g:lexiv_no_default_key_mappings = 1
-	inoremap <expr> { lexiv#paren_open('{')
-	inoremap <expr> } lexiv#paren_close('}')
-
-	" Searchx
-	nnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
-	xnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
-	let g:searchx = {}
-	let g:searchx.auto_accept = v:true
-	let g:searchx.scrolloff = &scrolloff
-	let g:searchx.scrolltime = 500
-	let g:searchx.nohlsearch = {}
-	let g:searchx.nohlsearch.jump = v:true
-	let g:searchx.markers = split(' HTSRMFGVXBDLCWZK', '.\zs')
-	function g:searchx.convert(input) abort
-		if a:input !~# '\k'
-			return '\V' .. a:input
-		endif
-		return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
-	endfunction
-
-	" Asyncomplete
-	inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-	inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-	inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_expand()
-
-	" Asterisk
-	map *  <Plug>(asterisk-z*)
-	map #  <Plug>(asterisk-z#)
-	map g* <Plug>(asterisk-gz*)
-	map g# <Plug>(asterisk-gz#)
-
-	" Sandwich
-	let g:sandwich_no_default_key_mappings = 1
-	nmap sa <Plug>(sandwich-add)
-	xmap sa <Plug>(sandwich-add)
-	omap sa <Plug>(sandwich-add)
-	nmap sd <Plug>(sandwich-delete-auto)
-	xmap sd <Plug>(sandwich-delete)
-	nmap sr <Plug>(sandwich-replace-auto)
-	xmap sr <Plug>(sandwich-replace)
-
-	" LSP
-	let g:lsp_async_completion = 1
-	let g:lsp_document_highlight_enabled = 0
-
-	let g:lsp_diagnostics_highlights_enabled = 1
-	let g:lsp_diagnostics_highlights_insert_mode_enabled = 1
-	let g:lsp_diagnostics_highlights_delay = 100
-	let g:lsp_diagnostics_signs_enabled = 0
-	let g:lsp_document_code_action_signs_enabled = 0
-	let g:lsp_diagnostics_virtual_text_enabled = 1
-	let g:lsp_diagnostics_virtual_text_delay = 100
-	let g:lsp_diagnostics_virtual_text_align = "right"
-
-	" Vim-go
-	let g:go_def_mapping_enabled = 0
-
-	" Vaffle
-	let g:vaffle_auto_cd = 1
-	let g:vaffle_show_hidden_files = 1
-
-	" Scrollbar
-	hi link SclowSbar StatusLine
-
-	" Quickfix 召喚
-	nnoremap _ :<C-u>botright copen<CR>
-
-	" 他のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
-	" 仕方なく割り当てるやつ
-	nnoremap he :<C-u>e .<CR>
-	nnoremap ht :<C-u>terminal<CR>
-	nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
-	nnoremap hr :<C-u>CtrlPMRU<CR>
-
-endfunction
-
+" vim-lsp
+" ---------------------------------------
 function! s:on_lsp_buffer_enabled() abort
 	setlocal omnifunc=lsp#complete
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
@@ -321,22 +288,27 @@ function! s:on_lsp_buffer_enabled() abort
 	" autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
 endfunction
 
+" Vaffle
+" ---------------------------------------
 function! s:filetype_vaffle() abort
-	nmap <buffer> <left>  h
-	nmap <buffer> <right> l
+	nmap <buffer> <left>  <Plug>(vaffle-open-parent)
+	nmap <buffer> <right> <Plug>(vaffle-open-current)
 
 	" リネームを LspRename に合わせる
 	nnoremap <buffer> gn <Plug>(vaffle-rename-selected)
+endfunction
+
+" Go
+" ---------------------------------------
+function! s:filetype_go() abort
+	" Snippet にするか迷う
+	abbrev <buffer> enil err != nil
+
 	nnoremap <buffer> gq :<C-u>call go#lsp#Restart()
 endfunction
 
-function! s:filetype_go() abort
-	" Snippet にするか迷う
-	abbrev <buffer> e~ err != nil
-
-	noremap <buffer> gt :<C-u>GoTest<CR>
-endfunction
-
+" Quickfix
+" ---------------------------------------
 function! s:filetype_qf() abort
 	nnoremap <buffer> <CR> <CR>
 	nnoremap <buffer> _ :<C-u>cclose<CR>
@@ -344,4 +316,8 @@ function! s:filetype_qf() abort
 	nnoremap <buffer> O :<C-u>cnewer<CR>
 endfunction
 
-call s:main()
+call plug#end()
+
+" プラグイン読み込み後に行う必要のある設定
+colorscheme aomi-grayscale
+hi Normal guibg=NONE
