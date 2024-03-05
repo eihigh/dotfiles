@@ -249,6 +249,7 @@ let g:clever_f_mark_char_color = 'Search'
 " Autocmd!
 " ========================================
 autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+autocmd! VimResized * wincmd =
 autocmd! FileType vaffle call s:filetype_vaffle()
 autocmd! FileType go call s:filetype_go()
 autocmd! FileType qf call s:filetype_qf()
