@@ -312,9 +312,20 @@ endfunction
 
 call plug#end()
 
-" プラグイン読み込み後に行う必要のある設定
-set background=light
-colorscheme aomi-grayscale
-" hi Normal guibg=NONE
-hi link SclowSbar StatusLine
-hi link EndOfBuffer Ignore
+" 色の設定はプラグイン読み込み後に行う
+function! Day() abort
+	set background=light
+	colorscheme aomi-grayscale
+	hi link SclowSbar StatusLine
+	hi link EndOfBuffer Ignore
+endfunction
+
+function! Night() abort
+	set background=dark
+	colorscheme aomi-grayscale
+	hi Normal guibg=NONE
+	hi link SclowSbar StatusLine
+	hi link EndOfBuffer Ignore
+endfunction
+
+call Day()
