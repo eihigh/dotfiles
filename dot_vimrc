@@ -277,7 +277,7 @@ function! s:on_lsp_buffer_enabled() abort
 	nmap <buffer> ga <plug>(lsp-code-lens)
 	nmap <buffer> gA <plug>(lsp-code-action)
 	xnoremap <buffer> gA :LspCodeAction<CR>
-	nnoremap <buffer> gQ :<C-u>LspStopServer<CR>:<C-u>call lsp#disable()<CR>
+	nnoremap <buffer> gq :<C-u>LspStopServer<CR>
 
 	" gofmt & goimports
 	" autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
