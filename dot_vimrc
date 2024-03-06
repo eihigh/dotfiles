@@ -54,21 +54,12 @@ Plug 'Shougo/junkfile.vim'
 " 検索ハイライト消去
 nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
 
-" <Esc> でターミナルノーマルモードへ遷移
-" 代わりに <C-w> 連打で <Esc> 入力
-tnoremap <Esc>      <C-w>N
-tnoremap <C-w><C-w> <Esc>
-
 " インサート中移動で undo block を中断しない
 inoremap <Left>  <C-g>U<Left>
 inoremap <Right> <C-g>U<Right>
 
 " yank 範囲
 nnoremap Y y$
-
-" 一文字削除でレジスタを消費しない
-nnoremap <BS> "_xh
-nnoremap x    "_s
 
 " Asterisk
 map *  <Plug>(asterisk-z*)
@@ -81,12 +72,20 @@ inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_expand()
 
+" Lexiv ({} にのみ適用)
+let g:lexiv_no_default_key_mappings = 1
+inoremap <expr> { lexiv#paren_open('{')
+inoremap <expr> } lexiv#paren_close('}')
+
 " ========================================
 " 標準にはない追加のキーマップ（少ないほどよいとされている）
 " ========================================
 
 " 保存ショートカット
 nnoremap <cr> :<C-u>w<CR>
+
+" <C-w> 連打でターミナルノーマルモードへ抜ける
+tnoremap <C-w><C-w> <C-w>N
 
 " Quickfix 召喚
 nnoremap _ :<C-u>botright copen<CR>
@@ -97,11 +96,6 @@ noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal 
 
 " Indentwise
 " [- や ]= があるが、デフォルトのまま使う
-
-" Lexiv ({} にのみ適用)
-let g:lexiv_no_default_key_mappings = 1
-inoremap <expr> { lexiv#paren_open('{')
-inoremap <expr> } lexiv#paren_close('}')
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
