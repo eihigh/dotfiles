@@ -7,13 +7,11 @@
 [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [ -d ~/go/bin ] && export PATH=$PATH:~/go/bin
 
-mkdir -p $HOME/.nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && source "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && source "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 mkdir -p ~/.docker/cli-plugins
 [ -s "/opt/homebrew/opt/docker-compose/bin/docker-compose" ] && ln -sfn /opt/homebrew/opt/docker-compose/bin/docker-compose ~/.docker/cli-plugins/docker-compose
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # ========================================
 # ENV
@@ -25,7 +23,7 @@ export LANG='ja_JP.utf8'
 # ========================================
 # Aliases
 # ========================================
-alias e='vim'
+alias e='vim .'
 alias cf='wrangler'
 alias cz='chezmoi'
 alias d='docker'
