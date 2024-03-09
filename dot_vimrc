@@ -29,6 +29,7 @@ Plug 'mattn/vim-findroot'
 Plug 'cocopon/vaffle.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
+Plug 'yssl/QFEnter'
 
 " パッシブ拡張
 " Plug 'wellle/context.vim'
