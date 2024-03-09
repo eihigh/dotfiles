@@ -278,9 +278,6 @@ endfunction
 function! s:filetype_vaffle() abort
 	nmap <buffer> <left>  <Plug>(vaffle-open-parent)
 	nmap <buffer> <right> <Plug>(vaffle-open-current)
-
-	" リネームを LspRename に合わせる
-	nnoremap <buffer> gn <Plug>(vaffle-rename-selected)
 endfunction
 
 " Go
@@ -289,6 +286,10 @@ function! s:filetype_go() abort
 	" Snippet にするか迷う
 	abbrev <buffer> e_ err != nil
 	abbrev <buffer> a_ append
+
+	" あまりキーも空いてないので苦しいが仕方なく割り当てる
+	nnoremap <buffer> hxx :<C-u>GoTest<CR>
+	nnoremap <buffer> hxf :<C-u>GoTestFunc<CR>
 endfunction
 
 " Quickfix
@@ -318,4 +319,4 @@ function! Night() abort
 	hi link EndOfBuffer Ignore
 endfunction
 
-call Day()
+call Night()
