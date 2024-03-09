@@ -292,7 +292,7 @@ endfunction
 function! s:filetype_go() abort
 	" Snippet にするか迷う
 	abbrev <buffer> e_ err != nil
-	abbrev <buffer> a_ append(
+	abbrev <buffer> a_ append
 endfunction
 
 " Quickfix
