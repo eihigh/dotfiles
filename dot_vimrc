@@ -22,7 +22,7 @@ Plug 'hrsh7th/vim-searchx'
 " テキスト編集
 Plug 'tyru/caw.vim'
 Plug 'machakann/vim-sandwich'
-Plug 'eihigh/vim-lexiv'
+Plug 'mattn/vim-lexiv'
 
 " ファイラ / セレクタ
 Plug 'mattn/vim-findroot'
@@ -71,11 +71,6 @@ map g# <Plug>(asterisk-gz#)
 inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_expand()
-
-" Lexiv ({} にのみ適用)
-let g:lexiv_no_default_key_mappings = 1
-inoremap <expr> { lexiv#paren_open('{')
-inoremap <expr> } lexiv#paren_close('}')
 
 " ========================================
 " 標準にはない追加のキーマップ（少ないほどよいとされている）
