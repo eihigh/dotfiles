@@ -22,7 +22,7 @@ Plug 'hrsh7th/vim-searchx'
 " テキスト編集
 Plug 'tyru/caw.vim'
 Plug 'machakann/vim-sandwich'
-Plug 'mattn/vim-lexiv'
+Plug 'eihigh/vim-lexiv'
 
 " ファイラ / セレクタ
 Plug 'mattn/vim-findroot'
@@ -67,6 +67,17 @@ map *  <Plug>(asterisk-z*)
 map #  <Plug>(asterisk-z#)
 map g* <Plug>(asterisk-gz*)
 map g# <Plug>(asterisk-gz#)
+
+" Lexiv
+inoremap <expr> " lexiv#quote_open('"')
+inoremap <expr> ' lexiv#quote_open("'")
+inoremap <expr> ` lexiv#backquote_open()
+inoremap <expr> { lexiv#paren_open('{')
+inoremap <expr> ( lexiv#paren_open('(')
+inoremap <expr> [ lexiv#paren_open('[')
+inoremap <expr> } lexiv#paren_close('}')
+inoremap <expr> ) lexiv#paren_close(')')
+inoremap <expr> ] lexiv#paren_close(']')
 
 " Asyncomplete
 inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -205,6 +216,11 @@ function g:searchx.convert(input) abort
 	endif
 	return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
 endfunction
+
+" Lexiv
+" デフォルトだと <cr> が補完確定のマッピングと
+" 衝突するので、無効にする（fork 元ではできない）
+let g:lexiv_no_default_key_mappings = 1
 
 " LSP
 let g:lsp_async_completion = 1
