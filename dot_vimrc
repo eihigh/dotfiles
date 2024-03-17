@@ -41,8 +41,10 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/ctrlp-lsp'
-
 Plug 'fatih/vim-go'
+
+" ウィンドウ
+Plug 't9md/vim-choosewin'
 
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
@@ -94,11 +96,12 @@ nnoremap <cr> :<C-u>w<CR>
 " <C-w> 連打でターミナルノーマルモードへ抜ける
 tnoremap <C-w><C-w> <C-w>N
 
-" 端までウィンドウ移動
+" ウィンドウ移動
 " （WinClosed で直前のウィンドウに戻れるおかげで捗る）
 nnoremap ( 99<C-w>h
 nnoremap ) 99<C-w>l
 nnoremap _ 99<C-w>j
+nmap - <Plug>(choosewin)
 
 " z. でカーソル中央固定
 set scrolloff=2
@@ -254,6 +257,10 @@ let g:clever_f_smart_case = 1
 let g:clever_f_mark_char_color = 'Search'
 
 " Scrollbar
+
+" Choosewin
+" overlay 表示はターミナルで壊れる
+let g:choosewin_blink_on_land = 0
 
 " ========================================
 " Autocmd!
