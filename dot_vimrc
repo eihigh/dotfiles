@@ -94,8 +94,11 @@ nnoremap <cr> :<C-u>w<CR>
 " <C-w> 連打でターミナルノーマルモードへ抜ける
 tnoremap <C-w><C-w> <C-w>N
 
-" Quickfix 召喚
-nnoremap _ :<C-u>botright copen<CR>
+" 端までウィンドウ移動
+" （WinClosed で直前のウィンドウに戻れるおかげで捗る）
+nnoremap ( 99<C-w>h
+nnoremap ) 99<C-w>l
+nnoremap _ 99<C-w>j
 
 " z. でカーソル中央固定
 set scrolloff=2
@@ -121,10 +124,11 @@ xnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
 nnoremap hh :<C-u>CtrlPMixed<CR>
-nnoremap he :<C-u>exe 'e '.expand('%:h')<CR>
+nnoremap he :<C-u>e %:h<CR>
 nnoremap ht :<C-u>botright terminal ++rows=20<CR>
 nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
 nnoremap hr :<C-u>CtrlPMRU<CR>
+nnoremap hc :<C-u>botright copen<CR>
 
 " ========================================
 " 本体機能の設定
@@ -256,6 +260,7 @@ let g:clever_f_mark_char_color = 'Search'
 " ========================================
 autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 autocmd! VimResized * wincmd =
+autocmd! WinClosed * wincmd p
 autocmd! FileType vaffle call s:filetype_vaffle()
 autocmd! FileType go call s:filetype_go()
 autocmd! FileType qf call s:filetype_qf()
@@ -312,7 +317,7 @@ endfunction
 " ---------------------------------------
 function! s:filetype_qf() abort
 	nnoremap <buffer> <CR> <CR>
-	nnoremap <buffer> <silent> _ :<C-u>cclose \| wincmd p<CR>
+	nnoremap <buffer> x :<C-u>cclose<CR>
 	nnoremap <buffer> o :<C-u>colder<CR>
 	nnoremap <buffer> O :<C-u>cnewer<CR>
 endfunction
