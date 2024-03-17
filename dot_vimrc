@@ -312,7 +312,7 @@ endfunction
 " ---------------------------------------
 function! s:filetype_qf() abort
 	nnoremap <buffer> <CR> <CR>
-	nnoremap <buffer> _ :<C-u>cclose<CR>
+	nnoremap <buffer> <silent> _ :<C-u>cclose \| wincmd p<CR>
 	nnoremap <buffer> o :<C-u>colder<CR>
 	nnoremap <buffer> O :<C-u>cnewer<CR>
 endfunction
