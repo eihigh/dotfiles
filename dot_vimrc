@@ -164,11 +164,6 @@ nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
 nnoremap hr :<C-u>CtrlPMRU<CR>
 nnoremap hl :<C-u>CtrlPBuffer<CR>
 nnoremap hc :<C-u>botright copen<CR>
-nnoremap hd :<C-u>cd %:h<CR>
-
-" あまりキーも空いてないので苦しいが仕方なく割り当てる
-nnoremap hxp :<C-u>terminal ++curwin go test<CR>
-nnoremap hxf :<C-u>exe 'terminal ++curwin go test -run ' .. go#util#TestName()<CR>
 
 " ========================================
 " 本体機能の設定
@@ -355,6 +350,8 @@ function! s:filetype_go() abort
 	" Snippet にするか迷う
 	abbrev <buffer> e_ err != nil
 	abbrev <buffer> a_ append
+
+	" TODO: go test は vim じゃなくて shell 的に解決する
 endfunction
 
 " Quickfix
