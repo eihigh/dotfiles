@@ -90,11 +90,21 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 nnoremap <cr> :<C-u>w<CR>
 
 " ウィンドウ管理
+nmap _(               <C-w>h<Plug>(winmove)
+nmap _)               <C-w>l<Plug>(winmove)
+nmap _{               <C-w>k<Plug>(winmove)
+nmap _}               <C-w>j<Plug>(winmove)
+nmap <Plug>(winmove)( <C-w>h<Plug>(winmove)
+nmap <Plug>(winmove)) <C-w>l<Plug>(winmove)
+nmap <Plug>(winmove){ <C-w>k<Plug>(winmove)
+nmap <Plug>(winmove)} <C-w>j<Plug>(winmove)
+
 nnoremap __ :<C-u>below split<CR>
 nnoremap _- :<C-u>above split<CR>
-nnoremap _( :<C-u>lefta vsplit<CR>
-nnoremap _) :<C-u>rightb vsplit<CR>
-nnoremap _<Esc> ZZ
+nnoremap _[ :<C-u>lefta vsplit<CR>
+nnoremap _] :<C-u>rightb vsplit<CR>
+nnoremap _<Tab> ZZ
+nnoremap _<S-Tab> ZZ
 
 " ターミナルノーマルモードへ抜ける
 tnoremap <C-l> <C-w>N
