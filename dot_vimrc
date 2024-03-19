@@ -109,8 +109,7 @@ noremap <C-w>_ :<C-u>below split<CR>
 noremap <C-w>- :<C-u>above split<CR>
 noremap <C-w>[ :<C-u>lefta vsplit<CR>
 noremap <C-w>] :<C-u>rightb vsplit<CR>
-noremap <C-w><Tab> ZQ
-noremap <C-w><S-Tab> ZQ
+noremap <C-w>! ZZ
 
 noremap           <C-w>( <C-w>W<Plug>(winmove)
 noremap           <C-w>) <C-w>w<Plug>(winmove)
