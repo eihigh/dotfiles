@@ -60,6 +60,16 @@ inoremap <Right> <C-g>U<Right>
 " yank 範囲
 nnoremap Y y$
 
+" マークは一種類のみ使う
+noremap m mZ
+noremap ` `Z
+
+" Changelist
+noremap g;           g;<Plug>(cgl)
+noremap g,           g,<Plug>(cgl)
+noremap <Plug>(cgl); g;<Plug>(cgl)
+noremap <Plug>(cgl), g,<Plug>(cgl)
+
 " Asterisk
 map *  <Plug>(asterisk-z*)
 map #  <Plug>(asterisk-z#)
@@ -90,14 +100,14 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 nnoremap <cr> :<C-u>w<CR>
 
 " ウィンドウ管理
-nmap _(               <C-w>h<Plug>(winmove)
-nmap _)               <C-w>l<Plug>(winmove)
-nmap _{               <C-w>k<Plug>(winmove)
-nmap _}               <C-w>j<Plug>(winmove)
-nmap <Plug>(winmove)( <C-w>h<Plug>(winmove)
-nmap <Plug>(winmove)) <C-w>l<Plug>(winmove)
-nmap <Plug>(winmove){ <C-w>k<Plug>(winmove)
-nmap <Plug>(winmove)} <C-w>j<Plug>(winmove)
+nnoremap _(               <C-w>h<Plug>(winmove)
+nnoremap _)               <C-w>l<Plug>(winmove)
+nnoremap _{               <C-w>k<Plug>(winmove)
+nnoremap _}               <C-w>j<Plug>(winmove)
+nnoremap <Plug>(winmove)( <C-w>h<Plug>(winmove)
+nnoremap <Plug>(winmove)) <C-w>l<Plug>(winmove)
+nnoremap <Plug>(winmove){ <C-w>k<Plug>(winmove)
+nnoremap <Plug>(winmove)} <C-w>j<Plug>(winmove)
 
 nnoremap __ :<C-u>below split<CR>
 nnoremap _- :<C-u>above split<CR>
