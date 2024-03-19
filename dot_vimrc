@@ -123,8 +123,9 @@ noremap <C-w>( :<C-u>lefta vsplit<CR>
 noremap <C-w>) :<C-u>rightb vsplit<CR>
 noremap <C-w>! ZZ
 
-" ターミナルノーマルモードへ抜ける
-tnoremap <C-l> <C-w>N
+" ターミナルからの脱出
+" （入る方はマウスでやるのがよさそう）
+tnoremap <F2> <C-w>N
 
 " z. でカーソル中央固定
 set scrolloff=2
