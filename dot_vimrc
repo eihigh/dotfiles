@@ -352,8 +352,8 @@ function! s:filetype_go() abort
 	abbrev <buffer> a_ append
 
 	" あまりキーも空いてないので苦しいが仕方なく割り当てる
-	nnoremap <buffer> hxa :<C-u>GoTest<CR>
-	nnoremap <buffer> hxf :<C-u>GoTestFunc<CR>
+	nnoremap <buffer> hxp :<C-u>lcd %:h \| terminal ++curwin go test<CR>
+	nnoremap <buffer> hxf :<C-u>lcd %:h \| exe 'terminal ++curwin go test -run ' .. go#util#TestName()<CR>
 endfunction
 
 " Quickfix
