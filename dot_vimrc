@@ -89,8 +89,12 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " 保存ショートカット
 nnoremap <cr> :<C-u>w<CR>
 
-" ウィンドウクローズ
-nnoremap <silent> <expr> x &modifiable ? "x" : "ZZ"
+" ウィンドウ管理
+nnoremap __ :<C-u>below split<CR>
+nnoremap _- :<C-u>above split<CR>
+nnoremap _( :<C-u>lefta vsplit<CR>
+nnoremap _) :<C-u>rightb vsplit<CR>
+nnoremap _<Esc> ZZ
 
 " ターミナルノーマルモードへ抜ける
 tnoremap <C-l> <C-w>N
