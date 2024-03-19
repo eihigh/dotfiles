@@ -67,11 +67,23 @@ nnoremap Y y$
 noremap m mZ
 noremap ` `Z
 
+" ウィンドウ移動
+map <Plug>(winmove)        <Nop>
+map           <C-w><Left>  <C-w><Left><Plug>(winmove)
+map           <C-w><Down>  <C-w><Down><Plug>(winmove)
+map           <C-w><Up>    <C-w><Up><Plug>(winmove)
+map           <C-w><Right> <C-w><Right><Plug>(winmove)
+map <Plug>(winmove)<Left>  <C-w><Left><Plug>(winmove)
+map <Plug>(winmove)<Down>  <C-w><Down><Plug>(winmove)
+map <Plug>(winmove)<Up>    <C-w><Up><Plug>(winmove)
+map <Plug>(winmove)<Right> <C-w><Right><Plug>(winmove)
+
 " Changelist
-noremap           g; g;<Plug>(cgl)
-noremap           g, g,<Plug>(cgl)
-noremap <Plug>(cgl); g;<Plug>(cgl)
-noremap <Plug>(cgl), g,<Plug>(cgl)
+map <Plug>(cgl)  <Nop>
+map           g; g;<Plug>(cgl)
+map           g, g,<Plug>(cgl)
+map <Plug>(cgl); g;<Plug>(cgl)
+map <Plug>(cgl), g,<Plug>(cgl)
 
 " Asterisk
 map *  <Plug>(asterisk-z*)
@@ -107,14 +119,9 @@ map - <Plug>(choosewin)
 map _ <C-w>
 noremap <C-w>_ :<C-u>below split<CR>
 noremap <C-w>- :<C-u>above split<CR>
-noremap <C-w>[ :<C-u>lefta vsplit<CR>
-noremap <C-w>] :<C-u>rightb vsplit<CR>
-noremap <C-w>! ZZ
-
-noremap           <C-w>( <C-w>W<Plug>(winmove)
-noremap           <C-w>) <C-w>w<Plug>(winmove)
-noremap <Plug>(winmove)( <C-w>W<Plug>(winmove)
-noremap <Plug>(winmove)) <C-w>w<Plug>(winmove)
+noremap <C-w>( :<C-u>lefta vsplit<CR>
+noremap <C-w>) :<C-u>rightb vsplit<CR>
+noremap <C-w>! ZQ
 
 " ターミナルノーマルモードへ抜ける
 tnoremap <C-l> <C-w>N
