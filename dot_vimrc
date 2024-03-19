@@ -10,8 +10,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'cocopon/iceberg.vim'
 
 " モーション / オペレータ
-" Plug 'haya14busa/vim-edgemotion'
-Plug 'jeetsukumaran/vim-indentwise'
+Plug 'haya14busa/vim-edgemotion'
 Plug 'haya14busa/vim-asterisk'
 Plug 'rhysd/clever-f.vim'
 Plug 'kana/vim-textobj-user'
@@ -43,9 +42,6 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/ctrlp-lsp'
 Plug 'fatih/vim-go'
 
-" ウィンドウ
-Plug 't9md/vim-choosewin'
-
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
 Plug 'Shougo/junkfile.vim'
@@ -63,9 +59,6 @@ inoremap <Right> <C-g>U<Right>
 
 " yank 範囲
 nnoremap Y y$
-
-" ウィンドウクローズ
-nnoremap <silent> <expr> x &modifiable ? "x" : "ZZ"
 
 " Asterisk
 map *  <Plug>(asterisk-z*)
@@ -96,24 +89,15 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " 保存ショートカット
 nnoremap <cr> :<C-u>w<CR>
 
-" ターミナルを隠す
-tnoremap <C-s> <C-w>:hide \| wincmd p<CR>
-" ターミナルノーマルモードへ抜ける
-tnoremap <C-w><C-w> <C-w>N
+" ウィンドウクローズ
+nnoremap <silent> <expr> x &modifiable ? "x" : "ZZ"
 
-" ウィンドウ移動
-" （WinClosed で直前のウィンドウに戻れるおかげで捗る）
-nnoremap ( 99<C-w>h
-nnoremap ) 99<C-w>l
-nnoremap _ 99<C-w>j
-nmap - <Plug>(choosewin)
+" ターミナルノーマルモードへ抜ける
+tnoremap <C-l> <C-w>N
 
 " z. でカーソル中央固定
 set scrolloff=2
 noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
-
-" Indentwise
-" [- や ]= があるが、デフォルトのまま使う
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
@@ -125,6 +109,14 @@ xmap sd <Plug>(sandwich-delete)
 nmap sr <Plug>(sandwich-replace-auto)
 xmap sr <Plug>(sandwich-replace)
 
+" Edgemotion
+nmap ( <Plug>(edgemotion-k)
+xmap ( <Plug>(edgemotion-k)
+omap ( <Plug>(edgemotion-k)
+nmap ) <Plug>(edgemotion-j)
+xmap ) <Plug>(edgemotion-j)
+omap ) <Plug>(edgemotion-j)
+
 " Searchx
 nnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
@@ -134,7 +126,7 @@ xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 " TODO: hr の候補にターミナルも混ぜる
 nnoremap hh :<C-u>CtrlPMixed<CR>
 nnoremap he :<C-u>e %:h<CR>
-nnoremap hn :<C-u>terminal ++curwin<CR>
+nnoremap hn :<C-u>terminal ++curwin ++open<CR>
 nnoremap ht :<C-u>call ReuseShellOrCreate()<CR>
 nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
 nnoremap hr :<C-u>CtrlPMRU<CR>
@@ -215,7 +207,6 @@ set statusline=\ %m%=%{Stl_fenc()}\ %<%F\
 " ========================================
 
 " CtrlP
-let g:ctrlp_open_single_match = ['buffer']
 
 " Searchx
 let g:searchx = {}
@@ -276,10 +267,10 @@ let g:choosewin_blink_on_land = 0
 autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 autocmd! VimResized * wincmd =
 autocmd! WinClosed * wincmd p
+autocmd! TerminalOpen * setlocal bufhidden=hide
 autocmd! FileType vaffle call s:filetype_vaffle()
 autocmd! FileType go call s:filetype_go()
 autocmd! FileType qf call s:filetype_qf()
-
 
 " ========================================
 " 自作関数
@@ -341,17 +332,18 @@ function! s:filetype_qf() abort
 	nnoremap <buffer> O :<C-u>cnewer<CR>
 endfunction
 
-" 既存の隠れたシェルがあれば再利用、なければ作成
+" 既存の隠れた実行中のシェルがあれば再利用、なければ作成
 " ---------------------------------------
 function! ReuseShellOrCreate() abort
 	let bufinfo = getbufinfo()->filter({i, b ->
 				\ getbufvar(b.bufnr, '&buftype') == 'terminal' &&
 				\ stridx(b.name, '!'.&shell) == 0 &&
+				\ b.changed == 1 &&
 				\ b.hidden == 1
 				\ })
 
 	if len(bufinfo) == 0
-		terminal ++curwin
+		terminal ++curwin ++open
 		return
 	endif
 
@@ -379,4 +371,4 @@ endfunction
 call plug#end()
 
 " 色の設定はプラグイン読み込み後に行う
-call Night()
+call Day()
