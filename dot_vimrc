@@ -351,7 +351,8 @@ function! s:filetype_go() abort
 	abbrev <buffer> e_ err != nil
 	abbrev <buffer> a_ append
 
-	" TODO: go test は vim じゃなくて shell 的に解決する
+	nnoremap g.t :<C-u>GoTest<CR>
+	nnoremap g.f :<C-u>GoTestFunc<CR>
 endfunction
 
 " Quickfix
