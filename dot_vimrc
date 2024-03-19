@@ -68,15 +68,16 @@ noremap m mZ
 noremap ` `Z
 
 " ウィンドウ移動
-map <Plug>(winmove)        <Nop>
-map           <C-w><Left>  <C-w><Left><Plug>(winmove)
-map           <C-w><Down>  <C-w><Down><Plug>(winmove)
-map           <C-w><Up>    <C-w><Up><Plug>(winmove)
-map           <C-w><Right> <C-w><Right><Plug>(winmove)
-map <Plug>(winmove)<Left>  <C-w><Left><Plug>(winmove)
-map <Plug>(winmove)<Down>  <C-w><Down><Plug>(winmove)
-map <Plug>(winmove)<Up>    <C-w><Up><Plug>(winmove)
-map <Plug>(winmove)<Right> <C-w><Right><Plug>(winmove)
+nmap <Plug>(winmove)        <Nop>
+nmap           <C-w><Left>  <C-w><Left><Plug>(winmove)
+nmap           <C-w><Down>  <C-w><Down><Plug>(winmove)
+nmap           <C-w><Up>    <C-w><Up><Plug>(winmove)
+nmap           <C-w><Right> <C-w><Right><Plug>(winmove)
+nmap <Plug>(winmove)<Left>  <C-w><Left><Plug>(winmove)
+nmap <Plug>(winmove)<Down>  <C-w><Down><Plug>(winmove)
+nmap <Plug>(winmove)<Up>    <C-w><Up><Plug>(winmove)
+nmap <Plug>(winmove)<Right> <C-w><Right><Plug>(winmove)
+tmap <Plug>(winmove)        <Nop>
 
 " Changelist
 map <Plug>(cgl)  <Nop>
@@ -124,7 +125,6 @@ noremap <C-w>) :<C-u>rightb vsplit<CR>
 noremap <C-w>! ZZ
 
 " ターミナルからの脱出
-" （入る方はマウスでやるのがよさそう）
 tnoremap <F2> <C-w>N
 
 " z. でカーソル中央固定
