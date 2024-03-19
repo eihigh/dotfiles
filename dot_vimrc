@@ -64,6 +64,9 @@ inoremap <Right> <C-g>U<Right>
 " yank 範囲
 nnoremap Y y$
 
+" ウィンドウクローズ
+nnoremap <silent> <expr> x &modifiable ? "x" : "ZZ"
+
 " Asterisk
 map *  <Plug>(asterisk-z*)
 map #  <Plug>(asterisk-z#)
@@ -93,7 +96,9 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " 保存ショートカット
 nnoremap <cr> :<C-u>w<CR>
 
-" <C-w> 連打でターミナルノーマルモードへ抜ける
+" ターミナルを隠す
+tnoremap <C-s> <C-w>:hide \| wincmd p<CR>
+" ターミナルノーマルモードへ抜ける
 tnoremap <C-w><C-w> <C-w>N
 
 " ウィンドウ移動
@@ -121,16 +126,19 @@ nmap sr <Plug>(sandwich-replace-auto)
 xmap sr <Plug>(sandwich-replace)
 
 " Searchx
-nnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
-xnoremap & <Cmd>call searchx#start({ 'dir': 1 })<cr>
+nnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
+xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
+" TODO: hr の候補にターミナルも混ぜる
 nnoremap hh :<C-u>CtrlPMixed<CR>
 nnoremap he :<C-u>e %:h<CR>
-nnoremap ht :<C-u>botright terminal ++rows=20<CR>
+nnoremap hn :<C-u>terminal ++curwin<CR>
+nnoremap ht :<C-u>call ReuseShellOrCreate()<CR>
 nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
 nnoremap hr :<C-u>CtrlPMRU<CR>
+nnoremap hl :<C-u>CtrlPBuffer<CR>
 nnoremap hc :<C-u>botright copen<CR>
 
 " ========================================
@@ -207,7 +215,7 @@ set statusline=\ %m%=%{Stl_fenc()}\ %<%F\
 " ========================================
 
 " CtrlP
-" TODO
+let g:ctrlp_open_single_match = ['buffer']
 
 " Searchx
 let g:searchx = {}
@@ -272,6 +280,11 @@ autocmd! FileType vaffle call s:filetype_vaffle()
 autocmd! FileType go call s:filetype_go()
 autocmd! FileType qf call s:filetype_qf()
 
+
+" ========================================
+" 自作関数
+" ========================================
+
 " vim-lsp
 " ---------------------------------------
 function! s:on_lsp_buffer_enabled() abort
@@ -316,7 +329,7 @@ function! s:filetype_go() abort
 	abbrev <buffer> a_ append
 
 	" あまりキーも空いてないので苦しいが仕方なく割り当てる
-	nnoremap <buffer> hxx :<C-u>GoTest<CR>
+	nnoremap <buffer> hxa :<C-u>GoTest<CR>
 	nnoremap <buffer> hxf :<C-u>GoTestFunc<CR>
 endfunction
 
@@ -324,14 +337,30 @@ endfunction
 " ---------------------------------------
 function! s:filetype_qf() abort
 	nnoremap <buffer> <CR> <CR>
-	nnoremap <buffer> x :<C-u>cclose<CR>
 	nnoremap <buffer> o :<C-u>colder<CR>
 	nnoremap <buffer> O :<C-u>cnewer<CR>
 endfunction
 
-call plug#end()
+" 既存の隠れたシェルがあれば再利用、なければ作成
+" ---------------------------------------
+function! ReuseShellOrCreate() abort
+	let bufinfo = getbufinfo()->filter({i, b ->
+				\ getbufvar(b.bufnr, '&buftype') == 'terminal' &&
+				\ stridx(b.name, '!'.&shell) == 0 &&
+				\ b.hidden == 1
+				\ })
 
-" 色の設定はプラグイン読み込み後に行う
+	if len(bufinfo) == 0
+		terminal ++curwin
+		return
+	endif
+
+	let bufnr = bufinfo[0].bufnr
+	exe 'b '.bufnr
+endfunction
+
+" 色の切り替え
+" ---------------------------------------
 function! Day() abort
 	set background=light
 	colorscheme aomi-grayscale
@@ -347,4 +376,7 @@ function! Night() abort
 	hi link EndOfBuffer Ignore
 endfunction
 
+call plug#end()
+
+" 色の設定はプラグイン読み込み後に行う
 call Night()
