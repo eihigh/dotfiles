@@ -42,6 +42,9 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/ctrlp-lsp'
 Plug 'fatih/vim-go'
 
+" ウィンドウ
+Plug 't9md/vim-choosewin'
+
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
 Plug 'Shougo/junkfile.vim'
@@ -65,8 +68,8 @@ noremap m mZ
 noremap ` `Z
 
 " Changelist
-noremap g;           g;<Plug>(cgl)
-noremap g,           g,<Plug>(cgl)
+noremap           g; g;<Plug>(cgl)
+noremap           g, g,<Plug>(cgl)
 noremap <Plug>(cgl); g;<Plug>(cgl)
 noremap <Plug>(cgl), g,<Plug>(cgl)
 
@@ -100,19 +103,19 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 nnoremap <cr> :<C-u>w<CR>
 
 " ウィンドウ管理
-nnoremap _(               <C-w>h<Plug>(winmove)
-nnoremap _)               <C-w>l<Plug>(winmove)
-nnoremap _{               <C-w>k<Plug>(winmove)
-nnoremap _}               <C-w>j<Plug>(winmove)
-nnoremap <Plug>(winmove)( <C-w>h<Plug>(winmove)
-nnoremap <Plug>(winmove)) <C-w>l<Plug>(winmove)
-nnoremap <Plug>(winmove){ <C-w>k<Plug>(winmove)
-nnoremap <Plug>(winmove)} <C-w>j<Plug>(winmove)
+map - <Plug>(choosewin)
+map _ <C-w>
+noremap <C-w>_ :<C-u>below split<CR>
+noremap <C-w>- :<C-u>above split<CR>
+noremap <C-w>[ :<C-u>lefta vsplit<CR>
+noremap <C-w>] :<C-u>rightb vsplit<CR>
+noremap <C-w><Tab> ZQ
+noremap <C-w><S-Tab> ZQ
 
-nnoremap __ :<C-u>below split<CR>
-nnoremap _- :<C-u>above split<CR>
-nnoremap _[ :<C-u>lefta vsplit<CR>
-nnoremap _] :<C-u>rightb vsplit<CR>
+noremap           <C-w>( <C-w>W<Plug>(winmove)
+noremap           <C-w>) <C-w>w<Plug>(winmove)
+noremap <Plug>(winmove)( <C-w>W<Plug>(winmove)
+noremap <Plug>(winmove)) <C-w>w<Plug>(winmove)
 
 " ターミナルノーマルモードへ抜ける
 tnoremap <C-l> <C-w>N
