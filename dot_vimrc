@@ -121,7 +121,7 @@ noremap <C-w>_ :<C-u>below split<CR>
 noremap <C-w>- :<C-u>above split<CR>
 noremap <C-w>( :<C-u>lefta vsplit<CR>
 noremap <C-w>) :<C-u>rightb vsplit<CR>
-noremap <C-w>! ZQ
+noremap <C-w>! ZZ
 
 " ターミナルノーマルモードへ抜ける
 tnoremap <C-l> <C-w>N
