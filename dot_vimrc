@@ -128,6 +128,7 @@ noremap <C-w>! ZZ
 tnoremap <Esc><Esc> <Esc>
 tnoremap <Esc>-     <C-w>:<C-u>call choosewin#start(range(1, winnr('$')))<CR>
 tnoremap <Esc>n     <C-w>N
+tnoremap <Esc>h     <C-w>:hide \| wincmd p<CR>
 
 " z. でカーソル中央固定
 set scrolloff=2
