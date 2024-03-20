@@ -145,12 +145,12 @@ nmap sr <Plug>(sandwich-replace-auto)
 xmap sr <Plug>(sandwich-replace)
 
 " Edgemotion
-nmap ( <Plug>(edgemotion-k)
-xmap ( <Plug>(edgemotion-k)
-omap ( <Plug>(edgemotion-k)
-nmap ) <Plug>(edgemotion-j)
-xmap ) <Plug>(edgemotion-j)
-omap ) <Plug>(edgemotion-j)
+nmap g< <Plug>(edgemotion-k)
+xmap g< <Plug>(edgemotion-k)
+omap g< <Plug>(edgemotion-k)
+nmap g> <Plug>(edgemotion-j)
+xmap g> <Plug>(edgemotion-j)
+omap g> <Plug>(edgemotion-j)
 
 " Searchx
 nnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
@@ -317,23 +317,17 @@ function! s:on_lsp_buffer_enabled() abort
 	setlocal omnifunc=lsp#complete
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
-	" 推奨のキーマップ
 	nmap <buffer> gd <plug>(lsp-definition)
 	nmap <buffer> gD <plug>(lsp-type-definition)
 	nmap <buffer> gs <plug>(lsp-document-symbol)
 	nmap <buffer> gS <plug>(lsp-workspace-symbol)
-	nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-	nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-	nmap <buffer> K <plug>(lsp-hover)
-
-	" 独自のキーマップ
-	" TODO: <Plug>(lsp-code-action) は nmap のみだがおそらく
-	" vmap もデフォルトで存在すべき
-	" lens と action 混ぜて候補に表示したい気もする
-	nmap <buffer> gn <plug>(lsp-rename)
-	nmap <buffer> ga <plug>(lsp-code-lens)
-	nmap <buffer> gA <plug>(lsp-code-action)
-	xnoremap <buffer> gA :LspCodeAction<CR>
+	nmap <buffer> gN <plug>(lsp-previous-diagnostic)
+	nmap <buffer> gn <plug>(lsp-next-diagnostic)
+	nmap <buffer> gh <plug>(lsp-hover)
+	nmap <buffer> gc <plug>(lsp-rename)
+	nmap <buffer> gl <plug>(lsp-code-lens)
+	nmap <buffer> ga <plug>(lsp-code-action)
+	xnoremap <buffer> ga :LspCodeAction<CR>
 	nnoremap <buffer> gq :<C-u>LspStopServer<CR>
 
 	" gofmt & goimports
@@ -343,8 +337,9 @@ endfunction
 " Vaffle
 " ---------------------------------------
 function! s:filetype_vaffle() abort
-	nmap <buffer> <left>  <Plug>(vaffle-open-parent)
-	nmap <buffer> <right> <Plug>(vaffle-open-current)
+	nmap <buffer> <Left>  <Plug>(vaffle-open-parent)
+	nmap <buffer> <Right> <Plug>(vaffle-open-current)
+	nmap <buffer> <End>   <Plug>(vaffle-open-current)
 endfunction
 
 " Go
