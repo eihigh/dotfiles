@@ -127,7 +127,7 @@ noremap <C-w>! ZZ
 " ターミナルからの脱出
 tnoremap <Esc><Esc> <Esc>
 tnoremap <Esc>-     <C-w>:<C-u>call choosewin#start(range(1, winnr('$')))<CR>
-tnoremap <Esc>s     <C-w>N
+tnoremap <Esc>n     <C-w>N
 
 " z. でカーソル中央固定
 set scrolloff=2
