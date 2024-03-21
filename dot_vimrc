@@ -67,6 +67,9 @@ nnoremap Y y$
 noremap m mZ
 noremap ` `Z
 
+" ウィンドウの位置復元 (autocmd との合わせ技)
+noremap ' <Cmd>call CurWinRestView()<CR>
+
 " ウィンドウ移動
 nmap <Plug>(winmove)        <Nop>
 nmap           <C-w><Left>  <C-w><Left><Plug>(winmove)
@@ -301,6 +304,7 @@ let g:choosewin_blink_on_land = 0
 " ========================================
 autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 autocmd! VimResized * wincmd =
+autocmd! WinLeave * call CurWinSaveView()
 autocmd! WinClosed * wincmd p
 autocmd! TerminalOpen * setlocal bufhidden=hide
 autocmd! FileType vaffle call s:filetype_vaffle()
@@ -378,6 +382,21 @@ function! ReuseShellOrCreate() abort
 
 	let bufnr = bufinfo[0].bufnr
 	exe 'b '.bufnr
+endfunction
+
+" ウィンドウのカーソル位置を保存
+" ---------------------------------------
+let g:win_views = {}
+function! CurWinSaveView() abort
+	let g:win_views[winnr()] = winsaveview()
+endfunction
+
+" ウィンドウのカーソル位置を復元（あれば）
+" ---------------------------------------
+function! CurWinRestView() abort
+	if g:win_views->has_key(winnr())
+		call winrestview(g:win_views[winnr()])
+	endif
 endfunction
 
 " 色の切り替え
