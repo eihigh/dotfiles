@@ -67,8 +67,11 @@ nnoremap Y y$
 noremap m mZ
 noremap ` `Z
 
-" ウィンドウの位置復元 (autocmd との合わせ技)
-noremap ' <Cmd>call CurWinRestView()<CR>
+" クリックしてもウィンドウの位置をなるべく保つ
+noremap <LeftMouse> <Cmd>call MyLeftMouse()<CR>
+map <2-LeftMouse> <LeftMouse>
+map <3-LeftMouse> <LeftMouse>
+map <4-LeftMouse> <LeftMouse>
 
 " ウィンドウ移動
 nmap <Plug>(winmove)        <Nop>
@@ -397,6 +400,23 @@ function! CurWinRestView() abort
 	if g:win_views->has_key(winnr())
 		call winrestview(g:win_views[winnr()])
 	endif
+endfunction
+
+" 上記を利用したクリックの挙動
+" ---------------------------------------
+function! MyLeftMouse() abort
+	" クリック前の winnr を保存
+	let prev = winnr()
+	" クリック実行
+	exe "normal! \<LeftMouse>"
+	" クリック後の winnr を保存
+	let curr = winnr()
+	" 同じウィンドウなら通常の挙動
+	if prev == curr
+		return
+	endif
+	" 異なるウィンドウならカーソル位置を復元
+	call CurWinRestView()
 endfunction
 
 " 色の切り替え
