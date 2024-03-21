@@ -157,8 +157,6 @@ nnoremap hr :<C-u>CtrlPMRU<CR>
 nnoremap hl :<C-u>CtrlPBuffer<CR>
 nnoremap hc :<C-u>botright copen<CR>
 
-" TODO: markdown が vimgrep の候補に含まれるとバグるので調査
-
 " ========================================
 " 本体機能の設定
 " ========================================
@@ -265,6 +263,7 @@ let g:lsp_document_code_action_signs_enabled = 0
 let g:lsp_diagnostics_virtual_text_enabled = 1
 let g:lsp_diagnostics_virtual_text_delay = 100
 let g:lsp_diagnostics_virtual_text_align = "right"
+let g:lsp_settings_enable_suggestions = 0
 
 " vim-go
 " LSPに寄せるのでキーマップ無効
