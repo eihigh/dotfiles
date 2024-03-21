@@ -63,27 +63,11 @@ inoremap <Right> <C-g>U<Right>
 " yank 範囲
 nnoremap Y y$
 
-" マークは一種類のみ使う
-noremap m mZ
-noremap ` `Z
-
 " クリックしてもウィンドウの位置をなるべく保つ
 noremap <LeftMouse> <Cmd>call MyLeftMouse()<CR>
 map <2-LeftMouse> <LeftMouse>
 map <3-LeftMouse> <LeftMouse>
 map <4-LeftMouse> <LeftMouse>
-
-" ウィンドウ移動
-nmap <Plug>(winmove)        <Nop>
-nmap           <C-w><Left>  <C-w><Left><Plug>(winmove)
-nmap           <C-w><Down>  <C-w><Down><Plug>(winmove)
-nmap           <C-w><Up>    <C-w><Up><Plug>(winmove)
-nmap           <C-w><Right> <C-w><Right><Plug>(winmove)
-nmap <Plug>(winmove)<Left>  <C-w><Left><Plug>(winmove)
-nmap <Plug>(winmove)<Down>  <C-w><Down><Plug>(winmove)
-nmap <Plug>(winmove)<Up>    <C-w><Up><Plug>(winmove)
-nmap <Plug>(winmove)<Right> <C-w><Right><Plug>(winmove)
-tmap <Plug>(winmove)        <Nop>
 
 " Changelist
 map <Plug>(cgl)  <Nop>
@@ -167,12 +151,13 @@ xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 " TODO: hr の候補にターミナルも混ぜる
 nnoremap hh :<C-u>CtrlPMixed<CR>
 nnoremap he :<C-u>e %:h<CR>
-nnoremap hn :<C-u>terminal ++curwin ++open<CR>
 nnoremap ht :<C-u>call ReuseShellOrCreate()<CR>
 nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
 nnoremap hr :<C-u>CtrlPMRU<CR>
 nnoremap hl :<C-u>CtrlPBuffer<CR>
 nnoremap hc :<C-u>botright copen<CR>
+
+" TODO: markdown が vimgrep の候補に含まれるとバグるので調査
 
 " ========================================
 " 本体機能の設定
@@ -413,11 +398,8 @@ endfunction
 " 上記を利用したクリックの挙動
 " ---------------------------------------
 function! MyLeftMouse() abort
-	" クリック前の winnr を保存
 	let prev = winnr()
-	" クリック実行
 	exe "normal! \<LeftMouse>"
-	" クリック後の winnr を保存
 	let curr = winnr()
 	" 同じウィンドウなら通常の挙動
 	if prev == curr
