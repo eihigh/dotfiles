@@ -308,6 +308,7 @@ let g:choosewin_blink_on_land = 0
 autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 autocmd! VimResized * wincmd =
 autocmd! WinLeave * call CurWinSaveView()
+autocmd! WinScrolled * call CurWinSaveViewOnScroll(expand('<afile>'))
 autocmd! WinClosed * wincmd p
 autocmd! TerminalOpen * setlocal bufhidden=hide
 autocmd! FileType vaffle call s:filetype_vaffle()
@@ -392,6 +393,13 @@ endfunction
 let g:win_views = {}
 function! CurWinSaveView() abort
 	let g:win_views[winnr()] = winsaveview()
+endfunction
+
+" ウィンドウのカーソル位置を保存（スクロール時）
+" ---------------------------------------
+function! CurWinSaveViewOnScroll(winid) abort
+	let winnr = win_id2win(a:winid)
+	let g:win_views[winnr] = winsaveview()
 endfunction
 
 " ウィンドウのカーソル位置を復元（あれば）
