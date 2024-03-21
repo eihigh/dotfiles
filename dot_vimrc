@@ -210,6 +210,12 @@ if isdirectory(expand('~/.cache/vim'))
 	set undodir=~/.cache/vim/
 endif
 
+" grepprg
+if executable('rg')
+	set grepprg=rg\ --vimgrep
+	set grepformat=%f:%l:%c:%m
+endif
+
 " NORMAL/INSERT でカーソル形状を変更
 if &term =~ 'xterm' || &term == 'win32'
 	let &t_SI = "\e[5 q"
@@ -298,6 +304,7 @@ autocmd! TerminalOpen * setlocal bufhidden=hide
 autocmd! FileType vaffle call s:filetype_vaffle()
 autocmd! FileType go call s:filetype_go()
 autocmd! FileType qf call s:filetype_qf()
+autocmd! QuickFixCmdPost make,grep,grepadd,vimgrep botright copen
 
 " ========================================
 " 自作関数
