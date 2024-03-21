@@ -213,7 +213,7 @@ set autoread
 abbrev ret return
 
 " マウス
-set mouse=a
+set mouse=n
 
 " クリップボード
 " TODO
