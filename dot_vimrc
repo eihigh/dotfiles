@@ -148,11 +148,10 @@ xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
-" TODO: hr の候補にターミナルも混ぜる
-nnoremap hh :<C-u>CtrlPMixed<CR>
 nnoremap he :<C-u>e %:h<CR>
 nnoremap ht :<C-u>call ReuseShellOrCreate()<CR>
-nnoremap hs :<C-u>vimgrep '' **<Left><Left><Left><Left>
+nnoremap hs :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
+nnoremap hg :<C-u>vimgrep '' **<Left><Left><Left><Left>
 nnoremap hr :<C-u>CtrlPMRU<CR>
 nnoremap hl :<C-u>CtrlPBuffer<CR>
 nnoremap hc :<C-u>botright copen<CR>
@@ -184,13 +183,14 @@ set number
 set signcolumn=number
 set helplang=ja
 set termguicolors
+set equalalways
 
 " statusline常設
 set laststatus=2
 
 " 挙動
 set autoread
-" set autochdir
+set autochdir
 
 " Abbreviation
 abbrev ret return
@@ -279,7 +279,8 @@ let g:go_def_mapping_enabled = 0
 let g:vaffle_show_hidden_files = 1
 
 " findroot
-let g:findroot_not_for_subdir = 0
+" 'findroot#find()' 関数目的で入れるので、発火はさせない
+let g:findroot_mask = '__do_not_fire__'
 
 " clever-f
 let g:clever_f_across_no_line = 1
@@ -358,6 +359,13 @@ function! s:filetype_qf() abort
 	nnoremap <buffer> <CR> <CR>
 	nnoremap <buffer> o :<C-u>colder<CR>
 	nnoremap <buffer> O :<C-u>cnewer<CR>
+endfunction
+
+" ディレクトリ指定 vimgrep
+" ---------------------------------------
+function! VimGrepDir(dir, word) abort
+	let esc = escape(a:word, '"')
+	exe 'vimgrep "' .. esc .. '" ' .. fnameescape(a:dir) .. '/**'
 endfunction
 
 " 既存の隠れた実行中のシェルがあれば再利用、なければ作成
