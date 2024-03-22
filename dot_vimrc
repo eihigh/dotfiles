@@ -148,6 +148,7 @@ xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
+nnoremap hh :<C-u>CtrlPMixed<CR>
 nnoremap he :<C-u>e %:h<CR>
 nnoremap ht :<C-u>call ReuseShellOrCreate()<CR>
 nnoremap hs :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
