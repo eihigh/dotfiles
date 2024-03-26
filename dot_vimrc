@@ -102,6 +102,14 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " 標準にはない追加のキーマップ（少ないほどよいとされている）
 " ========================================
 
+" 独自配列合わせ
+nnoremap t gk
+nnoremap s gj
+nnoremap r l
+xnoremap t gk
+xnoremap s gj
+xnoremap r l
+
 " 保存ショートカット
 nnoremap <cr> :<C-u>w<CR>
 
@@ -126,13 +134,13 @@ noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal 
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
-nmap sa <Plug>(sandwich-add)
-xmap sa <Plug>(sandwich-add)
-omap sa <Plug>(sandwich-add)
-nmap sd <Plug>(sandwich-delete-auto)
-xmap sd <Plug>(sandwich-delete)
-nmap sr <Plug>(sandwich-replace-auto)
-xmap sr <Plug>(sandwich-replace)
+" nmap sa <Plug>(sandwich-add)
+" xmap sa <Plug>(sandwich-add)
+" omap sa <Plug>(sandwich-add)
+" nmap sd <Plug>(sandwich-delete-auto)
+" xmap sd <Plug>(sandwich-delete)
+" nmap sr <Plug>(sandwich-replace-auto)
+" xmap sr <Plug>(sandwich-replace)
 
 " Edgemotion
 nmap g< <Plug>(edgemotion-k)
@@ -142,20 +150,23 @@ nmap g> <Plug>(edgemotion-j)
 xmap g> <Plug>(edgemotion-j)
 omap g> <Plug>(edgemotion-j)
 
+" clever-f
+let g:clever_f_not_overwrites_standard_mappings = 1
+
 " Searchx
 nnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
-nnoremap hh :<C-u>CtrlPMixed<CR>
-nnoremap he :<C-u>e %:h<CR>
-nnoremap ht :<C-u>call ReuseShellOrCreate()<CR>
-nnoremap hs :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
-nnoremap hg :<C-u>vimgrep '' **<Left><Left><Left><Left>
-nnoremap hr :<C-u>CtrlPMRU<CR>
-nnoremap hl :<C-u>CtrlPBuffer<CR>
-nnoremap hc :<C-u>botright copen<CR>
+nnoremap <space>h :<C-u>CtrlPMixed<CR>
+nnoremap <space>e :<C-u>e %:h<CR>
+nnoremap <space>t :<C-u>call ReuseShellOrCreate()<CR>
+nnoremap <space>s :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
+nnoremap <space>g :<C-u>vimgrep '' **<Left><Left><Left><Left>
+nnoremap <space>r :<C-u>CtrlPMRU<CR>
+nnoremap <space>l :<C-u>CtrlPBuffer<CR>
+nnoremap <space>c :<C-u>botright copen<CR>
 
 " ========================================
 " 本体機能の設定
