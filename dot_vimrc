@@ -110,6 +110,15 @@ xnoremap t gk
 xnoremap s gj
 xnoremap r l
 
+nnoremap T {
+nnoremap S }
+nnoremap H ^
+nnoremap R $
+xnoremap T {
+xnoremap S }
+xnoremap H ^
+xnoremap R $
+
 " 保存ショートカット
 nnoremap <cr> :<C-u>w<CR>
 
