@@ -146,7 +146,6 @@ endfunction
 
 " ターミナルからの脱出
 tnoremap <Esc><Esc> <Esc>
-tnoremap <Esc>-     <C-w>:<C-u>call choosewin#start(range(1, winnr('$')))<CR>
 tnoremap <Esc>n     <C-w>N
 tnoremap <Esc>h     <C-w>:hide \| wincmd p<CR>
 tnoremap <esc>p     <c-w>p
@@ -166,12 +165,12 @@ nmap mr <Plug>(sandwich-replace-auto)
 xmap mr <Plug>(sandwich-replace)
 
 " Edgemotion
-nmap g< <Plug>(edgemotion-k)
-xmap g< <Plug>(edgemotion-k)
-omap g< <Plug>(edgemotion-k)
-nmap g> <Plug>(edgemotion-j)
-xmap g> <Plug>(edgemotion-j)
-omap g> <Plug>(edgemotion-j)
+nmap H <Plug>(edgemotion-k)
+xmap H <Plug>(edgemotion-k)
+omap H <Plug>(edgemotion-k)
+nmap L <Plug>(edgemotion-j)
+xmap L <Plug>(edgemotion-j)
+omap L <Plug>(edgemotion-j)
 
 " clever-f
 let g:clever_f_not_overwrites_standard_mappings = 1
