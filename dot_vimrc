@@ -33,6 +33,7 @@ Plug 'yssl/QFEnter'
 " パッシブ拡張
 " Plug 'wellle/context.vim'
 Plug 'obcat/vim-sclow'
+Plug 'obcat/vim-hitspop'
 
 " 言語
 Plug 'prabirshrestha/vim-lsp'
@@ -41,6 +42,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/ctrlp-lsp'
 Plug 'fatih/vim-go'
+" TODO: obcat/vim-ref-godoc
 
 " ウィンドウ
 Plug '4513ECHO/vim-snipewin'
@@ -103,7 +105,7 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " ========================================
 
 " 保存ショートカット
-nnoremap m :<C-u>w<CR>
+nnoremap M <cmd>update<cr>
 
 " ウィンドウ管理
 nnoremap t  <cmd>call GotoWinByLabel()<cr>
@@ -155,13 +157,13 @@ noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal 
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
-" nmap sa <Plug>(sandwich-add)
-" xmap sa <Plug>(sandwich-add)
-" omap sa <Plug>(sandwich-add)
-" nmap sd <Plug>(sandwich-delete-auto)
-" xmap sd <Plug>(sandwich-delete)
-" nmap sr <Plug>(sandwich-replace-auto)
-" xmap sr <Plug>(sandwich-replace)
+nmap ma <Plug>(sandwich-add)
+xmap ma <Plug>(sandwich-add)
+omap ma <Plug>(sandwich-add)
+nmap md <Plug>(sandwich-delete-auto)
+xmap md <Plug>(sandwich-delete)
+nmap mr <Plug>(sandwich-replace-auto)
+xmap mr <Plug>(sandwich-replace)
 
 " Edgemotion
 nmap g< <Plug>(edgemotion-k)
@@ -180,14 +182,14 @@ xnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
-nnoremap <space>h :<C-u>CtrlPMixed<CR>
-nnoremap <space>e :<C-u>e %:h<CR>
-nnoremap <space>t :<C-u>call ReuseShellOrCreate()<CR>
-nnoremap <space>s :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
-nnoremap <space>g :<C-u>vimgrep '' **<Left><Left><Left><Left>
-nnoremap <space>r :<C-u>CtrlPMRU<CR>
-nnoremap <space>l :<C-u>CtrlPBuffer<CR>
-nnoremap <space>c :<C-u>botright copen<CR>
+nnoremap 'h :<C-u>CtrlPMixed<CR>
+nnoremap 'e :<C-u>e %:h<CR>
+nnoremap 't :<C-u>call ReuseShellOrCreate()<CR>
+nnoremap 's :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
+nnoremap 'g :<C-u>vimgrep '' **<Left><Left><Left><Left>
+nnoremap 'r :<C-u>CtrlPMRU<CR>
+nnoremap 'l :<C-u>CtrlPBuffer<CR>
+nnoremap 'c :<C-u>botright copen<CR>
 
 " ========================================
 " 本体機能の設定
@@ -196,34 +198,42 @@ nnoremap <space>c :<C-u>botright copen<CR>
 " エンコード
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,euc-jp,cp932
+set fileencodings=ucs-bom,utf-8,iso-2022-jp,euc-jp,cp932,latin1
+set fileformats=unix,dos
 
 " 検索
 set hlsearch
-set incsearch
 set ignorecase
+set incsearch
 set smartcase
 
 " テキスト編集
 set backspace=eol,indent,start
-set tabstop=3
+set formatoptions+=mM
+set matchpairs+=<:>,「:」,（:）,『:』,【:】,《:》,〈:〉,｛:｝,［:］,【:】,‘:’,“:”
 set shiftwidth=3
 set smartindent
+set tabstop=3
+set whichwrap=b,s,h,l,<,>,[,]
+" TODO: spell check
 
 " 見た目
+set display=lastline
+set equalalways
+set helplang=ja
+set laststatus=2
+set list
+set listchars=tab:\ \ ,extends:<,trail:+
 set nowrap
 set number
 set signcolumn=number
-set helplang=ja
 set termguicolors
-set equalalways
-
-" statusline常設
-set laststatus=2
 
 " 挙動
-set autoread
 set autochdir
+set autoread
+set tabpagemax=100
+set splitright
 
 " Abbreviation
 abbrev ret return
@@ -325,6 +335,10 @@ let g:clever_f_mark_char_color = 'Search'
 " Choosewin
 " overlay 表示はターミナルで壊れる
 let g:choosewin_blink_on_land = 0
+
+" Hitspop
+let g:hitspop_line = 'winbot'
+let g:hitspop_column_mod = -1
 
 " ========================================
 " Autocmd!
@@ -476,4 +490,4 @@ endfunction
 call plug#end()
 
 " 色の設定はプラグイン読み込み後に行う
-call Day()
+call Night()
