@@ -65,12 +65,6 @@ inoremap <Right> <C-g>U<Right>
 " yank 範囲
 nnoremap Y y$
 
-" クリックしてもウィンドウの位置をなるべく保つ
-noremap <LeftMouse> <Cmd>call MyLeftMouse()<CR>
-map <2-LeftMouse> <LeftMouse>
-map <3-LeftMouse> <LeftMouse>
-map <4-LeftMouse> <LeftMouse>
-
 " Changelist
 map <Plug>(cgl)  <Nop>
 map           g; g;<Plug>(cgl)
@@ -178,6 +172,8 @@ let g:clever_f_not_overwrites_standard_mappings = 1
 " Searchx
 nnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
 xnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
+nnoremap S <Cmd>call searchx#start({ 'dir': 0 })<cr>
+xnoremap S <Cmd>call searchx#start({ 'dir': 0 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
@@ -331,10 +327,6 @@ let g:clever_f_mark_char_color = 'Search'
 
 " Scrollbar
 
-" Choosewin
-" overlay 表示はターミナルで壊れる
-let g:choosewin_blink_on_land = 0
-
 " Hitspop
 let g:hitspop_line = 'winbot'
 let g:hitspop_column_mod = -1
@@ -431,42 +423,6 @@ function! ReuseShellOrCreate() abort
 
 	let bufnr = bufinfo[0].bufnr
 	exe 'b '.bufnr
-endfunction
-
-" ウィンドウのカーソル位置を保存
-" ---------------------------------------
-let g:win_views = {}
-function! CurWinSaveView() abort
-	let g:win_views[winnr()] = winsaveview()
-endfunction
-
-" ウィンドウのカーソル位置を保存（スクロール時）
-" ---------------------------------------
-function! CurWinSaveViewOnScroll(winid) abort
-	let winnr = win_id2win(a:winid)
-	let g:win_views[winnr] = winsaveview()
-endfunction
-
-" ウィンドウのカーソル位置を復元（あれば）
-" ---------------------------------------
-function! CurWinRestView() abort
-	if g:win_views->has_key(winnr())
-		call winrestview(g:win_views[winnr()])
-	endif
-endfunction
-
-" 上記を利用したクリックの挙動
-" ---------------------------------------
-function! MyLeftMouse() abort
-	let prev = winnr()
-	exe "normal! \<LeftMouse>"
-	let curr = winnr()
-	" 同じウィンドウなら通常の挙動
-	if prev == curr
-		return
-	endif
-	" 異なるウィンドウならカーソル位置を復元
-	call CurWinRestView()
 endfunction
 
 " 色の切り替え
