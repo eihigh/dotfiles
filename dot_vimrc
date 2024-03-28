@@ -133,41 +133,8 @@ function! SwapWinByLabel() abort
 		return
 	endif
 	let id = win_getid(nr)
-	" call snipewin#callback#swap(id)
-	call SwapWin(id)
-endfunction
-
-function! SwapWin(winid) abort
-  let current = win_getid()
-  if current !=# a:winid && winnr('$') <= 2
-    wincmd x
-    return
-  endif
-  let target = s:find_wincmd_x_target(winlayout(), current, a:winid)
-  if target
-    execute target 'wincmd x'
-    return
-  endif
-  let current = winbufnr(current)
-  execute 'hide buffer' winbufnr(a:winid)
-  call win_execute(a:winid, 'hide buffer ' .. current)
-endfunction
-
-" Original: https://github.com/atusy/dotfiles/blob/effe2521/dot_config/nvim/lua/plugins/chowcho.lua#L83-L96
-"  License: MIT, https://github.com/atusy/dotfiles/blob/effe2521/LICENSE.md
-function! s:find_wincmd_x_target(layout, current, target) abort
-  let leaves = {}
-  for [idx, item] in a:layout[1]->map({ i, v -> [i + 1, v] })
-    if item[0] ==# 'leaf'
-      let leaves[item[1]] = idx
-    else
-      let result = s:find_wincmd_x_target(item, a:current, a:target)
-      if result
-        return result
-      endif
-    endif
-  endfor
-  return leaves->has_key(a:current) ? leaves->get(a:target) : 0
+	call snipewin#callback#swap(id)
+	echo id
 endfunction
 
 function! WinLabel() abort
@@ -208,8 +175,8 @@ omap g> <Plug>(edgemotion-j)
 let g:clever_f_not_overwrites_standard_mappings = 1
 
 " Searchx
-nnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
-xnoremap l <Cmd>call searchx#start({ 'dir': 1 })<cr>
+nnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
+xnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
