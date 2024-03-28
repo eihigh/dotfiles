@@ -43,7 +43,7 @@ Plug 'mattn/ctrlp-lsp'
 Plug 'fatih/vim-go'
 
 " ウィンドウ
-Plug 't9md/vim-choosewin'
+Plug '4513ECHO/vim-snipewin'
 
 " 小回り
 Plug 'vim-jp/vimdoc-ja'
@@ -102,31 +102,85 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " 標準にはない追加のキーマップ（少ないほどよいとされている）
 " ========================================
 
-" 独自配列合わせ
-nnoremap t gk
-nnoremap s gj
-nnoremap r l
-xnoremap t gk
-xnoremap s gj
-xnoremap r l
-
 " 保存ショートカット
-nnoremap <cr> :<C-u>w<CR>
+nnoremap m :<C-u>w<CR>
 
 " ウィンドウ管理
-map - <Plug>(choosewin)
-map _ <C-w>
-noremap <C-w>_ :<C-u>below split<CR>
-noremap <C-w>- :<C-u>above split<CR>
-noremap <C-w>( :<C-u>lefta vsplit<CR>
-noremap <C-w>) :<C-u>rightb vsplit<CR>
-noremap <C-w>! ZZ
+nnoremap t  <cmd>call GotoWinByLabel()<cr>
+nnoremap T  <cmd>call SwapWinByLabel()<cr>
+nnoremap ta <cmd>above split<cr>
+nnoremap tb <cmd>below split<cr>
+nnoremap tr <cmd>rightb vsplit<cr>
+nnoremap tl <cmd>lefta vsplit<cr>
+nnoremap tp <c-w>p
+
+let g:win_labels = split(' eni,hmdlcuoq', '.\zs')
+
+function! GotoWinByLabel() abort
+	let c = nr2char(getchar())
+	let nr = index(g:win_labels, c)
+	if nr == -1
+		return
+	endif
+	let id = win_getid(nr)
+	call win_gotoid(id)
+endfunction
+
+function! SwapWinByLabel() abort
+	let c = nr2char(getchar())
+	let nr = index(g:win_labels, c)
+	if nr == -1
+		return
+	endif
+	let id = win_getid(nr)
+	" call snipewin#callback#swap(id)
+	call SwapWin(id)
+endfunction
+
+function! SwapWin(winid) abort
+  let current = win_getid()
+  if current !=# a:winid && winnr('$') <= 2
+    wincmd x
+    return
+  endif
+  let target = s:find_wincmd_x_target(winlayout(), current, a:winid)
+  if target
+    execute target 'wincmd x'
+    return
+  endif
+  let current = winbufnr(current)
+  execute 'hide buffer' winbufnr(a:winid)
+  call win_execute(a:winid, 'hide buffer ' .. current)
+endfunction
+
+" Original: https://github.com/atusy/dotfiles/blob/effe2521/dot_config/nvim/lua/plugins/chowcho.lua#L83-L96
+"  License: MIT, https://github.com/atusy/dotfiles/blob/effe2521/LICENSE.md
+function! s:find_wincmd_x_target(layout, current, target) abort
+  let leaves = {}
+  for [idx, item] in a:layout[1]->map({ i, v -> [i + 1, v] })
+    if item[0] ==# 'leaf'
+      let leaves[item[1]] = idx
+    else
+      let result = s:find_wincmd_x_target(item, a:current, a:target)
+      if result
+        return result
+      endif
+    endif
+  endfor
+  return leaves->has_key(a:current) ? leaves->get(a:target) : 0
+endfunction
+
+function! WinLabel() abort
+	let label = get(g:win_labels, winnr(), '')
+	return label
+endfunction
 
 " ターミナルからの脱出
 tnoremap <Esc><Esc> <Esc>
 tnoremap <Esc>-     <C-w>:<C-u>call choosewin#start(range(1, winnr('$')))<CR>
 tnoremap <Esc>n     <C-w>N
 tnoremap <Esc>h     <C-w>:hide \| wincmd p<CR>
+tnoremap <esc>p     <c-w>p
 
 " z. でカーソル中央固定
 set scrolloff=2
@@ -242,7 +296,7 @@ endif
 function! Stl_fenc() abort
 	return &fenc == "utf-8" ? "" : "[".&fenc."]"
 endfunction
-set statusline=\ %m%=%{Stl_fenc()}\ %<%F\ 
+set statusline=\ [%{WinLabel()}]%=%m%{Stl_fenc()}\ %<%F\ 
 
 " ========================================
 " プラグイン機能の設定
