@@ -139,12 +139,12 @@ nmap 'r <Plug>(sandwich-replace-auto)
 xmap 'r <Plug>(sandwich-replace)
 
 " Edgemotion
-nmap 'e <Plug>(edgemotion-k)
-xmap 'e <Plug>(edgemotion-k)
-omap 'e <Plug>(edgemotion-k)
-nmap 'E <Plug>(edgemotion-j)
-xmap 'E <Plug>(edgemotion-j)
-omap 'E <Plug>(edgemotion-j)
+nmap 'e <Plug>(edgemotion-j)
+xmap 'e <Plug>(edgemotion-j)
+omap 'e <Plug>(edgemotion-j)
+nmap 'E <Plug>(edgemotion-k)
+xmap 'E <Plug>(edgemotion-k)
+omap 'E <Plug>(edgemotion-k)
 
 " clever-f
 let g:clever_f_not_overwrites_standard_mappings = 1
