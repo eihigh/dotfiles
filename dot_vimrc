@@ -72,6 +72,14 @@ map           g, g,<Plug>(cgl)
 map <Plug>(cgl); g;<Plug>(cgl)
 map <Plug>(cgl), g,<Plug>(cgl)
 
+" Clever-f
+noremap  f <plug>(clever-f-f)
+noremap  F <plug>(clever-f-F)
+xnoremap t <plug>(clever-f-t)
+xnoremap T <plug>(clever-f-T)
+onoremap t <plug>(clever-f-t)
+onoremap T <plug>(clever-f-T)
+
 " Asterisk
 map *  <Plug>(asterisk-z*)
 map #  <Plug>(asterisk-z#)
@@ -108,35 +116,7 @@ nnoremap ta <cmd>above split<cr>
 nnoremap tb <cmd>below split<cr>
 nnoremap tr <cmd>rightb vsplit<cr>
 nnoremap tl <cmd>lefta vsplit<cr>
-nnoremap tp <c-w>p
-
-let g:win_labels = split(' eni,hmdlcuoq', '.\zs')
-
-function! GotoWinByLabel() abort
-	let c = nr2char(getchar())
-	let nr = index(g:win_labels, c)
-	if nr == -1
-		return
-	endif
-	let id = win_getid(nr)
-	call win_gotoid(id)
-endfunction
-
-function! SwapWinByLabel() abort
-	let c = nr2char(getchar())
-	let nr = index(g:win_labels, c)
-	if nr == -1
-		return
-	endif
-	let id = win_getid(nr)
-	call snipewin#callback#swap(id)
-	echo id
-endfunction
-
-function! WinLabel() abort
-	let label = get(g:win_labels, winnr(), '')
-	return label
-endfunction
+nnoremap tt <c-w>p
 
 " ターミナルからの脱出
 tnoremap <Esc><Esc> <Esc>
@@ -150,21 +130,21 @@ noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal 
 
 " Sandwich
 let g:sandwich_no_default_key_mappings = 1
-nmap ma <Plug>(sandwich-add)
-xmap ma <Plug>(sandwich-add)
-omap ma <Plug>(sandwich-add)
-nmap md <Plug>(sandwich-delete-auto)
-xmap md <Plug>(sandwich-delete)
-nmap mr <Plug>(sandwich-replace-auto)
-xmap mr <Plug>(sandwich-replace)
+nmap 'a <Plug>(sandwich-add)
+xmap 'a <Plug>(sandwich-add)
+omap 'a <Plug>(sandwich-add)
+nmap 'd <Plug>(sandwich-delete-auto)
+xmap 'd <Plug>(sandwich-delete)
+nmap 'r <Plug>(sandwich-replace-auto)
+xmap 'r <Plug>(sandwich-replace)
 
 " Edgemotion
-nmap H <Plug>(edgemotion-k)
-xmap H <Plug>(edgemotion-k)
-omap H <Plug>(edgemotion-k)
-nmap L <Plug>(edgemotion-j)
-xmap L <Plug>(edgemotion-j)
-omap L <Plug>(edgemotion-j)
+nmap 'e <Plug>(edgemotion-k)
+xmap 'e <Plug>(edgemotion-k)
+omap 'e <Plug>(edgemotion-k)
+nmap 'E <Plug>(edgemotion-j)
+xmap 'E <Plug>(edgemotion-j)
+omap 'E <Plug>(edgemotion-j)
 
 " clever-f
 let g:clever_f_not_overwrites_standard_mappings = 1
@@ -177,14 +157,14 @@ xnoremap S <Cmd>call searchx#start({ 'dir': 0 })<cr>
 
 " これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
 " 仕方なく割り当てるやつ
-nnoremap 'h :<C-u>CtrlPMixed<CR>
-nnoremap 'e :<C-u>e %:h<CR>
-nnoremap 't :<C-u>call ReuseShellOrCreate()<CR>
-nnoremap 's :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
-nnoremap 'g :<C-u>vimgrep '' **<Left><Left><Left><Left>
-nnoremap 'r :<C-u>CtrlPMRU<CR>
-nnoremap 'l :<C-u>CtrlPBuffer<CR>
-nnoremap 'c :<C-u>botright copen<CR>
+nnoremap mm :<C-u>CtrlPMixed<CR>
+nnoremap me :<C-u>e %:h<CR>
+nnoremap mt :<C-u>call ReuseShellOrCreate()<CR>
+nnoremap ms :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
+nnoremap mg :<C-u>vimgrep '' **<Left><Left><Left><Left>
+nnoremap mr :<C-u>CtrlPMRU<CR>
+nnoremap ml :<C-u>CtrlPBuffer<CR>
+nnoremap mc :<C-u>botright copen<CR>
 
 " ========================================
 " 本体機能の設定
@@ -336,8 +316,6 @@ let g:hitspop_column_mod = -1
 " ========================================
 autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 autocmd! VimResized * wincmd =
-autocmd! WinLeave * call CurWinSaveView()
-autocmd! WinScrolled * call CurWinSaveViewOnScroll(expand('<afile>'))
 autocmd! WinClosed * wincmd p
 autocmd! TerminalOpen * setlocal bufhidden=hide
 autocmd! FileType vaffle call s:filetype_vaffle()
@@ -387,8 +365,8 @@ function! s:filetype_go() abort
 	abbrev <buffer> e_ err != nil
 	abbrev <buffer> a_ append
 
-	nnoremap g.t :<C-u>GoTest<CR>
-	nnoremap g.f :<C-u>GoTestFunc<CR>
+	nnoremap mTT :<C-u>GoTest<CR>
+	nnoremap mTF :<C-u>GoTestFunc<CR>
 endfunction
 
 " Quickfix
@@ -423,6 +401,36 @@ function! ReuseShellOrCreate() abort
 
 	let bufnr = bufinfo[0].bufnr
 	exe 'b '.bufnr
+endfunction
+
+" ウィンドウ管理
+" ---------------------------------------
+let g:win_labels = split(' eni,hmdlcuoq', '.\zs')
+
+function! GotoWinByLabel() abort
+	let c = nr2char(getchar())
+	let nr = index(g:win_labels, c)
+	if nr == -1
+		return
+	endif
+	let id = win_getid(nr)
+	call win_gotoid(id)
+endfunction
+
+function! SwapWinByLabel() abort
+	let c = nr2char(getchar())
+	let nr = index(g:win_labels, c)
+	if nr == -1
+		return
+	endif
+	let id = win_getid(nr)
+	call snipewin#callback#swap(id)
+	echo id
+endfunction
+
+function! WinLabel() abort
+	let label = get(g:win_labels, winnr(), '')
+	return label
 endfunction
 
 " 色の切り替え
