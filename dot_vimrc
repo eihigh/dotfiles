@@ -65,6 +65,8 @@ inoremap <Right> <C-g>U<Right>
 " yank 範囲
 nnoremap Y y$
 
+noremap <home> ^
+
 " Changelist
 map <Plug>(cgl)  <Nop>
 map           g; g;<Plug>(cgl)
