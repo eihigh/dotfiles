@@ -240,6 +240,15 @@ endif
 " ステータスラインをシュッとさせる
 set statusline=\ [%{WinLabel()}]%=%m%{EncInfo()}\ %<%F
 
+" Autocmd
+augroup others
+	autocmd!
+	autocmd QuickFixCmdPost make,grep,grepadd,vimgrep botright copen 18
+	autocmd WinClosed * wincmd p
+	autocmd TabClosed * wincmd p
+	autocmd VimResized * wincmd =
+augroup END
+
 " ========================================
 " プラグイン機能の設定
 " ========================================
@@ -302,29 +311,18 @@ let g:hitspop_line = 'winbot'
 let g:hitspop_column_mod = -1
 
 " ========================================
-" Autocmd
-" ========================================
-augroup vimrc
-	autocmd!
-
-	" バッファローカル設定トリガー
-	autocmd User lsp_buffer_enabled call BufLocalLSP()
-	autocmd FileType vaffle call BufLocalVaffle()
-	autocmd FileType go call BufLocalGo()
-	autocmd FileType qf call BufLocalQF()
-	autocmd FileType markdown call BufLocalMarkdown()
-	autocmd TerminalOpen * setlocal bufhidden=hide
-
-	" それ以外
-	autocmd QuickFixCmdPost make,grep,grepadd,vimgrep botright copen 18
-	autocmd WinClosed * wincmd p
-	autocmd TabClosed * wincmd p
-	autocmd VimResized * wincmd =
-augroup END
-
-" ========================================
 " バッファローカル設定
 " ========================================
+
+augroup buflocal
+	autocmd!
+	autocmd User lsp_buffer_enabled call BufLocalLSP()
+	autocmd FileType vaffle         call BufLocalVaffle()
+	autocmd FileType go             call BufLocalGo()
+	autocmd FileType qf             call BufLocalQF()
+	autocmd FileType markdown       call BufLocalMarkdown()
+	autocmd TerminalOpen * setlocal bufhidden=hide
+augroup END
 
 " vim-lsp
 " ---------------------------------------
