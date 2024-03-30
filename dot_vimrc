@@ -123,7 +123,7 @@ nnoremap tp <c-w>p
 " 主要コマンド
 nnoremap mm <cmd>CtrlPMixed<cr>
 nnoremap me <cmd>e %:h<cr>
-nnoremap mt <cmd>call GotoShellOrOpen()<cr>
+nnoremap mt <cmd>call ReuseShellOrCreate()<cr>
 nnoremap ms <cmd>call VimGrepDir(findroot#find(), '')<left><left>
 nnoremap mg <cmd>call vimgrep '' **<left><left><left><left>
 nnoremap mr <cmd>CtrlPMRU<cr>
@@ -237,7 +237,7 @@ else
 endif
 
 " ステータスラインをシュッとさせる
-set statusline=\ [%{WinLabel()}]%=%m%{EncInfo()}\ %<%F\
+set statusline=\ [%{WinLabel()}]%=%m%{EncInfo()}\ %<%F
 
 " ========================================
 " プラグイン機能の設定
@@ -411,19 +411,7 @@ function! SwapWinByLabel() abort
 	endif
 endfunction
 
-function! GotoShellOrOpen() abort
-	" 実行中で表示中のシェルがあれば移動
-	let wins = getwininfo()->filter({i, w ->
-				\ w.terminal == 1 &&
-				\ stridx(bufname(w.bufnr), '!'..&shell) == 0 &&
-				\ getbufinfo(w.bufnr)[0].changed == 1
-				\ })
-
-	if len(wins) != 0
-		call win_gotoid(wins[0].winid)
-		return
-	endif
-
+function! ReuseShellOrCreate() abort
 	" 実行中で非表示のシェルがあれば復元
 	let bufs = getbufinfo()->filter({i, b ->
 				\ getbufvar(b.bufnr, '&buftype') == 'terminal' &&
