@@ -10,13 +10,13 @@ Plug 'chriskempson/base16-vim'
 Plug 'cocopon/iceberg.vim'
 
 " モーション / オペレータ
+Plug 'rhysd/clever-f.vim'
+Plug 'hrsh7th/vim-searchx'
 Plug 'haya14busa/vim-edgemotion'
 Plug 'haya14busa/vim-asterisk'
-Plug 'rhysd/clever-f.vim'
 Plug 'kana/vim-textobj-user'
-Plug 'sgur/vim-textobj-parameter'
 Plug 'kana/vim-textobj-indent'
-Plug 'hrsh7th/vim-searchx'
+Plug 'sgur/vim-textobj-parameter'
 
 " テキスト編集
 Plug 'tyru/caw.vim'
@@ -51,42 +51,38 @@ Plug '4513ECHO/vim-snipewin'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'Shougo/junkfile.vim'
 
+call plug#end()
+
 " ========================================
 " 標準のキーマップの上書き・調整（いくらあってもよいとされている）
 " ========================================
 
 " 検索ハイライト消去
-nnoremap <silent> <Esc> :<C-u>nohlsearch<CR>
+nnoremap <silent> <esc> <cmd>nohlsearch<cr>
 
 " インサート中移動で undo block を中断しない
-inoremap <Left>  <C-g>U<Left>
-inoremap <Right> <C-g>U<Right>
+inoremap <left>  <c-g>U<left>
+inoremap <right> <c-g>U<right>
 
 " yank 範囲
 nnoremap Y y$
 
-noremap <home> ^
-
 " Changelist
-map <Plug>(cgl)  <Nop>
-map           g; g;<Plug>(cgl)
-map           g, g,<Plug>(cgl)
-map <Plug>(cgl); g;<Plug>(cgl)
-map <Plug>(cgl), g,<Plug>(cgl)
+nnoremap <plug>(cgl)  <nop>
+nnoremap           g; g;<plug>(cgl)
+nnoremap           g, g,<plug>(cgl)
+nnoremap <plug>(cgl); g;<plug>(cgl)
+nnoremap <plug>(cgl), g,<plug>(cgl)
 
 " Clever-f
-noremap  f <plug>(clever-f-f)
-noremap  F <plug>(clever-f-F)
-xnoremap t <plug>(clever-f-t)
-xnoremap T <plug>(clever-f-T)
-onoremap t <plug>(clever-f-t)
-onoremap T <plug>(clever-f-T)
+noremap f <plug>(clever-f-f)
+noremap F <plug>(clever-f-F)
 
 " Asterisk
-map *  <Plug>(asterisk-z*)
-map #  <Plug>(asterisk-z#)
-map g* <Plug>(asterisk-gz*)
-map g# <Plug>(asterisk-gz#)
+noremap *  <plug>(asterisk-z*)
+noremap #  <plug>(asterisk-z#)
+noremap g* <plug>(asterisk-gz*)
+noremap g# <plug>(asterisk-gz#)
 
 " Lexiv
 inoremap <expr> " lexiv#quote_open('"')
@@ -100,9 +96,9 @@ inoremap <expr> ) lexiv#paren_close(')')
 inoremap <expr> ] lexiv#paren_close(']')
 
 " Asyncomplete
-inoremap <silent> <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent> <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_expand()
+inoremap <silent> <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+inoremap <silent> <expr> <tab>   pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent> <expr> <cr>   (pumvisible() ? "\<c-y>" : "") .. lexiv#paren_expand()
 
 " ========================================
 " 標準にはない追加のキーマップ（少ないほどよいとされている）
@@ -111,7 +107,10 @@ inoremap <silent> <expr> <CR>    (pumvisible() ? "\<C-y>" : "") . lexiv#paren_ex
 " 保存ショートカット
 nnoremap M <cmd>update<cr>
 
+" t, T, m, ', ` は既定で1char食うので、潰してスパルタン環境で誤爆しても害が少ない
+
 " ウィンドウ管理
+let g:win_labels = split('ine,mhsfvwdcxzkyou', '.\zs')
 nnoremap t  <cmd>call GotoWinByLabel()<cr>
 nnoremap T  <cmd>call SwapWinByLabel()<cr>
 nnoremap ta <cmd>above split<cr>
@@ -119,54 +118,52 @@ nnoremap tb <cmd>below split<cr>
 nnoremap tr <cmd>rightb vsplit<cr>
 nnoremap tl <cmd>lefta vsplit<cr>
 nnoremap tt <c-w>p
+nnoremap tp <c-w>p
+
+" 主要コマンド
+nnoremap mm <cmd>CtrlPMixed<cr>
+nnoremap me <cmd>e %:h<cr>
+nnoremap mt <cmd>call GotoShellOrOpen()<cr>
+nnoremap ms <cmd>call VimGrepDir(findroot#find(), '')<left><left>
+nnoremap mg <cmd>call vimgrep '' **<left><left><left><left>
+nnoremap mr <cmd>CtrlPMRU<cr>
+nnoremap ml <cmd>CtrlPBuffer<cr>
+nnoremap mc <cmd>botright copen 18<cr>
+
+" Sandwich
+noremap  'a <plug>(sandwich-add)
+nnoremap 'd <plug>(sandwich-delete-auto)
+xnoremap 'd <plug>(sandwich-delete)
+nnoremap 'r <plug>(sandwich-replace-auto)
+xnoremap 'r <plug>(sandwich-replace)
+
+" Edgemotion
+noremap 'e <plug>(edgemotion-j)
+noremap 'E <plug>(edgemotion-k)
+
+" Searchx
+nnoremap s <cmd>call searchx#start({ 'dir': 1 })<cr>
+xnoremap s <cmd>call searchx#start({ 'dir': 1 })<cr>
+nnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
+xnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
 
 " ターミナルからの脱出
-tnoremap <Esc><Esc> <Esc>
-tnoremap <Esc>n     <C-w>N
-tnoremap <Esc>h     <C-w>:hide \| wincmd p<CR>
+" ウィンドウ分割はターミナルノーマルに抜けてから実施
+tnoremap <esc><esc> <esc>
+tnoremap <esc>n     <c-w>N
 tnoremap <esc>p     <c-w>p
+tnoremap <esc>h     <c-w>:hide \| wincmd p<cr>
+tnoremap <esc>t     <c-w>:<c-u>call GotoWinByLabel()<cr>
+tnoremap <esc>tt    <c-w>p
+tnoremap <esc>tp    <c-w>p
 
 " z. でカーソル中央固定
 set scrolloff=2
 noremap <expr> z. &scrolloff == 99 ? ':setlocal scrolloff=2<CR>' : 'zz:setlocal scrolloff=99<CR>'
 
-" Sandwich
-let g:sandwich_no_default_key_mappings = 1
-nmap 'a <Plug>(sandwich-add)
-xmap 'a <Plug>(sandwich-add)
-omap 'a <Plug>(sandwich-add)
-nmap 'd <Plug>(sandwich-delete-auto)
-xmap 'd <Plug>(sandwich-delete)
-nmap 'r <Plug>(sandwich-replace-auto)
-xmap 'r <Plug>(sandwich-replace)
-
-" Edgemotion
-nmap 'e <Plug>(edgemotion-j)
-xmap 'e <Plug>(edgemotion-j)
-omap 'e <Plug>(edgemotion-j)
-nmap 'E <Plug>(edgemotion-k)
-xmap 'E <Plug>(edgemotion-k)
-omap 'E <Plug>(edgemotion-k)
-
-" clever-f
-let g:clever_f_not_overwrites_standard_mappings = 1
-
-" Searchx
-nnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
-xnoremap s <Cmd>call searchx#start({ 'dir': 1 })<cr>
-nnoremap S <Cmd>call searchx#start({ 'dir': 0 })<cr>
-xnoremap S <Cmd>call searchx#start({ 'dir': 0 })<cr>
-
-" これ以上のキーマップは増やしたくないので本当はコマンドパレットを使いたいが
-" 仕方なく割り当てるやつ
-nnoremap mm :<C-u>CtrlPMixed<CR>
-nnoremap me :<C-u>e %:h<CR>
-nnoremap mt :<C-u>call ReuseShellOrCreate()<CR>
-nnoremap ms :<C-u>call VimGrepDir(findroot#find(), '')<Left><Left>
-nnoremap mg :<C-u>vimgrep '' **<Left><Left><Left><Left>
-nnoremap mr :<C-u>CtrlPMRU<CR>
-nnoremap ml :<C-u>CtrlPBuffer<CR>
-nnoremap mc :<C-u>botright copen<CR>
+" テーマ切り替え
+nnoremap <f2> <cmd>call Night()<cr>
+nnoremap <f3> <cmd>call Day()<cr>
 
 " ========================================
 " 本体機能の設定
@@ -191,7 +188,6 @@ set matchpairs+=<:>,「:」,（:）,『:』,【:】,《:》,〈:〉,｛:｝,［:
 set shiftwidth=3
 set smartindent
 set tabstop=3
-set whichwrap=b,s,h,l,<,>,[,]
 " TODO: spell check
 
 " 見た目
@@ -210,6 +206,7 @@ set termguicolors
 set autochdir
 set autoread
 set tabpagemax=100
+set ttimeoutlen=0
 set splitright
 
 " Abbreviation
@@ -217,12 +214,6 @@ abbrev ret return
 
 " マウス
 set mouse=n
-
-" クリップボード
-" TODO
-
-" Esc の遅延解消
-set ttimeoutlen=0
 
 " undo 履歴
 if isdirectory(expand('~/.cache/vim'))
@@ -246,23 +237,17 @@ else
 endif
 
 " ステータスラインをシュッとさせる
-" utf-8 以外の注意すべきエンコードなら強調する
-function! Stl_fenc() abort
-	return &fenc == "utf-8" ? "" : "[".&fenc."]"
-endfunction
-set statusline=\ [%{WinLabel()}]%=%m%{Stl_fenc()}\ %<%F\ 
+set statusline=\ [%{WinLabel()}]%=%m%{EncInfo()}\ %<%F\
 
 " ========================================
 " プラグイン機能の設定
 " ========================================
 
-" CtrlP
-
 " Searchx
 let g:searchx = {}
 let g:searchx.auto_accept = v:true
 let g:searchx.scrolloff = &scrolloff
-let g:searchx.scrolltime = 500
+let g:searchx.scrolltime = 0
 let g:searchx.nohlsearch = {}
 let g:searchx.nohlsearch.jump = v:true
 let g:searchx.markers = split(' HTSRMFGVXBDLCWZK', '.\zs')
@@ -273,6 +258,15 @@ function g:searchx.convert(input) abort
 	return a:input[0] .. substitute(a:input[1:], '\\\@<! ', '.\\{-}', 'g')
 endfunction
 
+" Sandwich
+let g:sandwich_no_default_key_mappings = 1
+
+" Clever-f
+let g:clever_f_not_overwrites_standard_mappings = 1
+let g:clever_f_across_no_line = 1
+let g:clever_f_smart_case = 1
+let g:clever_f_mark_char_color = 'Search'
+
 " Lexiv
 " デフォルトだと <cr> が補完確定のマッピングと
 " 衝突するので、無効にする（fork 元ではできない）
@@ -280,15 +274,15 @@ let g:lexiv_no_default_key_mappings = 1
 
 " LSP
 let g:lsp_async_completion = 1
-let g:lsp_document_highlight_enabled = 0
+let g:lsp_diagnostics_highlights_delay = 100
 let g:lsp_diagnostics_highlights_enabled = 1
 let g:lsp_diagnostics_highlights_insert_mode_enabled = 1
-let g:lsp_diagnostics_highlights_delay = 100
 let g:lsp_diagnostics_signs_enabled = 0
-let g:lsp_document_code_action_signs_enabled = 0
-let g:lsp_diagnostics_virtual_text_enabled = 1
-let g:lsp_diagnostics_virtual_text_delay = 100
 let g:lsp_diagnostics_virtual_text_align = "right"
+let g:lsp_diagnostics_virtual_text_delay = 100
+let g:lsp_diagnostics_virtual_text_enabled = 1
+let g:lsp_document_code_action_signs_enabled = 0
+let g:lsp_document_highlight_enabled = 0
 let g:lsp_settings_enable_suggestions = 0
 
 " vim-go
@@ -302,51 +296,48 @@ let g:vaffle_show_hidden_files = 1
 " 'findroot#find()' 関数目的で入れるので、発火はさせない
 let g:findroot_mask = '__do_not_fire__'
 
-" clever-f
-let g:clever_f_across_no_line = 1
-let g:clever_f_smart_case = 1
-let g:clever_f_mark_char_color = 'Search'
-
-" Scrollbar
-
 " Hitspop
 let g:hitspop_line = 'winbot'
 let g:hitspop_column_mod = -1
 
 " ========================================
-" Autocmd!
+" Autocmd
 " ========================================
-autocmd! User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-autocmd! VimResized * wincmd =
-autocmd! WinClosed * wincmd p
-autocmd! TerminalOpen * setlocal bufhidden=hide
-autocmd! FileType vaffle call s:filetype_vaffle()
-autocmd! FileType go call s:filetype_go()
-autocmd! FileType qf call s:filetype_qf()
-autocmd! QuickFixCmdPost make,grep,grepadd,vimgrep botright copen
+augroup vimrc
+	autocmd!
+
+	" バッファローカル設定トリガー
+	autocmd User lsp_buffer_enabled call BufLocalLSP()
+	autocmd FileType vaffle call BufLocalVaffle()
+	autocmd FileType go call BufLocalGo()
+	autocmd FileType qf call BufLocalQF()
+	autocmd FileType markdown call BufLocalMarkdown()
+	autocmd TerminalOpen * setlocal bufhidden=hide
+
+	" それ以外
+	autocmd QuickFixCmdPost make,grep,grepadd,vimgrep botright copen 18
+	autocmd WinClosed * wincmd p
+	autocmd TabClosed * wincmd p
+	autocmd VimResized * wincmd =
+augroup END
 
 " ========================================
-" 自作関数
+" バッファローカル設定
 " ========================================
 
 " vim-lsp
 " ---------------------------------------
-function! s:on_lsp_buffer_enabled() abort
+function! BufLocalLSP() abort
 	setlocal omnifunc=lsp#complete
 	if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
-	nmap <buffer> gd <plug>(lsp-definition)
-	nmap <buffer> gD <plug>(lsp-type-definition)
-	nmap <buffer> gs <plug>(lsp-document-symbol)
-	nmap <buffer> gS <plug>(lsp-workspace-symbol)
-	nmap <buffer> gN <plug>(lsp-previous-diagnostic)
-	nmap <buffer> gn <plug>(lsp-next-diagnostic)
-	nmap <buffer> gh <plug>(lsp-hover)
-	nmap <buffer> gc <plug>(lsp-rename)
-	nmap <buffer> gl <plug>(lsp-code-lens)
-	nmap <buffer> ga <plug>(lsp-code-action)
-	xnoremap <buffer> ga :LspCodeAction<CR>
-	nnoremap <buffer> gq :<C-u>LspStopServer<CR>
+	nnoremap <buffer> gd <plug>(lsp-definition)
+	nnoremap <buffer> gD <plug>(lsp-type-definition)
+	nnoremap <buffer> 'L <plug>(lsp-previous-diagnostic)
+	nnoremap <buffer> 'l <plug>(lsp-next-diagnostic)
+	nnoremap <buffer> K  <plug>(lsp-hover)
+	nnoremap <buffer> gc <plug>(lsp-rename)
+	nnoremap <buffer> gq <cmd>LspStopServer<cr>
 
 	" gofmt & goimports
 	" autocmd! BufWritePre *.go call execute('LspDocumentFormatSync') | call execute('LspCodeActionSync source.organizeImports')
@@ -354,29 +345,99 @@ endfunction
 
 " Vaffle
 " ---------------------------------------
-function! s:filetype_vaffle() abort
-	nmap <buffer> <Left>  <Plug>(vaffle-open-parent)
-	nmap <buffer> <Right> <Plug>(vaffle-open-current)
-	nmap <buffer> <End>   <Plug>(vaffle-open-current)
+function! BufLocalVaffle() abort
+	nnoremap <buffer> <left>  <plug>(vaffle-open-parent)
+	nnoremap <buffer> <right> <plug>(vaffle-open-current)
 endfunction
 
 " Go
 " ---------------------------------------
-function! s:filetype_go() abort
+function! BufLocalGo() abort
 	" Snippet にするか迷う
 	abbrev <buffer> e_ err != nil
 	abbrev <buffer> a_ append
 
-	nnoremap mTT :<C-u>GoTest<CR>
-	nnoremap mTF :<C-u>GoTestFunc<CR>
+	nnoremap <buffer> mTT <cmd>GoTest<cr>
+	nnoremap <buffer> mTF <cmd>GoTestFunc<cr>
 endfunction
 
 " Quickfix
 " ---------------------------------------
-function! s:filetype_qf() abort
-	nnoremap <buffer> <CR> <CR>
-	nnoremap <buffer> o :<C-u>colder<CR>
-	nnoremap <buffer> O :<C-u>cnewer<CR>
+function! BufLocalQF() abort
+	nnoremap <buffer> o <cmd>colder<cr>
+	nnoremap <buffer> O <cmd>cnewer<cr>
+	nnoremap <buffer> <s-up> <up><cr>
+	nnoremap <buffer> <s-down> <down><cr>
+endfunction
+
+" Markdown
+" ---------------------------------------
+function! BufLocalMarkdown() abort
+	setlocal wrap
+endfunction
+
+" ========================================
+" 自作関数
+" ========================================
+
+" ステータスライン
+" ---------------------------------------
+function! EncInfo() abort
+	return &fenc == "utf-8" ? "" : "["..&fenc.."]"
+endfunction
+
+function! WinLabel() abort
+	return get(g:win_labels, winnr() - 1, '')
+endfunction
+
+" ウィンドウ管理
+" ---------------------------------------
+function! WinLabel2Id(label) abort
+	let nr = index(g:win_labels, a:label) + 1
+	return nr == 0 ? -1 : win_getid(nr)
+endfunction
+
+function! GotoWinByLabel() abort
+	let id = WinLabel2Id(nr2char(getchar()))
+	if id != -1
+		call win_gotoid(id)
+	endif
+endfunction
+
+function! SwapWinByLabel() abort
+	let id = WinLabel2Id(nr2char(getchar()))
+	if id != -1
+		call snipewin#callback#swap(id)
+	endif
+endfunction
+
+function! GotoShellOrOpen() abort
+	" 実行中で表示中のシェルがあれば移動
+	let wins = getwininfo()->filter({i, w ->
+				\ w.terminal == 1 &&
+				\ stridx(bufname(w.bufnr), '!'..&shell) == 0 &&
+				\ getbufinfo(w.bufnr)[0].changed == 1
+				\ })
+
+	if len(wins) != 0
+		call win_gotoid(wins[0].winid)
+		return
+	endif
+
+	" 実行中で非表示のシェルがあれば復元
+	let bufs = getbufinfo()->filter({i, b ->
+				\ getbufvar(b.bufnr, '&buftype') == 'terminal' &&
+				\ stridx(b.name, '!'..&shell) == 0 &&
+				\ b.changed == 1 &&
+				\ b.hidden == 1
+				\ })
+
+	if len(bufs) != 0
+		exe 'b '..bufs[0].bufnr
+		return
+	endif
+
+	terminal ++curwin ++open
 endfunction
 
 " ディレクトリ指定 vimgrep
@@ -384,55 +445,6 @@ endfunction
 function! VimGrepDir(dir, word) abort
 	let esc = escape(a:word, '"')
 	exe 'vimgrep "' .. esc .. '" ' .. fnameescape(a:dir) .. '/**'
-endfunction
-
-" 既存の隠れた実行中のシェルがあれば再利用、なければ作成
-" ---------------------------------------
-function! ReuseShellOrCreate() abort
-	let bufinfo = getbufinfo()->filter({i, b ->
-				\ getbufvar(b.bufnr, '&buftype') == 'terminal' &&
-				\ stridx(b.name, '!'.&shell) == 0 &&
-				\ b.changed == 1 &&
-				\ b.hidden == 1
-				\ })
-
-	if len(bufinfo) == 0
-		terminal ++curwin ++open
-		return
-	endif
-
-	let bufnr = bufinfo[0].bufnr
-	exe 'b '.bufnr
-endfunction
-
-" ウィンドウ管理
-" ---------------------------------------
-let g:win_labels = split(' eni,hmdlcuoq', '.\zs')
-
-function! GotoWinByLabel() abort
-	let c = nr2char(getchar())
-	let nr = index(g:win_labels, c)
-	if nr == -1
-		return
-	endif
-	let id = win_getid(nr)
-	call win_gotoid(id)
-endfunction
-
-function! SwapWinByLabel() abort
-	let c = nr2char(getchar())
-	let nr = index(g:win_labels, c)
-	if nr == -1
-		return
-	endif
-	let id = win_getid(nr)
-	call snipewin#callback#swap(id)
-	echo id
-endfunction
-
-function! WinLabel() abort
-	let label = get(g:win_labels, winnr(), '')
-	return label
 endfunction
 
 " 色の切り替え
@@ -451,8 +463,6 @@ function! Night() abort
 	hi link SclowSbar StatusLine
 	hi link EndOfBuffer Ignore
 endfunction
-
-call plug#end()
 
 " 色の設定はプラグイン読み込み後に行う
 call Night()
