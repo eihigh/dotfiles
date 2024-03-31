@@ -57,6 +57,10 @@ call plug#end()
 " 標準のキーマップの上書き・調整（いくらあってもよいとされている）
 " ========================================
 
+" 移動
+noremap <up>   gk
+noremap <down> gj
+
 " 検索ハイライト消去
 nnoremap <silent> <esc> <cmd>nohlsearch<cr>
 
