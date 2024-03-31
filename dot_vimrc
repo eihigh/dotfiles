@@ -148,13 +148,16 @@ nnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
 xnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
 
 " ターミナルからの脱出
-" ウィンドウ分割はターミナルノーマルに抜けてから実施
 tnoremap <esc><esc> <esc>
 tnoremap <esc>n     <c-w>N
 tnoremap <esc>p     <c-w>p
 tnoremap <esc>h     <c-w>:hide \| wincmd p<cr>
 tnoremap <esc>t     <c-w>:<c-u>call GotoWinByLabel()<cr>
 tnoremap <esc>T     <c-w>:<c-u>call SwapWinByLabel()<cr>
+tnoremap <esc>ta    <c-w>:<c-u>above new<cr>
+tnoremap <esc>tb    <c-w>:<c-u>below new<cr>
+tnoremap <esc>tr    <c-w>:<c-u>rightb vnew<cr>
+tnoremap <esc>tl    <c-w>:<c-u>lefta vnew<cr>
 tnoremap <esc>tt    <c-w>p
 tnoremap <esc>tp    <c-w>p
 
