@@ -126,7 +126,7 @@ nnoremap tp <c-w>p
 
 " 主要コマンド
 nnoremap mm <cmd>CtrlPMixed<cr>
-nnoremap me <cmd>e %:h<cr>
+nnoremap me <cmd>exe 'e ' .. getcwd()<cr>
 nnoremap mt <cmd>call ReuseShellOrCreate()<cr>
 nnoremap ms :<c-u>call VimGrepDir(findroot#find(), '')<left><left>
 nnoremap mg :<c-u>vimgrep '' **<left><left><left><left>
@@ -154,7 +154,7 @@ xnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
 " ターミナルからの脱出
 tnoremap <esc><esc> <esc>
 tnoremap <esc>n     <c-w>N
-tnoremap <esc>p     <c-w>p
+tnoremap <esc>p     <c-w>""
 tnoremap <esc>h     <c-w>:hide \| wincmd p<cr>
 tnoremap <esc>t     <c-w>:<c-u>call GotoWinByLabel()<cr>
 tnoremap <esc>T     <c-w>:<c-u>call SwapWinByLabel()<cr>
