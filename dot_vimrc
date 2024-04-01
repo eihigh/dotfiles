@@ -129,7 +129,7 @@ nnoremap mm <cmd>CtrlPMixed<cr>
 nnoremap me <cmd>e %:h<cr>
 nnoremap mt <cmd>call ReuseShellOrCreate()<cr>
 nnoremap ms :<c-u>call VimGrepDir(findroot#find(), '')<left><left>
-nnoremap mg :<c-u>call vimgrep '' **<left><left><left><left>
+nnoremap mg :<c-u>vimgrep '' **<left><left><left><left>
 nnoremap mr <cmd>CtrlPMRU<cr>
 nnoremap ml <cmd>CtrlPBuffer<cr>
 nnoremap mc <cmd>botright copen 18<cr>
@@ -372,8 +372,6 @@ endfunction
 function! BufLocalQF() abort
 	nnoremap <buffer> o <cmd>colder<cr>
 	nnoremap <buffer> O <cmd>cnewer<cr>
-	nnoremap <buffer> <s-up> <up><cr>
-	nnoremap <buffer> <s-down> <down><cr>
 endfunction
 
 " Markdown
