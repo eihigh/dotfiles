@@ -128,8 +128,8 @@ nnoremap tp <c-w>p
 nnoremap mm <cmd>CtrlPMixed<cr>
 nnoremap me <cmd>e %:h<cr>
 nnoremap mt <cmd>call ReuseShellOrCreate()<cr>
-nnoremap ms <cmd>call VimGrepDir(findroot#find(), '')<left><left>
-nnoremap mg <cmd>call vimgrep '' **<left><left><left><left>
+nnoremap ms :<c-u>call VimGrepDir(findroot#find(), '')<left><left>
+nnoremap mg :<c-u>call vimgrep '' **<left><left><left><left>
 nnoremap mr <cmd>CtrlPMRU<cr>
 nnoremap ml <cmd>CtrlPBuffer<cr>
 nnoremap mc <cmd>botright copen 18<cr>
