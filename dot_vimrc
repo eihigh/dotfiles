@@ -313,6 +313,9 @@ let g:vaffle_show_hidden_files = 1
 " 'findroot#find()' 関数目的で入れるので、発火はさせない
 let g:findroot_mask = '__do_not_fire__'
 
+" Sclow
+let g:sclow_block_filetypes = ['markdown']
+
 " Hitspop
 let g:hitspop_line = 'winbot'
 let g:hitspop_column_mod = -1
