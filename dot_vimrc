@@ -108,8 +108,9 @@ inoremap <silent> <expr> <cr>   (pumvisible() ? "\<c-y>" : "") .. lexiv#paren_ex
 " 標準にはない追加のキーマップ（少ないほどよいとされている）
 " ========================================
 
-" 保存ショートカット
-nnoremap M <cmd>update<cr>
+" 独自ショートカット
+nnoremap - V
+nnoremap L <cmd>update<cr>
 
 " t, T, m, ', ` は既定で1char食うので、潰してスパルタン環境で誤爆しても害が少ない
 
