@@ -268,7 +268,7 @@ let g:searchx.scrolloff = &scrolloff
 let g:searchx.scrolltime = 0
 let g:searchx.nohlsearch = {}
 let g:searchx.nohlsearch.jump = v:true
-let g:searchx.markers = split(' HTSRMFGVXBDLCWZK', '.\zs')
+let g:searchx.markers = split('HTSRMFGVXBDLCWZK', '.\zs')
 function g:searchx.convert(input) abort
 	if a:input !~# '\k'
 		return '\V' .. a:input
@@ -306,6 +306,7 @@ let g:lsp_settings_enable_suggestions = 0
 " vim-go
 " LSPに寄せるのでキーマップ無効
 let g:go_def_mapping_enabled = 0
+let g:go_diagnostics_enabled = 0
 
 " Vaffle
 let g:vaffle_show_hidden_files = 1
