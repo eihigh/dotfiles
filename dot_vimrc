@@ -110,7 +110,7 @@ inoremap <silent> <expr> <cr>   (pumvisible() ? "\<c-y>" : "") .. lexiv#paren_ex
 
 " 独自ショートカット
 nnoremap l V
-nnoremap L <cmd>update<cr>
+nnoremap h <cmd>update<cr>
 
 " t, T, m, ', ` は既定で1char食うので、潰してスパルタン環境で誤爆しても害が少ない
 
