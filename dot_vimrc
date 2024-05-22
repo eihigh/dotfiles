@@ -109,10 +109,41 @@ inoremap <silent> <expr> <cr>   (pumvisible() ? "\<c-y>" : "") .. lexiv#paren_ex
 " ========================================
 
 " 独自ショートカット
-nnoremap l V
-nnoremap h <cmd>update<cr>
+nnoremap h V
+nnoremap l <cmd>update<cr>
+
+" クリップボード
+nnoremap gy "+y
+xnoremap gy "+y
 
 " t, T, m, ', ` は既定で1char食うので、潰してスパルタン環境で誤爆しても害が少ない
+
+" 主要コマンド
+nnoremap mm <cmd>CtrlPMixed<cr>
+nnoremap me <cmd>exe 'e ' .. getcwd()<cr>
+nnoremap mt <cmd>call ReuseShellOrCreate()<cr>
+nnoremap ms :<c-u>call VimGrepDir(findroot#find(), '')<left><left>
+nnoremap mg :<c-u>vimgrep '' **<left><left><left><left>
+nnoremap mr <cmd>CtrlPMRU<cr>
+nnoremap ml <cmd>CtrlPBuffer<cr>
+nnoremap mq <cmd>botright copen 18<cr>
+
+" Sandwich
+noremap  ma <plug>(sandwich-add)
+nnoremap md <plug>(sandwich-delete-auto)
+xnoremap md <plug>(sandwich-delete)
+nnoremap mc <plug>(sandwich-replace-auto)
+xnoremap mc <plug>(sandwich-replace)
+
+" Edgemotion
+noremap ]e <plug>(edgemotion-j)
+noremap [e <plug>(edgemotion-k)
+
+" Searchx
+nnoremap s <cmd>call searchx#start({ 'dir': 1 })<cr>
+xnoremap s <cmd>call searchx#start({ 'dir': 1 })<cr>
+nnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
+xnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
 
 " ウィンドウ管理
 let g:win_labels = split('ine,mhsfvwdcxzkyou', '.\zs')
@@ -124,33 +155,6 @@ nnoremap tr <cmd>rightb vsplit<cr>
 nnoremap tl <cmd>lefta vsplit<cr>
 nnoremap tt <c-w>p
 nnoremap tp <c-w>p
-
-" 主要コマンド
-nnoremap mm <cmd>CtrlPMixed<cr>
-nnoremap me <cmd>exe 'e ' .. getcwd()<cr>
-nnoremap mt <cmd>call ReuseShellOrCreate()<cr>
-nnoremap ms :<c-u>call VimGrepDir(findroot#find(), '')<left><left>
-nnoremap mg :<c-u>vimgrep '' **<left><left><left><left>
-nnoremap mr <cmd>CtrlPMRU<cr>
-nnoremap ml <cmd>CtrlPBuffer<cr>
-nnoremap mc <cmd>botright copen 18<cr>
-
-" Sandwich
-noremap  'a <plug>(sandwich-add)
-nnoremap 'd <plug>(sandwich-delete-auto)
-xnoremap 'd <plug>(sandwich-delete)
-nnoremap 'r <plug>(sandwich-replace-auto)
-xnoremap 'r <plug>(sandwich-replace)
-
-" Edgemotion
-noremap 'e <plug>(edgemotion-j)
-noremap 'E <plug>(edgemotion-k)
-
-" Searchx
-nnoremap s <cmd>call searchx#start({ 'dir': 1 })<cr>
-xnoremap s <cmd>call searchx#start({ 'dir': 1 })<cr>
-nnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
-xnoremap S <cmd>call searchx#start({ 'dir': 0 })<cr>
 
 " ターミナルからの脱出
 tnoremap <esc><esc> <esc>
@@ -333,7 +337,7 @@ augroup buflocal
 	autocmd FileType go             call BufLocalGo()
 	autocmd FileType qf             call BufLocalQF()
 	autocmd FileType markdown       call BufLocalMarkdown()
-	autocmd TerminalOpen * setlocal bufhidden=hide
+	autocmd TerminalOpen *          setlocal bufhidden=hide
 augroup END
 
 " vim-lsp
@@ -344,8 +348,8 @@ function! BufLocalLSP() abort
 
 	nnoremap <buffer> gd <plug>(lsp-definition)
 	nnoremap <buffer> gD <plug>(lsp-type-definition)
-	nnoremap <buffer> 'L <plug>(lsp-previous-diagnostic)
-	nnoremap <buffer> 'l <plug>(lsp-next-diagnostic)
+	nnoremap <buffer> [d <plug>(lsp-previous-diagnostic)
+	nnoremap <buffer> ]d <plug>(lsp-next-diagnostic)
 	nnoremap <buffer> K  <plug>(lsp-hover)
 	nnoremap <buffer> gc <plug>(lsp-rename)
 	nnoremap <buffer> gq <cmd>LspStopServer<cr>
