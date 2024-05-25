@@ -36,6 +36,7 @@ Plug 'obcat/vim-sclow'
 Plug 'obcat/vim-hitspop'
 
 " 言語
+Plug 'github/copilot.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
