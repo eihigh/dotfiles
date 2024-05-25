@@ -369,8 +369,8 @@ endfunction
 " ---------------------------------------
 function! BufLocalGo() abort
 	" Snippet にするか迷う
-	abbrev <buffer> e_ err != nil
-	abbrev <buffer> a_ append
+	abbrev <buffer> enil err != nil
+	abbrev <buffer> aend append(
 
 	nnoremap <buffer> mTT <cmd>GoTest<cr>
 	nnoremap <buffer> mTF <cmd>GoTestFunc<cr>
