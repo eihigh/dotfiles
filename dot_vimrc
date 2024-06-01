@@ -467,4 +467,4 @@ function! Night() abort
 endfunction
 
 " 色の設定はプラグイン読み込み後に行う
-call Night()
+call Day()
