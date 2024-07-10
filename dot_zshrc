@@ -43,7 +43,6 @@ alias i='git status -sb'
 alias m='make'
 alias n='fg'
 alias qc="q -d,"
-alias wingo="GOOS=windows go build -o /mnt/h/public/game.exe && /mnt/h/public/game.exe"
 
 case "${OSTYPE}" in
 	darwin*)
