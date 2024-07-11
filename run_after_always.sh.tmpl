@@ -18,6 +18,3 @@ dev_env() {
 }
 
 {{ if not (contains "dev" .chezmoi.hostname) }} standard_env {{ else }} dev_env {{ end }}
-
-# Include my gitconfig
-git config --global include.path ~/.gitconfig_shared
