@@ -1,0 +1,26 @@
+[core]
+	symlinks = true
+	pager = LESSCHARSET=utf-8 less
+
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZu5lpkbLKfNFq69elj3D+R1Ex5yQP1xoMRGki2MM2D
+	name = eihigh
+	email = eihigh.contact@gmail.com
+
+[ghq]
+	root = ~/ghq
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+  gpgsign = true
+
+[includeIf "gitdir:~/ghq/github.com/"]
+	path = ~/.config/git/config_personal
+
+[includeIf "gitdir:~/git/"]
+	path = ~/.config/git/config_work

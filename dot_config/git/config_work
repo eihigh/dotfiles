@@ -1,0 +1,7 @@
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIdi5SWaZyqnvelN7A8eioDJROy87HWwYFr4jQzaSTpW
+	name = eiichiro-takahashi
+	email = eiichiro.takahashi@dena.com
+
+[url "git@github.dena.jp:"]
+	insteadOf = https://github.dena.jp/
