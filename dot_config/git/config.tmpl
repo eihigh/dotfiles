@@ -2,13 +2,15 @@
 	symlinks = true
 	pager = LESSCHARSET=utf-8 less
 
+[ghq]
+	root = ~/ghq
+
 [user]
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZu5lpkbLKfNFq69elj3D+R1Ex5yQP1xoMRGki2MM2D
 	name = eihigh
 	email = eihigh.contact@gmail.com
 
-[ghq]
-	root = ~/ghq
+{{ if eq .chezmoi.os "darwin" }}
+ 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINZu5lpkbLKfNFq69elj3D+R1Ex5yQP1xoMRGki2MM2D
 
 [gpg]
   format = ssh
@@ -18,6 +20,8 @@
 
 [commit]
   gpgsign = true
+
+{{ end }}
 
 [includeIf "gitdir:~/ghq/github.com/"]
 	path = ~/.config/git/config_personal
