@@ -8,6 +8,13 @@ $ gh auth login
 $ update
 ```
 
+## 概要
+* Mac, Linux 対応、Windows 非対応
+* 現在 Mac のみ code signing 対応、また 1password への依存も Mac のみある
+* Linux では GitHub へのアクセスに ssh の代わりに https + gh auth login する
+* Mac, Linux 両方とも Homebrew ですべて管理
+* chezmoi encryption は鍵管理が手間なので今のところ予定なし
+
 ## Other topics
 ### WSL2 (Ubuntu)
 
