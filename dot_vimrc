@@ -456,6 +456,8 @@ function! Day() abort
 	colorscheme aomi-grayscale
 	hi link SclowSbar StatusLine
 	hi link EndOfBuffer Ignore
+	hi clear CopilotSuggestion
+	hi CopilotSuggestion guibg=#000000 guifg=#aaaaaa
 endfunction
 
 function! Night() abort
