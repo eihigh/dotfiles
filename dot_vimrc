@@ -111,7 +111,7 @@ inoremap <silent> <expr> <cr>   (pumvisible() ? "\<c-y>" : "") .. lexiv#paren_ex
 
 " 独自ショートカット
 nnoremap <space> V
-nnoremap h <cmd>update<cr>
+nnoremap l <cmd>update<cr>
 
 " クリップボード
 nnoremap gy "+y
