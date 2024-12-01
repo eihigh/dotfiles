@@ -222,6 +222,7 @@ set autoread
 set tabpagemax=100
 set ttimeoutlen=0
 set splitright
+set updatetime=100
 
 " Abbreviation
 abbrev ret return

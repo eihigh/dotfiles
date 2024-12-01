@@ -44,6 +44,7 @@ alias m='make'
 alias n='fg'
 alias qc="q -d,"
 alias wingo="GOOS=windows go build -o /mnt/h/tmp/win.exe && /mnt/h/tmp/win.exe" # C:/Users/Public あたりだとマルウェア扱いされるので注意
+alias re='arelo -p "**/*.go" -i "**/.*" -i "**/*_test.go" -- go run .'
 
 winre () {
 	arelo -p '**/*.go' -i '**/.*' -i '**/*_test.go' -- bash -c 'GOOS=windows go build -o /mnt/h/tmp/win.exe && /mnt/h/tmp/win.exe'
