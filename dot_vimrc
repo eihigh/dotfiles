@@ -454,16 +454,14 @@ endfunction
 " ---------------------------------------
 function! Day() abort
 	set background=light
-	colorscheme aomi-grayscale
+	colorscheme iceberg
 	hi link SclowSbar StatusLine
 	hi link EndOfBuffer Ignore
-	hi clear CopilotSuggestion
-	hi CopilotSuggestion guibg=#000000 guifg=#aaaaaa
 endfunction
 
 function! Night() abort
 	set background=dark
-	colorscheme aomi-grayscale
+	colorscheme iceberg
 	hi Normal guibg=NONE
 	hi link SclowSbar StatusLine
 	hi link EndOfBuffer Ignore
