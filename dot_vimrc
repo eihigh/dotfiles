@@ -389,6 +389,8 @@ endfunction
 " ---------------------------------------
 function! BufLocalMarkdown() abort
 	setlocal wrap
+	setlocal noexpandtab
+	nnoremap <buffer> gI :%s/\V..\/..\/images\///g<cr>
 endfunction
 
 " ========================================
